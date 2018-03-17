@@ -2,14 +2,14 @@ const favoriteDB = require('../config/connection');
 
 module.exports = {
   updateFavorite(favorite) {
-    return favoriteDB.one(`INSERT INTO favorites(username, restaurant_name)
+    return favoriteDB.one(`INSERT INTO favorites(user_id, restaurant_name)
                                           VALUES($[favorite.username], $[favorite.restaurant_name])
                                           RETURNING *`, favorite);
   },
 
   removeFavorite(favorite) {
     return favoriteDB.none(`DELETE FROM favorites
-                                            WHERE username = $[favorite.username]
+                                            WHERE user_id = $[favorite.username]
                                             AND restaurant_name = $[favorite.restaurant_name]`, favorite);
   },
 
@@ -17,14 +17,14 @@ module.exports = {
     return favoriteDB.any(`SELECT name
                                           FROM restaurants
                                           JOIN favorites
-                                          ON favorites.username = $[user.username]
+                                          ON favorites.user_id = $[user.username]
                                           GROUP BY name;`, user);
   },
 
   alreadyFavorites(user) {
     return favoriteDB.one(`SELECT *
-                                          FROM likes
-                                          WHERE username = $[user.username]
+                                          FROM favorites
+                                          WHERE user_id = $[user.username]
                                           AND restaurant_name = $[user.restaurant_name]`, user);
   },
 };
