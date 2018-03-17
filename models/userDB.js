@@ -25,7 +25,7 @@ module.exports = {
     return userDB.one(`UPDATE users SET fname = $[user.fname], lname = $[user.lname],
                                           username=$[user.username], password=$[user.password],
                                           about_me = $[user.about_me], auth = $[user.auth]
-                                          WHERE id=$[user.id] RETURNING *`, user);
+                                          WHERE username=$[user.username] RETURNING *`, user);
   },
 
   destroyByUsername(user) {
@@ -46,7 +46,7 @@ module.exports = {
 
   updateLoc(user) {
     return userDB.one(`UPDATE users SET loc = $[loc]
-                                        WHERE username = $[name] RETURNING *`, user);
+                                        WHERE username = $[user.username] RETURNING *`, user);
   },
 
 };

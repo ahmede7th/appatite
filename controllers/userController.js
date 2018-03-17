@@ -87,6 +87,9 @@ module.exports = {
       .delete(req.params.id)
       .then(() => {
         console.log('DELETING USER WORKED');
+        res.json({
+          message: 'ok',
+        });
       })
       .catch(err => {
         console.log('DELETE USER FAILED--->', err);

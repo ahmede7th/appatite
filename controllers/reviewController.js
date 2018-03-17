@@ -97,6 +97,9 @@ module.exports = {
       .deleteReview(req.params.id)
       .then(() => {
         console.log('DELETING REVIEW WORKED');
+        res.json({
+          message: 'deleted review',
+        });
       })
       .catch(err => {
         console.log('DELETE REVIEW FAILED--->', err);

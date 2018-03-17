@@ -26,7 +26,7 @@ module.exports = {
     .then(restaurant => {
       console.log('FOUND USER WORKED---->', restaurant);
       res.json({
-        message: 'Got user',
+        message: 'Got restaurant',
         data: restaurant,
       });
     }).catch(err => {
@@ -84,6 +84,9 @@ module.exports = {
       .delete(req.params.id)
       .then(() => {
         console.log('DELETING RESTAURANT WORKED');
+        res.json({
+          message: 'restaurant deleted',
+        });
       })
       .catch(err => {
         console.log('DELETE RESTAURANT FAILED--->', err);

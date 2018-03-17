@@ -1,4 +1,4 @@
-const favorites = require('../models/favoriteDB');
+const favorites = require('../models/favoritesDB');
 
 module.exports = {
 

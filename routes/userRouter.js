@@ -9,11 +9,11 @@ userRouter
 
 userRouter
   .route(`/edit/:id`)
-  .get(userController.show)
+  .get(userController.getOneUser)
   .put(userController.updateUser);
 
 userRouter
-  .route(`/:id`)
+  .route(`/delete/:id`)
   .delete(userController.destroyByUsername);
 
 module.exports = userRouter;

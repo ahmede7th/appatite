@@ -4,7 +4,11 @@ const restaurantController = require('../controllers/restaurantController');
 
 restaurantRouter
   .route(`/`)
-  .get(restaurantController.getAllRestaurants)
+  .get(restaurantController.getAllRestaurants);
+
+restaurantRouter
+  .route('/:id')
+  .get(restaurantController.getOneRestaurant)
   .post(restaurantController.createRestaurant);
 
 restaurantRouter
@@ -13,7 +17,7 @@ restaurantRouter
   .put(restaurantController.updateRestaurant);
 
 restaurantRouter
-  .route(`/:id`)
+  .route(`/delete/:id`)
   .delete(restaurantController.destroyRestaurantById);
 
 module.exports = restaurantRouter;
