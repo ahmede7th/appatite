@@ -1,0 +1,44 @@
+const reviewDB = require('../config/connection');
+
+module.exports = {
+  addReview(review) {
+    return reviewDB.one(`INSERT INTO reviews(user_id, restaurant_id, content)
+                                    VALUES($[user_id], $[restaurant_id], $[content])
+                                    RETURNING *`, review);
+  },
+
+  getYourReviews(review) {
+    return reviewDB.any(`SELECT user_id, restaurant_id, content, id, date_posted
+                                    FROM reviews
+                                    WHERE friend_id = $1`, review);
+  },
+
+  getPublicReviews(user) {
+    return reviewDB.any(`SELECT user_id, restaurant_id, content, id, date_posted
+                                    FROM reviews
+                                    WHERE user_id != $1
+                                    `, user);
+  },
+
+  getFriendReviews(friend) {
+    return reviewDB.any(`SELECT user_id, content
+                                    FROM reviews
+                                    WHERE user_id = $1
+                                    `, friend);
+  },
+
+  getReviewById(review) {
+    return reviewDB.one(`SELECT *
+                                    FROM reviews
+                                    WHERE id = $1`, review);
+  },
+
+  editReview(review) {
+    return reviewDB.one(`UPDATE reviews SET content = $[content]
+                                    WHERE id = $[id] RETURNING *`, review);
+  },
+
+  deleteReview(review) {
+    return reviewDB.none(`DELETE FROM reviews WHERE id = $1`, review);
+  },
+};
