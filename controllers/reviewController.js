@@ -5,7 +5,7 @@ module.exports = {
   getAllReviewsByRestaurantName(req, res, next) {
     console.log(`INSIDE GET ALL REVIEWS BY RESTAURANT NAME---->`, req.params);
     reviewDB
-      .getAllReviewsByRestaurantId(req.params.id)
+      .getAllReviewsByRestaurantName(req.params.id)
       .then(restaurantReviews => {
         console.log('FOUND RESTAURANT REVIEWS WORKED---->', restaurantReviews);
         res.json({
@@ -22,7 +22,7 @@ module.exports = {
   getAllReviewsByUsername(req, res, next) {
     console.log(`INSIDE GET ALL REVIEWS BY USER NAME---->`, req.params);
     reviewDB
-      .getAllReviewsByUserId(req.params.id)
+      .getAllReviewsByUsername(req.params.id)
       .then(userReviews => {
         console.log('FOUND USER REVIEWS WORKED---->', userReviews);
         res.json({
@@ -73,7 +73,7 @@ module.exports = {
 
   updateReviewById(req, res, next) {
     reviewDB
-      .update({
+      .editReview({
         username: req.body.username,
         restaurant_name: req.body.restaurantName,
         content: req.body.content,
@@ -94,7 +94,7 @@ module.exports = {
 
   deleteReviewById(req, res, next) {
     reviewDB
-      .delete(req.params.id)
+      .deleteReview(req.params.id)
       .then(() => {
         console.log('DELETING REVIEW WORKED');
       })
