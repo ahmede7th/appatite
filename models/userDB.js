@@ -2,9 +2,9 @@ const userDB = require('../config/connection');
 
 module.exports = {
   save(user) {
-    return userDB.one(`INSERT INTO users(fname, lname, username, password, aboutme, auth, loc)
-                                        VALUES($[fname], $[lname], $[username],
-                                        $[password], $[aboutme], $[auth], $[loc]) RETURNING *`, user);
+    return userDB.one(`INSERT INTO users(fname, lname, username, password, about_me, auth, loc)
+                                        VALUES($[user.fname], $[user.lname], $[user.username], $[user.password],
+                                        $[user.about_me], $[user.auth], $[user.loc]) RETURNING *`, user);
   },
 
   checkUser(user) {
@@ -15,24 +15,24 @@ module.exports = {
                                         user);
   },
 
-  getUsers(user) {
+  getAllUsers(user) {
     return userDB.any(`SELECT *
                                             FROM users
                                             WHERE username != $[username]`, user);
   },
 
   update(user) {
-    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname],
-                                          username=$[username], password=$[password],
-                                          aboutme = $[aboutme], auth = $[auth]
-                                        WHERE id=$[id] RETURNING *`, user);
+    return userDB.one(`UPDATE users SET fname = $[user.fname], lname = $[user.lname],
+                                          username=$[user.username], password=$[user.password],
+                                          about_me = $[user.about_me], auth = $[user.auth]
+                                          WHERE id=$[user.id] RETURNING *`, user);
   },
 
   destroyByUsername(user) {
     return userDB.none(`DELETE FROM users WHERE username = $1`, user.username);
   },
 
-  findUser(user) {
+  getOneUser(user) {
     return userDB.one(`SELECT *
                                         FROM users
                                         WHERE username = $[username]`, user);
