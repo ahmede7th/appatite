@@ -14,7 +14,7 @@ module.exports = {
 
   addReview(review) {
     return reviewDB.one(`INSERT INTO reviews(user_id, restaurant_name, content)
-                                          VALUES($[review.username], $[review.restaurant_name], $[review.content])
+                                          VALUES($[user_id], $[restaurant_name], $[content])
                                           RETURNING *
                                           `, review);
   },
@@ -47,8 +47,8 @@ module.exports = {
   },
 
   editReview(review) {
-    return reviewDB.one(`UPDATE reviews SET content = $[review.content]
-                                          WHERE id = $[review.id]
+    return reviewDB.one(`UPDATE reviews SET content = $[content]
+                                          WHERE id = $[id]
                                           RETURNING *`, review);
   },
 

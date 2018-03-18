@@ -3,8 +3,8 @@ const userDB = require('../config/connection');
 module.exports = {
   save(user) {
     return userDB.one(`INSERT INTO users(fname, lname, username, password, about_me, auth, loc)
-                                        VALUES($[user.fname], $[user.lname], $[user.username], $[user.password],
-                                        $[user.about_me], $[user.auth], $[user.loc]) RETURNING *`, user);
+                                        VALUES($[fname], $[lname], $[username], $[password],
+                                        $[about_me], $[auth], $[loc]) RETURNING *`, user);
   },
 
   checkUser(user) {
@@ -15,21 +15,25 @@ module.exports = {
                                         user);
   },
 
-  getAllUsers(user) {
-    return userDB.any(`SELECT *
-                                            FROM users
-                                            WHERE username != $[username]`, user);
+  getAllUsers() {
+    return userDB.any(`SELECT * FROM users`);
   },
+
+  // getAllUsers(username) {
+  //   return userDB.any(`SELECT *
+  //                                           FROM users
+  //                                           WHERE username != $[username]`, username);
+  // },
 
   update(user) {
-    return userDB.one(`UPDATE users SET fname = $[user.fname], lname = $[user.lname],
-                                          username=$[user.username], password=$[user.password],
-                                          about_me = $[user.about_me], auth = $[user.auth]
-                                          WHERE username=$[user.username] RETURNING *`, user);
+    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname],
+                                          username = $[username], password = $[password],
+                                          about_me = $[about_me], auth = $[auth]
+                                          WHERE username=$[username] RETURNING *`, user);
   },
 
-  destroyByUsername(user) {
-    return userDB.none(`DELETE FROM users WHERE username = $1`, user.username);
+  destroyByUsername(username) {
+    return userDB.none(`DELETE FROM users WHERE username = $1`, username);
   },
 
   getOneUser(user) {

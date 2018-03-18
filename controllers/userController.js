@@ -84,7 +84,7 @@ module.exports = {
 
   destroyByUsername(req, res, next) {
     userDB
-      .delete(req.params.id)
+      .destroyByUsername(req.params.id)
       .then(() => {
         console.log('DELETING USER WORKED');
         res.json({

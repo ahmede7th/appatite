@@ -58,19 +58,18 @@ module.exports = {
 
   updateRestaurant(req, res, next) {
     restaurantDB
-      .update({
+      .updateRestaurant({
         name: req.body.name,
         rating: req.body.rating,
         cuisine: req.body.cuisine,
         img_src: 0,
         loc: 0,
-        id: req.params.id,
       })
       .then(restaurant => {
         console.log('UPDATING RESTAURANT WORKED--->', restaurant);
         res.json({
           message: 'ok',
-          data: user,
+          data: restaurant,
         });
       })
       .catch(err => {
@@ -79,9 +78,9 @@ module.exports = {
       });
   },
 
-  destroyRestaurantById(req, res, next) {
+  destroyRestaurantByName(req, res, next) {
     restaurantDB
-      .delete(req.params.id)
+      .destroyRestaurantByName(req.params.id)
       .then(() => {
         console.log('DELETING RESTAURANT WORKED');
         res.json({

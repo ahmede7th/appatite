@@ -54,7 +54,7 @@ module.exports = {
   createReview(req, res, next) {
     reviewDB
       .addReview({
-        username: req.body.username,
+        user_id: req.body.username,
         restaurant_name: req.body.restaurantName,
         content: req.body.content,
       })
@@ -74,7 +74,7 @@ module.exports = {
   updateReviewById(req, res, next) {
     reviewDB
       .editReview({
-        username: req.body.username,
+        user_id: req.body.username,
         restaurant_name: req.body.restaurantName,
         content: req.body.content,
         id: req.params.id,

@@ -3,8 +3,8 @@ const restaurantDB = require('../config/connection');
 module.exports = {
   save(restaurant) {
     return restaurantDB.one(`INSERT INTO restaurants(name, rating, cuisine, img_src, loc)
-                                              VALUES($[restaurant.name], $[restaurant.rating],
-                                              $[restaurant.cuisine], $[restaurant.img_src], $[restaurant.loc])
+                                              VALUES($[name], $[rating],
+                                              $[cuisine], $[img_src], $[loc])
                                               RETURNING *`, restaurant);
   },
 
@@ -19,12 +19,12 @@ module.exports = {
   },
 
   updateRestaurant(restaurant) {
-    return restaurantDB.one(`UPDATE restaurants SET name = $[restaurant.name],
-                                                rating = $[restaurant.rating], cuisine = $[restaurant.cuisine]
-                                                WHERE id=$[restaurant.id] RETURNING *`, restaurant);
+    return restaurantDB.one(`UPDATE restaurants SET name = $[name],
+                                                rating = $[rating], cuisine = $[cuisine]
+                                                WHERE name=$[name] RETURNING *`, restaurant);
   },
 
-  destroyRestaurantById(restaurant) {
+  destroyRestaurantByName(restaurant) {
     return restaurantDB.none(`DELETE FROM restaurants WHERE name = $1`, restaurant);
   },
 };
