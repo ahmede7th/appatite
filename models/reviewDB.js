@@ -2,7 +2,7 @@
 const reviewDB = require('../config/connection');
 
 module.exports = {
-  getAllReviewsByRestaurantName(restaurantId) {
+  getAllReviewsByRestaurantName(restaurantName) {
     return reviewDB.any(`SELECT * FROM reviews
                                           WHERE restaurant_name = $1`, restaurantName);
   },
@@ -15,7 +15,8 @@ module.exports = {
   addReview(review) {
     return reviewDB.one(`INSERT INTO reviews(user_id, restaurant_name, content)
                                           VALUES($[review.username], $[review.restaurant_name], $[review.content])
-                                          RETURNING *`, review);
+                                          RETURNING *
+                                          `, review);
   },
 
   getYourReviews(review) {
@@ -28,6 +29,7 @@ module.exports = {
     return reviewDB.any(`SELECT user_id, restaurant_name, content, id, date_posted
                                           FROM reviews
                                           WHERE user_id != $1
+                                          RETURNING *
                                           `, user);
   },
 

@@ -1,5 +1,5 @@
 //Require the model
-const reviewDB = require(`../models/userDB`);
+const reviewDB = require(`../models/reviewDB`);
 
 module.exports = {
   getAllReviewsByRestaurantName(req, res, next) {

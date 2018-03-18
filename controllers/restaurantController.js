@@ -1,5 +1,5 @@
 //Require the model
-const restaurantDB = require(`../models/userDB`);
+const restaurantDB = require(`../models/restaurantDB`);
 
 module.exports = {
   getAllRestaurants(req, res, next) {
