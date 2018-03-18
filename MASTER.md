@@ -1,5 +1,5 @@
-##GET /api/user
-Returns information about one specific user.
+#GET /api/user/:id
+Returns information about one specific user based on username in the database.
 {
   "message": "Got user",
   "data": {
@@ -16,7 +16,7 @@ Returns information about one specific user.
   }
 }
 
-##POST /api/user
+#POST /api/user
 Adds a user to the database.
 {
   "message": "ok",
@@ -34,7 +34,7 @@ Adds a user to the database.
   }
 }
 
-##GET /api/user/edit/:id
+#GET /api/user/edit/:id
 Gets a specific users information based on their username to use for updating user information.
 {
   "message": "Got user",
@@ -52,7 +52,7 @@ Gets a specific users information based on their username to use for updating us
   }
 }
 
-##PUT /api/user/edit/:id
+#PUT /api/user/edit/:id
 Edits a users information, based on that users' username in the database.
 {
   "message": "ok",
@@ -68,7 +68,7 @@ Edits a users information, based on that users' username in the database.
   }
 }
 
-##DELETE /api/user/delete/:id
+#DELETE /api/user/delete/:id
 Deletes a user from the database, based on that users username.
 {
  "message": "ok"
@@ -76,7 +76,7 @@ Deletes a user from the database, based on that users username.
 
 -----------------------------------------
 
-##GET /api/restaurant
+#GET /api/restaurant
 Gets the information about every restaurant currently in the database.
 {
   "message": "ok",
@@ -104,7 +104,7 @@ Gets the information about every restaurant currently in the database.
   }
 }
 
-##GET /api/restaurant/:id
+#GET /api/restaurant/:id
 Gets a specific restaurant from the database based on that restaurants name in the database.
 {
   "message": "Got restaurant",
@@ -121,7 +121,7 @@ Gets a specific restaurant from the database based on that restaurants name in t
   }
 }
 
-##POST /api/restaurant/:id
+#POST /api/restaurant/
 Creates a new restaurant in the database, returning the information about that restaurant.
 {
   "message": "ok",
@@ -140,7 +140,7 @@ Creates a new restaurant in the database, returning the information about that r
   }
 }
 
-##GET /api/restaurant/edit/:id
+#GET /api/restaurant/edit/:id
 Gets one restaurant in the database based on that restaurants name to be used to edit that restaurant.
 {
   "message": "Got restaurant",
@@ -157,7 +157,7 @@ Gets one restaurant in the database based on that restaurants name to be used to
   }
 }
 
-##PUT /api/restaurant/:id
+#PUT /api/restaurant/edit/:id
 Edits a restaurant in the database based on that restaurants name.
 {
   "message": "ok",
@@ -174,7 +174,7 @@ Edits a restaurant in the database based on that restaurants name.
   }
 }
 
-##DELETE /api/restaurant/delete/:id
+#DELETE /api/restaurant/delete/:id
 Deletes a restaurant from the database, based on that restaurants name in the database.
 {
   "message": "restaurant deleted"
@@ -184,7 +184,7 @@ Deletes a restaurant from the database, based on that restaurants name in the da
 ---------------------------------------
 
 
-##GET /api/review/:id
+#GET /api/review/:id
 Gets all reviews for the specific restaurant based on the restaurants' name in the database.
 {
   "message": "ok",
@@ -206,7 +206,7 @@ Gets all reviews for the specific restaurant based on the restaurants' name in t
   }
 }
 
-##POST /api/review
+#POST /api/review
 Adds a review to the database.
 {
   "message": "ok",
@@ -221,7 +221,7 @@ Adds a review to the database.
   }
 }
 
-##GET /api/review/user/:id
+#GET /api/review/user/:id
 Gets all reviews made by a specific user based on that users username in the database.
 {
   "message": "ok",
@@ -245,7 +245,7 @@ Gets all reviews made by a specific user based on that users username in the dat
   }
 }
 
-##GET /api/review/edit/:id
+#GET /api/review/edit/:id
 Gets a review from the database based on that reviews id to be used to edit.
 {
   "message": "ok"
@@ -260,7 +260,7 @@ Gets a review from the database based on that reviews id to be used to edit.
   }
 }
 
-##PUT /api/review/edit/:id
+#PUT /api/review/edit/:id
 Edits a review based on that reviews id in the database.
 {
   "message": "ok",
@@ -275,7 +275,7 @@ Edits a review based on that reviews id in the database.
   }
 }
 
-##DELETE /api/review/delete/:id
+#DELETE /api/review/delete/:id
 Deletes a review from the database.
 {
   "message": "deleted review"
