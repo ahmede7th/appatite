@@ -36,7 +36,7 @@ module.exports = {
       console.log('worked')
       res.json({
         message:'ok',
-        data.response.data
+        data:response.data
       })
     })
     .catch(err => {
@@ -57,7 +57,7 @@ module.exports = {
       console.log('worked')
       res.json({
         message:'ok',
-        data.response.data
+        data:response.data
       })
     })
     .catch(err => {
