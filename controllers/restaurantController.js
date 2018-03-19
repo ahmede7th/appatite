@@ -60,6 +60,7 @@ module.exports = {
     restaurantDB
       .updateRestaurant({
         name: req.body.name,
+        newName: req.body.newName,
         rating: req.body.rating,
         cuisine: req.body.cuisine,
         img_src: 0,

@@ -13,13 +13,12 @@ module.exports = {
   },
 
   getOneRestaurant(restaurant) {
-    return restaurantDB.any(`SELECT *
-                                              FROM restaurants
+    return restaurantDB.any(`SELECT * FROM restaurants
                                               WHERE name = $1`, restaurant);
   },
 
   updateRestaurant(restaurant) {
-    return restaurantDB.one(`UPDATE restaurants SET name = $[name],
+    return restaurantDB.one(`UPDATE restaurants SET name = $[newName],
                                                 rating = $[rating], cuisine = $[cuisine]
                                                 WHERE name=$[name] RETURNING *`, restaurant);
   },
