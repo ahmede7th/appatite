@@ -19,8 +19,14 @@
   },
   "homepage": "https://github.com/CRHarding/appatite#readme",
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.18.0",
+=======
+    "bcrypt": "^1.0.3",
+>>>>>>> 89ec97432e0d7dffdbfdc64d7bb63ce734446c2e
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.2.0",

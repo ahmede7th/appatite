@@ -1,4 +1,6 @@
 const userDB = require('../config/connection');
+const bcrypt = require('bcrypt');
+const TokenService = require('../services/TokenService');
 
 module.exports = {
   save(user) {

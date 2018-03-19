@@ -1,56 +1,81 @@
-import auth0 from 'auth0-js';
-import history from '../history';
+import React, { Component } from 'react';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import Home from './Home';
+import Login from './Login';
+import Register from './Register';
+import TokenService from './Services/TokenService';
 
-export default class Auth {
-  auth0 = new auth0.WebAuth({
-      domain: 'crharding.auth0.com',
-      clientID: 'K_Yh7jYeB3iQ_k9HlOykWTSaqOnBLe5S',
-      redirectUri: 'http://localhost:3000/callback',
-      audience: 'https://crharding.auth0.com/userinfo',
-      responseType: 'token id_token',
-      scope: 'openid',
-    });
-
-  constructor() {
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-  }
-
-  login() {
-    this.auth0.authorize();
-  }
-
-  handleAuthentication() {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        history.replace('/home');
-      } else if (err) {
-        history.replace('/home');
-        console.log(err);
-      }
+class Auth extends Component {
+  register(data) {
+    console.log(data);
+    axios('api/user/', {
+      method: 'POST',
+      data,
+    }).then(resp => {
+      TokenService.save(resp.data.token);
+    }).catch(err => {
+      console.log('ERROR IN CREATING USER IN CLIENT--->', err);
     });
   }
 
-  setSession(authResult) {
-    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-    history.replace('/home');
+  login(data) {
+    axios('api/user/login', {
+      method: 'POST',
+      data,
+    }).then(resp => {
+      TokenService.save(resp.data.token);
+    }).catch(err => {
+      console.log('ERROR IN GETTING USER IN CLIENT--->', err);
+    });
   }
 
-  logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    history.replace('/home');
+  authClick(ev) {
+    ev.preventDefault();
+    axios('api/restricted', {
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
+    }).then(resp => console.log('AUTH CLICK SUCCESS RESPONSE--->', resp))
+    .catch(err => console.log('AUTH CLICK FAILURE RESPONSE--->', err));
   }
 
-  isAuthenticated() {
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+  logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
+  }
+
+  checkLogin() {
+    axios('api/isLoggedIn', {
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
+    }).then(resp => console.log('CHECK LOGIN SUCCESS RESPONSE--->', resp))
+    .catch(err => console.log('CHECK LOGIN FAILURE RESPONSE--->', err));
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          Weird button: <button onClick={this.authClick.bind(this)}>Weird Button</button>
+          <p><button onClick={this.checkLogin.bind(this)}>Check If Logged In</button></p>
+          <p><button onClick={this.logout.bind(this)}>Logout</button></p>
+        </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/register" component={(props) => (
+                <Register {...props} submit={this.register.bind(this)} />
+            )} />
+          <Route exact path="/login" component={(props) => (
+            <Login {...props} submit={this.login.bind(this)} />
+          )} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
   }
 }
+
+export default Auth;
