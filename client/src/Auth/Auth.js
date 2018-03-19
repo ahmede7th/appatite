@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import Home from './Home';
+import TokenService from './Services/TokenService';
+import { Redirect } from 'react-router-dom';
+import Home from '../Components/Home';
+import AuthHome from './AuthHome';
 import Login from './Login';
 import Register from './Register';
-import TokenService from './Services/TokenService';
 
 class Auth extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      isLoggedIn: false,
+    };
+  }
+
   register(data) {
     console.log(data);
     axios('api/user/auth', {
@@ -14,6 +23,9 @@ class Auth extends Component {
       data,
     }).then(resp => {
       TokenService.save(resp.data.token);
+      this.setState({
+        isLoggedIn: true,
+      });
     }).catch(err => {
       console.log('ERROR IN CREATING USER IN CLIENT--->', err);
     });
@@ -25,8 +37,11 @@ class Auth extends Component {
       method: 'POST',
       data,
     }).then(resp => {
-      console.log('INSIDE LOGIN--->', resp);
       TokenService.save(resp.data.token);
+      this.setState({
+        isLoggedIn: true,
+      });
+      console.log('USER LOGGED IT--->', this.state.isLoggedIn);
     }).catch(err => {
       console.log('ERROR IN GETTING USER IN CLIENT--->', err);
     });
@@ -45,6 +60,9 @@ class Auth extends Component {
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
+    this.setState({
+      isLoggedIn: false,
+    });
   }
 
   checkLogin() {
@@ -60,20 +78,23 @@ class Auth extends Component {
     return (
       <div>
         <div>
-          Weird button: <button onClick={this.authClick.bind(this)}>Weird Button</button>
           <p><button onClick={this.checkLogin.bind(this)}>Check If Logged In</button></p>
           <p><button onClick={this.logout.bind(this)}>Logout</button></p>
         </div>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={AuthHome} />
             <Route exact path="/register" component={(props) => (
                 <Register {...props} submit={this.register.bind(this)} />
             )} />
-          <Route exact path="/login" component={(props) => (
-            <Login {...props} submit={this.login.bind(this)} />
-          )} />
+            <Route exact path="/login" component={(props) => (
+              <Login {...props} submit={this.login.bind(this)} />
+            )} />
+            <Route exact path="/main" component={Home} />
           </Switch>
+        </BrowserRouter>
+        <BrowserRouter>
+          {this.state.isLoggedIn ? <Redirect to="/main" /> : ''}
         </BrowserRouter>
       </div>
     );
