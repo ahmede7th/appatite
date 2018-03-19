@@ -4,6 +4,8 @@ import history from './history';
 import axios from 'axios';
 import './App.css';
 
+import Restaurants from './Restaurants'
+
 class App extends Component {
   // goTo(route) {
   //   this.props.history.replace(`/${route}`);
@@ -23,23 +25,23 @@ class App extends Component {
         <div className="container-fluid" align="center">
 
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link class="navbar-brand" to="/">Home</Link>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+              <Link className="navbar-brand" to="/">Home</Link>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <Link class="nav-link" to="#">My Favorites</Link><span class="sr-only">(current)</span>
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link className="nav-link" to="#">My Favorites</Link><span className="sr-only">(current)</span>
                   </li>
-                  <li class="nav-item">
-                    <Link class="nav-link" to="#">Friends</Link>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="#">Friends</Link>
                   </li>
-                  <li class="nav-item">
-                    <Link class="nav-link" to="#">Search</Link>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="#">Search</Link>
                   </li>
-                  <li class="nav-item">
-                    <Link class="nav-link" to="#">...</Link>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="#">...</Link>
                   </li>
                 </ul>
               </div>
@@ -48,7 +50,7 @@ class App extends Component {
           <br/>
           <h1>WELCOME TO APP-A-TITE</h1>
           <p>It's time to getcha eat on!</p>
-
+          <Restaurants />
         </div>
       </Router>
     );
