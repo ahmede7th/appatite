@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 const Header = () => {
 	return (
+		<BrowserRouter>
          <nav className="navbar navbar-expand-lg navbar-light bg-light">
              <Link class="navbar-brand" to="/main">Home</Link>
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +25,7 @@ const Header = () => {
                </ul>
              </div>
          </nav>
+			 </BrowserRouter>
 	)
 }
 

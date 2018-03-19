@@ -7,13 +7,16 @@ import Home from '../Components/Home';
 import AuthHome from './AuthHome';
 import Login from './Login';
 import Register from './Register';
+import history from './Services/history';
 
 class Auth extends Component {
   constructor(props) {
     super();
     this.state = {
-      isLoggedIn: false,
+      redirect: false,
     };
+    this.renderLogin = this.renderLogin.bind(this);
+    this.renderHome = this.renderHome.bind(this);
   }
 
   register(data) {
@@ -24,7 +27,7 @@ class Auth extends Component {
     }).then(resp => {
       TokenService.save(resp.data.token);
       this.setState({
-        isLoggedIn: true,
+        redirect: true,
       });
     }).catch(err => {
       console.log('ERROR IN CREATING USER IN CLIENT--->', err);
@@ -39,9 +42,9 @@ class Auth extends Component {
     }).then(resp => {
       TokenService.save(resp.data.token);
       this.setState({
-        isLoggedIn: true,
+        redirect: true,
       });
-      console.log('USER LOGGED IT--->', this.state.isLoggedIn);
+      console.log('USER LOGGED IN--->', this.state.isLoggedIn);
     }).catch(err => {
       console.log('ERROR IN GETTING USER IN CLIENT--->', err);
     });
@@ -61,7 +64,7 @@ class Auth extends Component {
     ev.preventDefault();
     TokenService.destroy();
     this.setState({
-      isLoggedIn: false,
+      redirect: false,
     });
   }
 
@@ -70,11 +73,11 @@ class Auth extends Component {
       headers: {
         Authorization: `Bearer ${TokenService.read()}`,
       },
-    }).then(resp => console.log('CHECK LOGIN SUCCESS RESPONSE--->', resp))
+    }).then(resp => console.log('CHECK LOGIN SUCCESS RESPONSE--->', resp.data))
     .catch(err => console.log('CHECK LOGIN FAILURE RESPONSE--->', err));
   }
 
-  render() {
+  renderLogin() {
     return (
       <div>
         <div>
@@ -87,17 +90,26 @@ class Auth extends Component {
             <Route exact path="/register" component={(props) => (
                 <Register {...props} submit={this.register.bind(this)} />
             )} />
-            <Route exact path="/login" component={(props) => (
+            <Route exact path="/login" render={(props) => (
               <Login {...props} submit={this.login.bind(this)} />
             )} />
-            <Route exact path="/main" component={Home} />
+            <Route exact path="/home" component={Home} />
           </Switch>
-        </BrowserRouter>
-        <BrowserRouter>
-          {this.state.isLoggedIn ? <Redirect to="/main" /> : ''}
         </BrowserRouter>
       </div>
     );
+  }
+
+  renderHome() {
+    return (
+      <div>
+        <Home />
+      </div>
+    );
+  }
+
+  render() {
+    return this.state.redirect ? this.renderHome() : this.renderLogin();
   }
 }
 

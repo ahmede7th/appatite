@@ -19,7 +19,7 @@ module.exports = {
   },
 
   updateRestaurant(restaurant) {
-    return restaurantDB.one(`UPDATE restaurants SET name = $[name],
+    return restaurantDB.one(`UPDATE restaurants SET name = $[newName],
                                                 rating = $[rating], cuisine = $[cuisine]
                                                 WHERE name=$[name] RETURNING *`, restaurant);
   },
