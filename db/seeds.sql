@@ -1,3 +1,5 @@
+\c appatite_db;
+
 INSERT INTO users (fname, lname, username, password, about_me, auth, loc) VALUES
 (
   'Casey',
