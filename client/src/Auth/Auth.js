@@ -9,7 +9,7 @@ import TokenService from './Services/TokenService';
 class Auth extends Component {
   register(data) {
     console.log(data);
-    axios('api/user/', {
+    axios('api/user/auth', {
       method: 'POST',
       data,
     }).then(resp => {
@@ -20,10 +20,12 @@ class Auth extends Component {
   }
 
   login(data) {
-    axios('api/user/login', {
+    console.log(data);
+    axios('api/user/auth/login', {
       method: 'POST',
       data,
     }).then(resp => {
+      console.log('INSIDE LOGIN--->', resp);
       TokenService.save(resp.data.token);
     }).catch(err => {
       console.log('ERROR IN GETTING USER IN CLIENT--->', err);

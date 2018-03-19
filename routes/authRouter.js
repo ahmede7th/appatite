@@ -13,6 +13,7 @@ authRouter.post('/', authController.createNewUser, (req, res) => {
 });
 
 authRouter.post('/login', authController.login, (req, res) => {
+  console.log(res.locals.user);
   if (!res.locals.user) {
     res.status(401).json({ err: 'Login Failed' });
   } else {
