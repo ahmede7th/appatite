@@ -6,7 +6,15 @@ const bcrypt = require('bcrypt');
 module.exports = {
   createNewUser(req, res, next) {
     const user = req.body;
-    const passwordDigest = bcrypt.hashSync(user.password, 10);
+    if (!user.auth) {
+      user.auth = 1;
+    }
+
+    if (!user.loc) {
+      user.loc = 0;
+    }
+
+    user.password = bcrypt.hashSync(user.password, 10);
     userDB.save(user)
     .then(data => {
       const { password, ...userData } = data;
@@ -14,7 +22,6 @@ module.exports = {
       const tokenData = {
         username: userData.username,
       };
-
       TokenService.makeToken(tokenData)
       .then(token => {
         console.log('THIS IS THE TOKEN--->', token);

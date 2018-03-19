@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default class UserForm extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class UserForm extends Component {
     // set initial state
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,6 +31,7 @@ export default class UserForm extends Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <label>First Name
           <input
@@ -68,6 +70,7 @@ export default class UserForm extends Component {
         </label>
         <button type="submit" value="Submit">Submit</button>
       </form>
+    </div>
     );
   }
 }
