@@ -33,7 +33,6 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/login" component={LogIn} />
           <Route exact path="/main" component={Home} />
-          <Route path="/main/add" component={RestCreate} />
           <Route exact path="/main/:id" component={RestSingle} />
           <Route path="/main/:id/edit" component={RestEdit} />
 

@@ -10,8 +10,7 @@ class RestEdit extends Component {
 			newName: '',
 			name: '',
 			cuisine: '',
-			img_src: '',
-			loc: '',
+			rating: '',
 			fireRedirect: false
 		}
 		this.inputChange = this.inputChange.bind(this)
@@ -19,16 +18,15 @@ class RestEdit extends Component {
 	};
 
 	componentDidMount() {
-		return axios.get(`/api/restaurant/${this.props.match.params.id}`)
+		return axios.get(`/api/restaurant/edit/${this.props.match.params.id}`)
 			.then(restaurant => {
 				console.log('about to edit', restaurant.data.data[0].name)
 				this.setState({
 					apiDataLoaded: true,
 					newName: restaurant.data.data[0].name,
 					name: restaurant.data.data[0].name,
-					cuisine: restaurant.data.data[0].cuisine,
-					img_src: restaurant.data.data[0].img_src,
-					loc: restaurant.data.data[0].loc
+					rating: restaurant.data.data[0].rating,
+					cuisine: restaurant.data.data[0].cuisine
 				})
 			})
 			.catch(err => {
@@ -74,14 +72,13 @@ class RestEdit extends Component {
 			<div className="restaurant-edit">
 				<h1>Edit:  {this.state.name}</h1>
 				<form onSubmit={this.formSubmit}>
-					
-					<input type='text' onChange={this.inputChange} name='newName' value={this.state.name} />
+					<input type='hidden' name='name' value={this.state.name} />
+					<input type='text' onChange={this.inputChange} name='newName' value={this.state.newName} />
 					<input type='text' onChange={this.inputChange} name='cuisine' value={this.state.cuisine} />
-					<input type='text' onChange={this.inputChange} name='img_src' value={this.state.img_src} />
-					<input type='text' onChange={this.inputChange} name='loc' value={this.state.loc} />
+					<input type='number' onChange={this.inputChange} name='rating' value={this.state.rating} />
 					<input type='submit' value='submit' />
 				</form>
-				{this.state.fireRedirect ? <Redirect to={`/main/${this.props.match.params.id}`} /> : '' }
+				{this.state.fireRedirect ? <Redirect to={`/main/${this.state.newName}`} /> : '' }
 			</div>
 		)
 	}
