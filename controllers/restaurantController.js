@@ -24,13 +24,13 @@ module.exports = {
     restaurantDB
     .getOneRestaurant(req.params.id)
     .then(restaurant => {
-      console.log('FOUND USER WORKED---->', restaurant);
+      console.log('FOUND RESTAURANT WORKED---->', restaurant);
       res.json({
         message: 'Got restaurant',
         data: restaurant,
       });
     }).catch(err => {
-      console.log('FOUND USER FAILED---->', err);
+      console.log('FOUND RESTAURANT FAILED---->', err);
     });
   },
 
