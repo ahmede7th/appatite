@@ -134,6 +134,8 @@ module.exports = {
       res.json({
         message: 'ok',
         data: restaurant,
+    })
+      .updateRestaurant({
         name: req.body.name,
         newName: req.body.newName,
         rating: req.body.rating,
