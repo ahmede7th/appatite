@@ -6,9 +6,9 @@ const Welcome = () => {
 			<h1>Welcome</h1>
 
 			<p>
-			   Are you hungry?  Are you always looking for places to eat 
-		   	   only to find a 5 star rated restaurant written by people who have 
-			   no idea what good food is.  You have come to the right place
+			   Are you hungry?  Are you always looking for places to eat
+		   	   only to find a 5 star rated restaurant written by people who have
+			   no idea what good food is?  You have come to the right place
 			</p>
 
 			<button><a href="/register">Sign up</a></button>
