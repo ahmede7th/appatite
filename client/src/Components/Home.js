@@ -11,9 +11,12 @@ class Home extends Component {
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null,
-			show: false
+			show: false,
+			lat: '',
+			long: ''
 		}
 		this.buttonClick = this.buttonClick.bind(this)
+		this.getLocation = this.getLocation.bind(this)
 	};
 
   componentDidMount() {
@@ -37,15 +40,22 @@ class Home extends Component {
 		})
 	};
 
-	// Location() {
-	// 	axios.get('')
-	// 		.then(response => {
-	// 			console.log('geolocation', response)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('geolocation', err)
-	// 		})
-	// };
+	getLocation() {
+	    if (navigator.geolocation) {
+	    	console.log('getting users position')
+	        navigator.geolocation.getCurrentPosition(this.showPosition);
+	    } else { 
+	        console.log("Geolocation is not supported by this browser.");
+	   	  }
+	}
+
+	showPosition(position) {
+		console.log('users location has been set')
+	    this.setState({
+	     	lat: position.coords.latitude,
+	     	long: position.coords.longitude
+	     }) 
+		}
 
 	mainListing() {
 		if (this.state.apiDataLoaded) {
@@ -61,7 +71,7 @@ class Home extends Component {
 				<Header />
 					<div className="jumbotron">
 					<button onClick={this.buttonClick}>Biz owner</button>
-					
+					{this.getLocation()}
 					{this.state.show ? <RestCreate /> : ''}
 					{this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
 					</div>
