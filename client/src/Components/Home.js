@@ -44,20 +44,6 @@ class Home extends Component {
     });
   }
 
-	buttonClick() {
-		this.setState({
-			show: !this.state.show
-		})
-	};
-	 mainListing() {
-		if (this.state.apiDataLoaded) {
-			return this.state.apiData.map((el, i) => {
-				return <Restaurants restaurants={el} key={el.id} />
-			})
-		}
-	};
-
-	 render() {
   buttonClick() {
     this.setState({
       show: !this.state.show,
