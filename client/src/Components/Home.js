@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RestCreate from '../Components/RestCreate';
 import Restaurants from './Restaurants';
 import Header from './subComponents/Header';
 import Footer from './subComponents/Footer';
-
-
-
+import RestCreate from '../Components/RestCreate';
 
 class Home extends Component {
 	constructor() {
@@ -34,27 +31,7 @@ class Home extends Component {
       });
   }
 
-
-  mainListing() {
-    if (this.state.apiDataLoaded) {
-      return this.state.apiData.map((el, i) => {
-        return <Restaurants restaurants={el} key={el.id} />;
-      });
-    }
-  }
-
-  render() {
-    return (
-      <div className="main">
-        <Header />
-        {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-        <Footer />
-      </div>
-    );
-  }
-};
-
-	function buttonClick() {
+	buttonClick() {
 		this.setState({
 			show: !this.state.show
 		})
@@ -81,6 +58,6 @@ class Home extends Component {
 			</div>
 		)
 	}
-
+};
 
 export default Home;

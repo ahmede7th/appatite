@@ -8,6 +8,7 @@ import AuthHome from './AuthHome';
 import Login from './Login';
 import Register from './Register';
 import history from './Services/history';
+// import AuthRoutes from '../Components/Routes/AuthRoutes';
 
 class Auth extends Component {
   constructor(props) {
