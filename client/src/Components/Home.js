@@ -49,6 +49,27 @@ class Home extends Component {
 		this.setState({
 			show: !this.state.show
 		})
+<<<<<<< HEAD
+=======
+	};
+
+	// Location() {
+	// 	axios.get('')
+	// 		.then(response => {
+	// 			console.log('geolocation', response)
+	// 		})
+	// 		.catch(err => {
+	// 			console.log('geolocation', err)
+	// 		})
+	// };
+
+	mainListing() {
+		if (this.state.apiDataLoaded) {
+			return this.state.apiData.map((el, i) => {
+				return <Restaurants restaurants={el} key={el.id} />
+			})
+		}
+>>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 	};
 
 	// Location() {

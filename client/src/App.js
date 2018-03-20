@@ -17,6 +17,10 @@ class App extends Component {
       <Router>
         <div className="container-fluid router" align="center">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 =======
         
 >>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711

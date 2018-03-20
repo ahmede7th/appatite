@@ -9,7 +9,11 @@ const favoritesRouter = require('./routes/favoritesRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const apiRouter = require('./routes/apiRoutes')
 <<<<<<< HEAD
+<<<<<<< HEAD
 //const restaurantRouter = require('./routes/restaurantRouter');
+=======
+const restaurantRouter = require('./routes/restaurantRouter');
+>>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 =======
 const restaurantRouter = require('./routes/restaurantRouter');
 >>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
