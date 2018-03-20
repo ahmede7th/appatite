@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import RestCreate from '../Components/RestCreate';
 import Restaurants from './Restaurants';
 import Header from './subComponents/Header';
 import Footer from './subComponents/Footer';
-<<<<<<< HEAD
 
-class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      apiDataLoaded: false,
-      apiData: null,
-    };
-  }
-=======
-import RestCreate from '../Components/RestCreate';
+
+
 
 class Home extends Component {
 	constructor() {
@@ -27,7 +18,6 @@ class Home extends Component {
 		}
 		this.buttonClick = this.buttonClick.bind(this)
 	};
->>>>>>> a17e36c0f62943f34f28118ba8d611a700bf9027
 
   componentDidMount() {
     return axios
@@ -44,7 +34,7 @@ class Home extends Component {
       });
   }
 
-<<<<<<< HEAD
+
   mainListing() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
@@ -62,15 +52,15 @@ class Home extends Component {
       </div>
     );
   }
-}
-=======
-	buttonClick() {
+};
+
+	function buttonClick() {
 		this.setState({
 			show: !this.state.show
 		})
-	}
+	};
 
-	mainListing() {
+	function mainListing() {
 		if (this.state.apiDataLoaded) {
 			return this.state.apiData.map((el, i) => {
 				return <Restaurants restaurants={el} key={el.id} />
@@ -78,7 +68,7 @@ class Home extends Component {
 		}
 	};
 
-	render() {
+	function render() {
 		return (
 			<div className="container-fluid">
 				<Header />
@@ -91,7 +81,6 @@ class Home extends Component {
 			</div>
 		)
 	}
-};
->>>>>>> a17e36c0f62943f34f28118ba8d611a700bf9027
+
 
 export default Home;
