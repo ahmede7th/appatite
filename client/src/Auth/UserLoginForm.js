@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-export default class UserForm extends Component {
+export default class UserLoginForm extends Component {
   constructor(props) {
     super(props);
 
@@ -33,20 +33,6 @@ export default class UserForm extends Component {
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
-        <label>First Name
-          <input
-            type="text"
-            name="fname"
-            onChange={this.handleChange}
-            value={this.state.fname} />
-        </label>
-        <label>Last Name
-          <input
-            type="text"
-            name="lname"
-            onChange={this.handleChange}
-            value={this.state.lname} />
-        </label>
         <label>User Name
           <input
             type="text"
@@ -60,13 +46,6 @@ export default class UserForm extends Component {
             name="password"
             onChange={this.handleChange}
             value={this.state.password} />
-        </label>
-        <label>About Me
-          <input
-            type="text"
-            name="about_me"
-            onChange={this.handleChange}
-            value={this.state.about_me} />
         </label>
         <button type="submit" value="Submit">Submit</button>
       </form>

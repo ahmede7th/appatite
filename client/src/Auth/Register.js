@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import UserForm from './UserForm';
+import UserRegisterForm from './UserRegisterForm';
 
 export default class Register extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Register extends Component {
     return (
       <div>
         I'm a register
-        <UserForm submit={this.onSubmit} />
+        <UserRegisterForm submit={this.onSubmit} />
         <p><Link to="/"><button>Back Home</button></Link></p>
       </div>
     );

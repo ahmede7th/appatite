@@ -3,7 +3,6 @@ import { BrowserRouter, Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <BrowserRouter>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link class="navbar-brand" to="/main">
           Home
@@ -45,7 +44,6 @@ const Header = () => {
           </ul>
         </div>
       </nav>
-    </BrowserRouter>
   );
 };
 
