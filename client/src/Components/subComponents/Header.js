@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import SearchBar from '../SearchBar'
+//import { Button } from 'reactstrap';
 
 const Header = () => {
   return (
     <div>
+
     <BrowserRouter>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/main">
