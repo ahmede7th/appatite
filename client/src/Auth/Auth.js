@@ -8,7 +8,7 @@ import AuthHome from './AuthHome';
 import Login from './Login';
 import Register from './Register';
 import history from './Services/history';
-import AuthRoutes from '../Components/Routes/AuthRoutes';
+// import AuthRoutes from '../Components/Routes/AuthRoutes';
 
 class Auth extends Component {
   constructor(props) {
@@ -85,6 +85,7 @@ class Auth extends Component {
           <p><button onClick={this.checkLogin.bind(this)}>Check If Logged In</button></p>
           <p><button onClick={this.logout.bind(this)}>Logout</button></p>
         </div>
+        <BrowserRouter>
           <Switch>
             <Route exact path="/" component={AuthHome} />
             <Route exact path="/register" component={(props) => (
@@ -95,6 +96,7 @@ class Auth extends Component {
             )} />
             <Route exact path="/home" component={Home} />
           </Switch>
+        </BrowserRouter>
       </div>
     );
   }
