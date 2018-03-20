@@ -7,7 +7,8 @@ const cors = require('cors');
 const tokenService = require('./services/TokenService');
 const favoritesRouter = require('./routes/favoritesRouter');
 const reviewRouter = require('./routes/reviewRouter');
-const restaurantRouter = require('./routes/restaurantRouter');
+const apiRouter = require('./routes/apiRouter')
+//const restaurantRouter = require('./routes/restaurantRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
 const authService = require('./services/AuthService');
@@ -37,7 +38,7 @@ app.get('/api/isLoggedIn', authService.isLoggedIn, (req, res) => {
 
 app.use('/api/favorites', favoritesRouter);
 app.use('/api/review', reviewRouter);
-app.use('/api/restaurant', restaurantRouter);
+app.use('/api/restaurant', apiRouter);
 app.use('/api/user', userRouter);
 app.use('/api/user/auth', authRouter);
 

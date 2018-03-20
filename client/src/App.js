@@ -11,6 +11,8 @@ import RestSingle from './Components/RestSingle';
 import RestEdit from './Components/RestEdit';
 import RestCreate from './Components/RestCreate';
 
+import Restaurants from './Restaurants'
+
 class App extends Component {
   // goTo(route) {
   //   this.props.history.replace(`/${route}`);
