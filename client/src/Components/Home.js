@@ -36,6 +36,7 @@ class Home extends Component {
       });
   }
 
+<<<<<<< HEAD
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
@@ -43,6 +44,23 @@ class Home extends Component {
       logoutUser: true,
     });
   }
+=======
+	buttonClick() {
+		this.setState({
+			show: !this.state.show
+		})
+	};
+
+	// Location() {
+	// 	axios.get('')
+	// 		.then(response => {
+	// 			console.log('geolocation', response)
+	// 		})
+	// 		.catch(err => {
+	// 			console.log('geolocation', err)
+	// 		})
+	// };
+>>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 
   buttonClick() {
     this.setState({
@@ -50,6 +68,7 @@ class Home extends Component {
     });
   }
 
+<<<<<<< HEAD
   mainListing() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
@@ -79,5 +98,22 @@ class Home extends Component {
     }
   }
 }
+=======
+	render() {
+		return (
+			<div className="container-fluid">
+				<Header />
+					<div className="jumbotron">
+					<button onClick={this.buttonClick}>Biz owner</button>
+					
+					{this.state.show ? <RestCreate /> : ''}
+					{this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+					</div>
+				<Footer />
+			</div>
+		)
+	}
+};
+>>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 
 export default Home;

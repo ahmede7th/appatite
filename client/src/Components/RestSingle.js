@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import RestMap from './RestMap';
 
 class RestSingle extends Component {
 	constructor() {
@@ -46,6 +47,7 @@ class RestSingle extends Component {
 				<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
 				<button>Edit</button>
 				<button onClick={this.deleteRestaurant}>Delete posting</button>
+				<RestMap />
 				{this.state.fireRedirect ? <Redirect to='/main' /> : ''}
 			</div>
 		)
