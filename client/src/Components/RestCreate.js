@@ -12,6 +12,8 @@ class RestCreate extends Component {
 			loc: '',
 			fireRedirect: false
 		}
+		this.inputChange = this.inputChange.bind(this)
+		this.formSubmit = this.formSubmit.bind(this)
 	};
 
 	inputChange(e) {
@@ -23,7 +25,7 @@ class RestCreate extends Component {
 	};
 
 	formSubmit(e) {
-		e.preventDefault();	
+		e.preventDefault();
 		axios({
 			method: 'POST',
 			url: '/api/restaurant',
@@ -46,9 +48,19 @@ class RestCreate extends Component {
 
 	render() {
 		return (
-			<h1>Create page</h1>
+			<div className="restaurant-create">
+				<h1>Create page</h1>
+				<form onSubmit={this.formSubmit}>
+					<input type='text' name='name' onChange={this.inputChange} placeholder='name of business' />
+					<input type='text' name='cuisine' onChange={this.inputChange} placeholder='type of cuisine' />
+					<input type='text' name='img_src' onChange={this.inputChange} placeholder='image url' />
+					<input type='test' name='loc' onChange={this.inputChange} placeholder='location' />
+					<input type='submit' value='submit' />
+				</form>
+				{this.state.fireRedirect ? <Redirect to='/main' /> : ''}
+			</div>
 		)
-	}
-}
+	};
+};
 
 export default RestCreate;

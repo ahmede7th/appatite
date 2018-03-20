@@ -13,8 +13,7 @@ module.exports = {
   },
 
   getOneRestaurant(restaurant) {
-    return restaurantDB.any(`SELECT *
-                                              FROM restaurants
+    return restaurantDB.any(`SELECT * FROM restaurants
                                               WHERE name = $1`, restaurant);
   },
 
