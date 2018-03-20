@@ -23,33 +23,39 @@ export default class UserLoginForm extends Component {
 
   // update form state
   handleChange(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <label>User Name
-          <input
-            type="text"
-            name="username"
-            onChange={this.handleChange}
-            value={this.state.username} />
-        </label>
-        <label>Password
-          <input
-            type="text"
-            name="password"
-            onChange={this.handleChange}
-            value={this.state.password} />
-        </label>
-        <button type="submit" value="Submit">Submit</button>
-      </form>
-    </div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            User Name
+            <input
+              type="text"
+              name="username"
+              onChange={this.handleChange}
+              value={this.state.username}
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="text"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </label>
+          <button type="submit" value="Submit">
+            Submit
+          </button>
+        </form>
+      </div>
     );
   }
 }

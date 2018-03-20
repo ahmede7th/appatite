@@ -4,7 +4,6 @@ import axios from 'axios';
 import TokenService from '../Auth/Services/TokenService';
 import { Redirect } from 'react-router-dom';
 import Home from '../Components/Home';
-import AuthHome from '../Auth/AuthHome';
 import Register from '../Auth/Register';
 import Login from '../Auth/authLogin';
 import history from '../Auth/Services/history';
@@ -13,7 +12,7 @@ class userLogin extends Component {
   constructor(props) {
     super();
     this.state = {
-      redirect: false,
+      finishRender: false,
     };
     this.renderLogin = this.renderLogin.bind(this);
     this.renderHome = this.renderHome.bind(this);
@@ -26,6 +25,8 @@ class userLogin extends Component {
       data,
     }).then(resp => {
       TokenService.save(resp.data.token);
+      TokenService.saveUser(resp.data.user.id);
+      console.log('USER IS REGISTERED--->', resp.data.token);
       this.setState({
         redirect: true,
       });
@@ -41,6 +42,7 @@ class userLogin extends Component {
       data,
     }).then(resp => {
       TokenService.save(resp.data.token);
+      TokenService.saveUser(resp.data.user.id);
       this.setState({
         redirect: true,
       });
@@ -50,49 +52,33 @@ class userLogin extends Component {
     });
   }
 
-  authClick(ev) {
-    ev.preventDefault();
-    axios('api/restricted', {
-      headers: {
-        Authorization: `Bearer ${TokenService.read()}`,
-      },
-    }).then(resp => console.log('AUTH CLICK SUCCESS RESPONSE--->', resp))
-    .catch(err => console.log('AUTH CLICK FAILURE RESPONSE--->', err));
-  }
-
-  logout(ev) {
-    ev.preventDefault();
-    TokenService.destroy();
-    this.setState({
-      redirect: false,
-    });
-  }
-
-  checkLogin() {
+  componentDidMount() {
     axios('api/isLoggedIn', {
       headers: {
         Authorization: `Bearer ${TokenService.read()}`,
       },
-    }).then(resp => console.log('CHECK LOGIN SUCCESS RESPONSE--->', resp.data))
-    .catch(err => console.log('CHECK LOGIN FAILURE RESPONSE--->', err));
+    }).then(resp => {
+      console.log('CHECK LOGIN SUCCESS RESPONSE--->', resp.data);
+      this.setState({
+        finishRender: resp.data.isLoggedIn,
+      });
+      return resp.data.isLoggedIn;
+    })
+    .catch(err => {
+      console.log('CHECK LOGIN FAILURE RESPONSE--->', err);
+    });
   }
 
   renderLogin() {
     return (
       <div>
-        <div>
-          <p><button onClick={this.checkLogin.bind(this)}>Check If Logged In</button></p>
-          <p><button onClick={this.logout.bind(this)}>Logout</button></p>
-        </div>
 				<div>
-            <Route exact path="/" component={AuthHome} />
             <Route exact path="/register" component={(props) => (
                 <Register {...props} submit={this.register.bind(this)} />
             )} />
             <Route exact path="/login" render={(props) => (
               <Login {...props} submit={this.login.bind(this)} />
             )} />
-            <Route exact path="/home" component={Home} />
 					</div>
       </div>
     );
@@ -107,7 +93,7 @@ class userLogin extends Component {
   }
 
   render() {
-    return this.state.redirect ? this.renderHome() : this.renderLogin();
+    return this.state.finishRender || this.state.redirect ? this.renderHome() : this.renderLogin();
   }
 }
 
