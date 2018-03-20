@@ -37,7 +37,7 @@ class Home extends Component {
 		})
 	};
 
-	function mainListing() {
+	 mainListing() {
 		if (this.state.apiDataLoaded) {
 			return this.state.apiData.map((el, i) => {
 				return <Restaurants restaurants={el} key={el.id} />
@@ -45,7 +45,7 @@ class Home extends Component {
 		}
 	};
 
-	function render() {
+	 render() {
 		return (
 			<div className="container-fluid">
 				<Header />

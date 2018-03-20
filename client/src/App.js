@@ -31,7 +31,6 @@ class App extends Component {
 
       <Router history={history}>
         <div className="container-fluid router" align="center">
-
           <Route exact path="/" component={Welcome} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={LogIn} />

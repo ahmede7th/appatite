@@ -129,7 +129,6 @@ module.exports = {
 
   updateRestaurant(req, res, next) {
     restaurantDB
-<<<<<<< HEAD
     .updateRestaurant({
       name: req.body.name,
       rating: req.body.rating,
@@ -142,7 +141,7 @@ module.exports = {
       res.json({
         message: 'ok',
         data: restaurant,
-=======
+})
       .updateRestaurant({
         name: req.body.name,
         newName: req.body.newName,
@@ -161,7 +160,6 @@ module.exports = {
       .catch(err => {
         console.log('UPDATING RESTAURANT FAILED--->', err);
         next(err);
->>>>>>> a8ac688617d75f8a73f07af357f25ebbebdcf2ec
       });
     })
     .catch(err => {

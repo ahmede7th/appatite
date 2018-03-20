@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
-
+import SearchBar from '../SearchBar'
 
 const Header = () => {
   return (
+    <div>
     <BrowserRouter>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link class="navbar-brand" to="/main">
@@ -47,8 +48,8 @@ const Header = () => {
         </div>
       </nav>
     </BrowserRouter>
-
-
+    <SearchBar />
+</div>
   );
 };
 
