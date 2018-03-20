@@ -15,6 +15,6 @@ export default class AuthHome extends Component {
         <br />
         <Link to="/login"><button>Login</button></Link>
       </div>
-    )
+    );
   }
 }
