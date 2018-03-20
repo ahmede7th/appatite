@@ -4,6 +4,8 @@ import Restaurants from './Restaurants';
 import Header from './subComponents/Header';
 import Footer from './subComponents/Footer';
 import RestCreate from '../Components/RestCreate';
+import auth from '../Auth/Auth';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 class Home extends Component {
 	constructor() {
@@ -47,6 +49,7 @@ class Home extends Component {
 
 	render() {
 		return (
+    <BrowserRouter>
 			<div className="container-fluid">
 				<Header />
 					<div className="jumbotron">
@@ -56,6 +59,7 @@ class Home extends Component {
 					</div>
 				<Footer />
 			</div>
+		</BrowserRouter>
 		)
 	}
 };
