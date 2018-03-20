@@ -5,7 +5,7 @@ const Restaurants = (props) => {
 	const name = (props.restaurants.name).replace(/ /g, "%20")
 
 	return (
-		<div className="restaurant">
+		<div class="restaurant">
 			<h1>{props.restaurants.name}</h1>
 			<p>Rating: <small>{props.restaurants.rating}</small></p>
 			<p>Cuisine: <strong>{props.restaurants.cuisine}</strong></p>
