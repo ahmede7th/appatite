@@ -55,7 +55,7 @@ class Home extends Component {
 	     	lat: position.coords.latitude,
 	     	long: position.coords.longitude
 	     }) 
-		}
+	}
 
 	mainListing() {
 		if (this.state.apiDataLoaded) {
