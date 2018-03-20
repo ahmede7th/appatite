@@ -11,7 +11,8 @@ class RestSingle extends Component {
 			apiData: null,
 			fireRedirect: false
 		}
-		this.deleteRestaurant = this.deleteRestaurant.bind(this)
+		this.deleteRestaurant = this.deleteRestaurant.bind(this);
+		this.goToFavorite = this.goToFavorite.bind(this);
 	};
 
 	componentDidMount() {
@@ -40,14 +41,31 @@ class RestSingle extends Component {
 			})
 	};
 
+	goToFavorite() {
+		return axios.post(`/api/favorites/${this.props.match.params.id}`, {withCredentials: true}, {
+			headers: {
+				'user': window.localStorage.getItem('id'),
+			}
+		})
+		.then(favorite => {
+			console.console.log('GOT FAVORITE SINGLE PAGE--->', favorite);
+			this.setState({
+				favorite: true,
+			})
+		}).catch(err => {
+			console.log('ERROR IN FAVORITE SINGLE PAGE--->', err);
+		})
+	}
+
 	render() {
-		return (	
+		return (
 			<div className="restaurant-single">
 				<h1>single</h1>
 				<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
 				<button>Edit</button>
 				<button onClick={this.deleteRestaurant}>Delete posting</button>
 				<RestMap />
+				<button onClick={this.goToFavorite}>Favorite This Baby!</button>
 				{this.state.fireRedirect ? <Redirect to='/main' /> : ''}
 			</div>
 		)

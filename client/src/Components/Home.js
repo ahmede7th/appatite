@@ -63,7 +63,6 @@ class Home extends Component {
       return <Welcome />;
     } else {
       return (
-        <BrowserRouter>
           <div className="container-fluid">
             <Header />
             <div className="jumbotron">
@@ -72,9 +71,8 @@ class Home extends Component {
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
             </div>
             <button onClick={this.logout}>Logout?</button>
-            <Footer />
+            {/* <Footer /> */}
           </div>
-        </BrowserRouter>
       );
     }
   }

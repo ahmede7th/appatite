@@ -1,41 +1,40 @@
 const favorites = require('../models/favoritesDB');
+const TokenService = require('../services/TokenService');
 
 module.exports = {
   //add the user / restaurant to the favorite database
   updateFavorite(req, res, next) {
-    const user = window.localStory.getItem();
-    console.log('USER IN UPDATEFAVORITE--->', user);
-    const favorite = { user: user, restaurant: req.params.id };
-    favorites.alreadyFavorites(favorite).then(favorite => {
+    console.log('USER IN UPDATEFAVORITE--->', parseInt(req.headers.user));
+    const favorite = { user_id: parseInt(req.headers.user), restaurant_name: req.params.id };
+    favorites.alreadyFavorites(favorite)
+    .then(favorite => {
+      console.log('UPDATE FAVORITE WORKED--->', favorite);
       favorites
-        .updateFavorites({
-          username: req.body.username,
-          restaurant_name: req.body.restaurantName,
-        })
+        .removeFavorite(favorite)
         .then(favorite => {
+          console.log('UPDATE FAVORITE REMOVE FAVORITE WORKED--->', favorite);
           next();
         })
         .catch(err => {
+          console.log('UPDATE FAVORITE REMOVE FAVORITE FAILED--->', err);
           next(err);
-        })
-        .catch(err => {
-          const like = {
-            user: req.session.user.username,
-            restaurant: parseInt(req.params.id),
-          };
-          favorites
-            .removeFavorite(favorites)
-            .then(workLike => {
-              next();
-            })
-            .catch(err => {
-              next(err);
-            });
         });
-    });
+      })
+      .catch(err => {
+        favorites
+        .addFavorite(favorite)
+          .then(favorite => {
+            console.log('UPDATE FAVORITE ADD FAVORITE WORKED--->', favorite);
+            next();
+          })
+          .catch(err => {
+            console.log('UPDATE FAVORITE ADD FAVORITE FAILED--->', err);
+            next(err);
+          });
+      });
   },
 
-  alreadyLikes(req, res, next) {
+  alreadyFavorites(req, res, next) {
     const like = {
       user: req.session.user.username,
       restaurant: parseInt(req.params.id),
@@ -52,7 +51,7 @@ module.exports = {
       });
   },
 
-  removeLike(req, res, next) {
+  removeFavorite(req, res, next) {
     const dislike = {
       user: req.session.user.username,
       restaurant: parseInt(req.params.id),
@@ -67,7 +66,7 @@ module.exports = {
       });
   },
 
-  getLikes(req, res, next) {
+  getFavorites(req, res, next) {
     const restaurantName = req.params.id;
     favorites
       .getFavorites(restaurantName)
