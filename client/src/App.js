@@ -5,39 +5,23 @@ import axios from 'axios';
 
 import Welcome from './Components/Welcome';
 import Home from './Components/Home';
-import Register from './Components/Register';
-import LogIn from './Components/LogIn';
+import userLogin from './Components/userLogin';
 import RestSingle from './Components/RestSingle';
 import RestEdit from './Components/RestEdit';
 import RestCreate from './Components/RestCreate';
-import Restaurants from './Restaurants'
-
+import Restaurants from './Restaurants';
 
 class App extends Component {
-  // goTo(route) {
-  //   this.props.history.replace(`/${route}`);
-  // }
-  //
-  // login() {
-  //   this.props.auth.login();
-  // }
-  //
-  // logout() {
-  //   this.props.auth.logout();
-  // }
-
   render() {
     return (
-
-      <Router history={history}>
+      <Router>
         <div className="container-fluid router" align="center">
           <Route exact path="/" component={Welcome} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={LogIn} />
+          <Route path="/register" component={userLogin} />
+          <Route path="/login" component={userLogin} />
           <Route exact path="/main" component={Home} />
           <Route exact path="/main/:id" component={RestSingle} />
           <Route path="/main/:id/edit" component={RestEdit} />
-
         </div>
       </Router>
     );
