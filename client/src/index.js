@@ -5,7 +5,7 @@ import App from './App';
 import Auth from './Auth/Auth';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Auth />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
 

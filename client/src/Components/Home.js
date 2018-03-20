@@ -35,7 +35,17 @@ class Home extends Component {
 		this.setState({
 			show: !this.state.show
 		})
-	}
+	};
+
+	// Location() {
+	// 	axios.get('')
+	// 		.then(response => {
+	// 			console.log('geolocation', response)
+	// 		})
+	// 		.catch(err => {
+	// 			console.log('geolocation', err)
+	// 		})
+	// };
 
 	mainListing() {
 		if (this.state.apiDataLoaded) {
@@ -51,6 +61,7 @@ class Home extends Component {
 				<Header />
 					<div className="jumbotron">
 					<button onClick={this.buttonClick}>Biz owner</button>
+					
 					{this.state.show ? <RestCreate /> : ''}
 					{this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
 					</div>
