@@ -8,6 +8,10 @@ import Home from './Components/Home';
 import Register from './Components/Register';
 import LogIn from './Components/LogIn';
 import RestSingle from './Components/RestSingle';
+import RestEdit from './Components/RestEdit';
+import RestCreate from './Components/RestCreate';
+
+import Restaurants from './Restaurants'
 
 class App extends Component {
   // goTo(route) {
@@ -32,6 +36,7 @@ class App extends Component {
           <Route path="/login" component={LogIn} />
           <Route exact path="/main" component={Home} />
           <Route exact path="/main/:id" component={RestSingle} />
+          <Route path="/main/:id/edit" component={RestEdit} />
 
         </div>
       </Router>
