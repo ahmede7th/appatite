@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Header from './subComponents/Header';
 import RestMap from './RestMap';
+import Review from './subComponents/Review';
 
 class RestSingle extends Component {
   constructor() {
@@ -42,7 +44,7 @@ class RestSingle extends Component {
         console.log('error deleting', err);
       });
   }
-
+  
   goToFavorite() {
     return axios
       .post(
@@ -67,18 +69,16 @@ class RestSingle extends Component {
 
   render() {
     return (
-      <div className="restaurant-single">
-        <h1>single</h1>
-        <h2>
-          {this.state.apiDataLoaded
-            ? this.state.apiData.name
-            : 'failed to load'}
-        </h2>
-        <button>Edit</button>
-        <button onClick={this.deleteRestaurant}>Delete posting</button>
-        <RestMap />
-        <button onClick={this.goToFavorite}>Favorite This Baby!</button>
-        {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
+			<div className="restaurant-single">
+				<Header />
+					<h1>single</h1>
+					<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
+					<button><Link to={`/main/${name}/edit`}>Edit</Link></button>
+					<button onClick={this.deleteRestaurant}>Delete posting</button>
+					<RestMap />
+					<Review name={this.props.match.params.id} />
+          <button onClick={this.goToFavorite}>Favorite This Baby!</button>
+          {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );
   }

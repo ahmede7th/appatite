@@ -54,8 +54,8 @@ module.exports = {
   createReview(req, res, next) {
     reviewDB
       .addReview({
-        user_id: req.body.username,
-        restaurant_name: req.body.restaurantName,
+        user_id: req.body.user_id,
+        restaurant_name: req.body.restaurant_name,
         content: req.body.content,
       })
       .then(review => {
