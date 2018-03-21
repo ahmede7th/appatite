@@ -24,8 +24,10 @@ class userLogin extends Component {
       method: 'POST',
       data,
     }).then(resp => {
+      console.log(resp);
       TokenService.save(resp.data.token);
-      TokenService.saveUser(resp.data.user.id);
+      TokenService.saveUserId(resp.data.user.id);
+      TokenService.saveUsername(resp.data.user.username);
       console.log('USER IS REGISTERED--->', resp.data.token);
       this.setState({
         redirect: true,
@@ -36,13 +38,14 @@ class userLogin extends Component {
   }
 
   login(data) {
-    console.log(data);
     axios('api/user/auth/login', {
       method: 'POST',
       data,
     }).then(resp => {
+      console.log(resp);
       TokenService.save(resp.data.token);
-      TokenService.saveUser(resp.data.user.id);
+      TokenService.saveUserId(resp.data.user.id);
+      TokenService.saveUsername(resp.data.user.username);
       this.setState({
         redirect: true,
       });

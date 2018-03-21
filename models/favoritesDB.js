@@ -1,30 +1,48 @@
 const favoriteDB = require('../config/connection');
 
 module.exports = {
-  updateFavorite(favorite) {
+  addFavorite(favorite) {
+    console.log('INSIDE ADD FAVORITE');
     return favoriteDB.one(`INSERT INTO favorites(user_id, restaurant_name)
-                                          VALUES($[favorite.username], $[favorite.restaurant_name])
+                                          VALUES($[user_id], $[restaurant_name])
                                           RETURNING *`, favorite);
   },
 
   removeFavorite(favorite) {
+    console.log('INSIDE REMOVE FAVORITE');
     return favoriteDB.none(`DELETE FROM favorites
-                                            WHERE user_id = $[favorite.username]
-                                            AND restaurant_name = $[favorite.restaurant_name]`, favorite);
+                                            WHERE user_id = $[user_id]
+                                            AND restaurant_name = $[restaurant_name]`, favorite);
   },
 
-  getFavorites(user) {
-    return favoriteDB.any(`SELECT name
-                                          FROM restaurants
-                                          JOIN favorites
-                                          ON favorites.user_id = $[user.username]
-                                          GROUP BY name;`, user);
+  getTotalFavorites(name) {
+    console.log('INSIDE GET TOTAL FAVORITES');
+    return favoriteDB.any(`SELECT COUNT(user_id)
+                                          FROM favorites
+                                          WHERE restaurant_name = $[name]
+                                          `, name);
+  },
+
+  getUserFavorites(user) {
+    console.log('INSIDE GETUSERFAVORITES');
+    return favoriteDB.any(`SELECT restaurant_name
+                                          FROM favorites
+                                          WHERE user_id = $[user_id]
+                                          `, user);
+  },
+
+  getUserCountFavorites(user) {
+    console.log('INSIDE GET USER COUNT FAVORITES');
+    return favoriteDB.any(`SELECT COUNT(restaurant_name)
+                                          FROM favorites
+                                          WHERE user_id = $[user_id]`, user);
   },
 
   alreadyFavorites(user) {
+    console.log('INSIDE ALREADY FAVORITES');
     return favoriteDB.one(`SELECT *
                                           FROM favorites
-                                          WHERE user_id = $[user.username]
-                                          AND restaurant_name = $[user.restaurant_name]`, user);
+                                          WHERE user_id = $[user_id]
+                                          AND restaurant_name = $[restaurant_name]`, user);
   },
 };

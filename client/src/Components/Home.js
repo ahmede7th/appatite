@@ -78,25 +78,25 @@ class Home extends Component {
       });
     }
   }
-
-	render() {
-		if (this.state.logoutUser) {
-			return <Welcome />;
-        } else {
-		   return (
-				<div className="container-fluid">
-					<Header />
-						<div className="jumbotron">
-						<button onClick={this.buttonClick}>Biz owner</button>
-						{this.getLocation()}
-						{this.state.show ? <RestCreate /> : ''}
-						{this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-						</div>
-						<button onClick={this.logout}>Logout?</button>		
-				</div>
-			)
-		}
-	};
+  
+  render() {
+    if (this.state.logoutUser) {
+      return <Welcome />;
+    } else {
+      return (
+          <div className="container-fluid">
+            <Header />
+            <div className="jumbotron">
+              <button onClick={this.buttonClick}>Biz owner</button>
+              {this.state.show ? <RestCreate /> : ''}
+              {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+            </div>
+            <button onClick={this.logout}>Logout?</button>
+            {/* <Footer /> */}
+          </div>
+      );
+    }
+  }
 }
 
 export default Home;

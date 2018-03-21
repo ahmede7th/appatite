@@ -9,6 +9,7 @@ import userLogin from './Components/userLogin';
 import RestSingle from './Components/RestSingle';
 import RestEdit from './Components/RestEdit';
 import RestCreate from './Components/RestCreate';
+import AllFavorites from './Components/AllFavorites';
 import Restaurants from './Restaurants';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/main" component={Home} />
           <Route exact path="/main/:id" component={RestSingle} />
           <Route path="/main/:id/edit" component={RestEdit} />
+          <Route path="/user/favorites" component={AllFavorites} />
         </div>
       </Router>
     );
