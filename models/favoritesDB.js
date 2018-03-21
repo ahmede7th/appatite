@@ -31,6 +31,13 @@ module.exports = {
                                           `, user);
   },
 
+  getUserCountFavorites(user) {
+    console.log('INSIDE GET USER COUNT FAVORITES');
+    return favoriteDB.any(`SELECT COUNT(restaurant_name)
+                                          FROM favorites
+                                          WHERE user_id = $[user_id]`, user);
+  },
+
   alreadyFavorites(user) {
     console.log('INSIDE ALREADY FAVORITES');
     return favoriteDB.one(`SELECT *

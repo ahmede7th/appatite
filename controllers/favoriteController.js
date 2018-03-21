@@ -97,7 +97,7 @@ module.exports = {
     });
   },
 
-  getNumberFavorites(req, res, next) {
+  getUserCountFavorites(req, res, next) {
     favorites
     .getUserFavorites(req.params.id)
     .then(favorites => {
