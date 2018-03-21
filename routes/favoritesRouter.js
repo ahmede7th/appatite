@@ -8,7 +8,11 @@ favoritesRouter
 
 favoritesRouter
   .route(`/:id`)
-  .get(favoritesController.getFavorites)
+  .get(favoritesController.getTotalFavorites)
   .post(favoritesController.updateFavorite);
+
+favoritesRouter
+  .route(`/number/:id`)
+  .get(favoritesController.getNumberFavorites);
 
 module.exports = favoritesRouter;

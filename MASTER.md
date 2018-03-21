@@ -284,3 +284,24 @@ Deletes a review from the database.
 
 
 -------------------
+
+/api/favorites
+
+#POST /api/favorites/user
+Gets the names of all restaurants that a user has favorited, based on the currently logged in user
+{
+  "message": "ok",
+  "data": [
+  {"restaurant_name": "Caseys Palace"},
+  {"restaurant_name": "The French Laundry"}
+  }
+}
+
+#GET /api/favorites/:id
+Gets the total number of favorites for the restaurant based on the restaurant name in req.params.id
+
+#POST /api/favorites/:id
+Either adds a user / restaurant key value pair to the favorites table or deletes it
+
+#GET /api/favorites/number/:id
+Gets the total number of favorites for the restaurant

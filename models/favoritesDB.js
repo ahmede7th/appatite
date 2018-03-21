@@ -15,13 +15,12 @@ module.exports = {
                                             AND restaurant_name = $[restaurant_name]`, favorite);
   },
 
-  getFavorites(user) {
-    console.log('INSIDE GETFAVORITES');
-    return favoriteDB.any(`SELECT name
-                                          FROM restaurants
-                                          JOIN favorites
-                                          ON user_id = $[user_id]
-                                          GROUP BY name;`, user);
+  getTotalFavorites(name) {
+    console.log('INSIDE GET TOTAL FAVORITES');
+    return favoriteDB.any(`SELECT COUNT(user_id)
+                                          FROM favorites
+                                          WHERE restaurant_name = $[name]
+                                          `, name);
   },
 
   getUserFavorites(user) {
@@ -29,7 +28,7 @@ module.exports = {
     return favoriteDB.any(`SELECT restaurant_name
                                           FROM favorites
                                           WHERE user_id = $[user_id]
-                                          `, user)
+                                          `, user);
   },
 
   alreadyFavorites(user) {

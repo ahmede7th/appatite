@@ -65,10 +65,10 @@ module.exports = {
       });
   },
 
-  getFavorites(req, res, next) {
+  getTotalFavorites(req, res, next) {
     const restaurantName = req.params.id;
     favorites
-      .getFavorites(restaurantName)
+      .getTotalFavorites(restaurantName)
       .then(totalFavorites => {
         console.log('GETTING TOTAL FAVORITES WORKED--->', totalFavorites);
         res.json({
@@ -84,13 +84,26 @@ module.exports = {
   },
 
   getUserFavorites(req, res, next) {
-    const favorite = { user_id: parseInt(req.headers.user), restaurant_name: req.params.id };
+    const favorite = { user_id: parseInt(req.headers.user) };
     favorites
     .getUserFavorites(favorite)
     .then(favorites => {
-      console.log('GOT THE FAVORITES FOR USER WORKED--->', favorites);
+      res.json({
+        message: 'ok',
+        data: favorites,
+      });
     }).catch(err => {
       console.log('GOT THE FAVORITES FOR USER FAILED--->', err);
+    });
+  },
+
+  getNumberFavorites(req, res, next) {
+    favorites
+    .getUserFavorites(req.params.id)
+    .then(favorites => {
+      console.log('GOT THE FAVORITES FOR RESTAURANT WORKED--->', favorites);
+    }).catch(err => {
+      console.log('GOT THE FAVORITES FOR RESTAURANT FAILED--->', err);
     });
   },
 };
