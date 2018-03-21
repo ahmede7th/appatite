@@ -303,5 +303,5 @@ Gets the total number of favorites for the restaurant based on the restaurant na
 #POST /api/favorites/:id
 Either adds a user / restaurant key value pair to the favorites table or deletes it
 
-#GET /api/favorites/number/:id
-Gets the total number of favorites for the restaurant
+#GET /api/favorites/number
+Gets the total number of favorites that the current user has made
