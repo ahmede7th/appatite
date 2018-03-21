@@ -4,7 +4,6 @@ const TokenService = require('../services/TokenService');
 module.exports = {
   //add the user / restaurant to the favorite database
   updateFavorite(req, res, next) {
-    console.log('USER IN UPDATEFAVORITE--->', parseInt(req.headers.user));
     const favorite = { user_id: parseInt(req.headers.user), restaurant_name: req.params.id };
     favorites.alreadyFavorites(favorite)
     .then(favorite => {
@@ -82,5 +81,16 @@ module.exports = {
         console.log('GETTING TOTAL FAVORITES FAILED--->', err);
         next(err);
       });
+  },
+
+  getUserFavorites(req, res, next) {
+    const favorite = { user_id: parseInt(req.headers.user), restaurant_name: req.params.id };
+    favorites
+    .getUserFavorites(favorite)
+    .then(favorites => {
+      console.log('GOT THE FAVORITES FOR USER WORKED--->', favorites);
+    }).catch(err => {
+      console.log('GOT THE FAVORITES FOR USER FAILED--->', err);
+    });
   },
 };

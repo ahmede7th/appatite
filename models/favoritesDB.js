@@ -20,8 +20,16 @@ module.exports = {
     return favoriteDB.any(`SELECT name
                                           FROM restaurants
                                           JOIN favorites
-                                          ON favorites.user_id = $[user.user_id]
+                                          ON user_id = $[user_id]
                                           GROUP BY name;`, user);
+  },
+
+  getUserFavorites(user) {
+    console.log('INSIDE GETUSERFAVORITES');
+    return favoriteDB.any(`SELECT restaurant_name
+                                          FROM favorites
+                                          WHERE user_id = $[user_id]
+                                          `, user)
   },
 
   alreadyFavorites(user) {
