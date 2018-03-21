@@ -41,7 +41,7 @@ module.exports = {
   getOneUser(user) {
     return userDB.one(`SELECT *
                                         FROM users
-                                        WHERE username = $1`, user);
+                                        WHERE id = $1`, user);
   },
 
   findFriendByUsername(friend) {
