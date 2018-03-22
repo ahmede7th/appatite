@@ -7,7 +7,8 @@ import Footer from './subComponents/Footer';
 import RestCreate from '../Components/RestCreate';
 import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
-import Yelp from './Yelp';
+import Yelp from './yelpComponents/Yelp';
+
 {/* <Navbar>
   <Navbar.Header>
     <Navbar.Brand>

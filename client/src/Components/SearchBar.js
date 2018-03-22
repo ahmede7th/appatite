@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('this was typed and entered ' + this.state.term);
+    console.log('this was typed and entered ' + this.state.term);
 
     event.preventDefault();
   }
@@ -56,7 +56,6 @@ componentDidMount(){
       return (<form onSubmit={this.handleSubmit}>
 
         <input type="text" placeholder="search" value={this.state.value} onChange={this.handleChange}/>
-
         <input type="submit" value="Submit"/>
       </form>);
     }
