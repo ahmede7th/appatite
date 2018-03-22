@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const Restaurants = (props) => {
 		 const names = (props.restaurants.name).replace(/ /g, "%20")
 
-
 	return (
 		<div class="restaurant">
 			<h1>{props.restaurants.names}</h1>
