@@ -38,7 +38,7 @@ app.get('/api/isLoggedIn', authService.isLoggedIn, (req, res) => {
 
 app.use('/api/favorites', favoritesRouter);
 app.use('/api/review', reviewRouter);
-app.use('/api/restaurant', restaurantRouter);
+app.use('/api/restaurant', apiRouter);
 app.use('/api/user', userRouter);
 app.use('/api/user/auth', authRouter);
 
