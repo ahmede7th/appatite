@@ -19,5 +19,7 @@ export default {
 
   destroy() {
     window.localStorage.removeItem('authToken');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('id');
   },
 };

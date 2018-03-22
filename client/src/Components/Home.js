@@ -52,7 +52,7 @@ class Home extends Component {
 	    if (navigator.geolocation) {
 	    	console.log('getting users position')
 	        navigator.geolocation.getCurrentPosition(this.showPosition);
-	    } else { 
+	    } else {
 	        console.log("Geolocation is not supported by this browser.");
 	   	  }
 	}
@@ -62,7 +62,7 @@ class Home extends Component {
 	    this.setState({
 	     	lat: position.coords.latitude,
 	     	long: position.coords.longitude
-	     }) 
+	     })
 	}
 
   buttonClick() {
@@ -78,7 +78,7 @@ class Home extends Component {
       });
     }
   }
-  
+
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
