@@ -28,26 +28,26 @@ class SearchBar extends React.Component {
 
 componentDidMount(){
 
-  fetch(`https://api.yelp.com/v3/businesses/search?term=${this.state.term}&location=${this.state.location}`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(myJson) {
-      console.log(myJson);
-    });
+  // fetch(`https://api.yelp.com/v3/businesses/search?term=${this.state.term}&location=${this.state.location}`)
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(myJson) {
+  //     console.log(myJson);
+  //   });
+  //
 
 
-
-  axios({
-    method:'post',
-    url:`/api/restaurant`,
-    headers: {
-            "Access-Control-Allow-Origin" : "*",
-            Authorization: 'Bearer xJjNsj4RmbcDR8jxrabVdG5hRpgkvMRStRNwJC5OurUUy14vSSgKyqTCQ-wZ0NbuM7Jg4yj8_il2FVeVSgC3Usd7D_Xvf6v6OVJ3gSedXlOpcJzl8VWleQHRDPyuWnYx',
-              }
-  }).then(response => {
-    console.log(response.data)
-  }).catch(err=>{console.log(err)})
+//   axios({
+//     method:'post',
+//     url:`/api/restaurant`,
+//     headers: {
+//             "Access-Control-Allow-Origin" : "*",
+//             Authorization: 'Bearer xJjNsj4RmbcDR8jxrabVdG5hRpgkvMRStRNwJC5OurUUy14vSSgKyqTCQ-wZ0NbuM7Jg4yj8_il2FVeVSgC3Usd7D_Xvf6v6OVJ3gSedXlOpcJzl8VWleQHRDPyuWnYx',
+//               }
+//   }).then(response => {
+//     console.log(response.data)
+//   }).catch(err=>{console.log(err)})
 }
 
 
