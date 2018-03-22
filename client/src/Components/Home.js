@@ -9,17 +9,21 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      apiDataLoaded: false,
-      apiData: null,
-      show: false,
-      logoutUser: false,
-    };
-    this.buttonClick = this.buttonClick.bind(this);
-    this.logout = this.logout.bind(this);
-  }
+	constructor() {
+		super();
+		this.state = {
+			apiDataLoaded: false,
+			apiData: null,
+			show: false,
+			logoutUser: false,
+			lat: null,
+			long: null
+		}
+		this.buttonClick = this.buttonClick.bind(this)
+		this.getLocation = this.getLocation.bind(this)
+		this.showPosition = this.showPosition.bind(this)
+		this.logout = this.logout.bind(this)
+	};
 
   componentDidMount() {
     return axios
@@ -44,6 +48,23 @@ class Home extends Component {
     });
   }
 
+	getLocation() {
+	    if (navigator.geolocation) {
+	    	console.log('getting users position')
+	        navigator.geolocation.getCurrentPosition(this.showPosition);
+	    } else {
+	        console.log("Geolocation is not supported by this browser.");
+	   	  }
+	}
+
+	showPosition(position) {
+		console.log('users location has been set', position)
+	    this.setState({
+	     	lat: position.coords.latitude,
+	     	long: position.coords.longitude
+	     })
+	}
+
   buttonClick() {
     this.setState({
       show: !this.state.show,
@@ -63,7 +84,6 @@ class Home extends Component {
       return <Welcome />;
     } else {
       return (
-        <BrowserRouter>
           <div className="container-fluid">
             <Header />
             <div className="jumbotron">
@@ -72,9 +92,8 @@ class Home extends Component {
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
             </div>
             <button onClick={this.logout}>Logout?</button>
-            <Footer />
+            {/* <Footer /> */}
           </div>
-        </BrowserRouter>
       );
     }
   }

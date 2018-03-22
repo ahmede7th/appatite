@@ -6,8 +6,6 @@ import SearchBar from '../SearchBar'
 const Header = () => {
   return (
     <div>
-
-    <BrowserRouter>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/main">
           Home
@@ -49,7 +47,7 @@ const Header = () => {
           </ul>
         </div>
       </nav>
-    </BrowserRouter>
+    
     <SearchBar />
 </div>
 

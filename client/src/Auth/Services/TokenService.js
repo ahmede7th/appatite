@@ -3,9 +3,14 @@ export default {
     window.localStorage.setItem('authToken', token);
   },
 
-  saveUser(id) {
+  saveUserId(id) {
     console.log('TOKEN--->', id);
     window.localStorage.setItem('id', id);
+  },
+
+  saveUsername(username) {
+    console.log('TOKEN--->', username);
+    window.localStorage.setItem('username', username);
   },
 
   read() {
@@ -14,5 +19,7 @@ export default {
 
   destroy() {
     window.localStorage.removeItem('authToken');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('id');
   },
 };
