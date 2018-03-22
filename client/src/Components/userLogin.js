@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import TokenService from '../Auth/Services/TokenService';
-import { Redirect } from 'react-router-dom';
 import Home from '../Components/Home';
 import Register from '../Auth/Register';
 import Login from '../Auth/authLogin';
-import history from '../Auth/Services/history';
 
 class userLogin extends Component {
   constructor(props) {
