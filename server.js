@@ -7,7 +7,6 @@ const cors = require('cors');
 const tokenService = require('./services/TokenService');
 const favoritesRouter = require('./routes/favoritesRouter');
 const reviewRouter = require('./routes/reviewRouter');
-const apiRouter = require('./routes/apiRouter')
 const restaurantRouter = require('./routes/restaurantRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
@@ -41,7 +40,6 @@ app.use('/api/review', reviewRouter);
 app.use('/api/restaurant', restaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/user/auth', authRouter);
-app.use('/api/yelp', apiRouter)
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
