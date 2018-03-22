@@ -35,7 +35,7 @@ class Review extends Component {
 		axios.get(`/api/user/${this.state.user}`)
 			.then(username => {
 				console.log('GOT USER INFO', username)
-				this.setState({user_id: username.data.data.username})
+				this.setState({user_id: username.data.data.username})  // user based on ID not username
 			})
 			.catch(err => {
 				console.log('Error User info', err)
@@ -79,6 +79,13 @@ class Review extends Component {
 		})
 	}
 
+	editReview() {
+		axios({
+			method: 'PUT',
+			url: '/api/'
+		})
+	}
+
 	showReviews() {
 		if (this.state.apiDataLoaded) {
 			return this.state.apiData.map((el, i) => {
@@ -88,7 +95,7 @@ class Review extends Component {
 	}
 
 	render() {
-		console.log('current user id: ', this.state.user)
+		console.log('current user: ', this.state.user_id)
 		console.log('apiData', this.state.apiData)
 		return (
 			<div className="review">
