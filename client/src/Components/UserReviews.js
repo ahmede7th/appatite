@@ -10,8 +10,7 @@ class UserReviews extends Component {
 		this.state={
 			apiDataLoaded: false,
 			apiData: null,
-			user: window.localStorage.getItem('username'),
-			click: false
+			user: window.localStorage.getItem('username')
 		}
 		this.buttonClick = this.buttonClick.bind(this)
 	}
@@ -30,14 +29,10 @@ class UserReviews extends Component {
 			})
 	}
 
-	deleteReview() {
-
-	}
-
 	buttonClick(e) {
-		console.log(e.target.value)
 		this.setState({
-			click: !this.state.click
+			click: !this.state.click,
+			value: e.target.value
 		})
 	}
 
@@ -46,9 +41,11 @@ class UserReviews extends Component {
 			this.state.apiData.map((el) => {
 				return (
 					<div>
-						<p><Link to={`/main/${el.restaurant_name}`}>{el.restaurant_name}<br/></Link></p>
+						<Link to={`/main/${el.restaurant_name}`}>{el.restaurant_name}<br/></Link>
+						<p>{el.content}<br/>
+						{el.date_created}</p>
 						<ReviewEdit review={el} key={el.id} />
-						{el.content}<br/>{new Date(el.date_created).getFullYear()}
+						<br/>
 					</div>
 				)
 			})
