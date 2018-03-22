@@ -9,7 +9,7 @@ const Restaurants = (props) => {
 			<h1>{props.restaurants.name}</h1>
 			<p>Rating: <small>{props.restaurants.rating}</small></p>
 			<p>Cuisine: <strong>{props.restaurants.cuisine}</strong></p>
-			<img src={props.restaurants.img_src}></img>
+			<img src={props.restaurants.img_src} alt="restaurant"></img>
 			<p><Link to={`/main/${name}`}>Click for more details</Link></p>
 		</div>
 	)
