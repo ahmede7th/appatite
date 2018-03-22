@@ -6,7 +6,7 @@ STILL TO IMPLEMENT:
 5.) Pulling reviews from yelp api and displaying them...both in the main page(possibly have the first / most liked review displayed) and on the RestSingle page(more reviews with a button on the bottom that 'onClick' displays ten more reviews or something like that)
 6.) General CSS / Bootstrapping
 7.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
-8.) 
+8.)
 
 #GET /api/user/:id
 Returns information about one specific user based on username in the database.
@@ -320,7 +320,7 @@ Gets the total number of favorites for the restaurant based on the restaurant na
 #POST /api/favorites/:id
 Either adds a user / restaurant key value pair to the favorites table or deletes it
 
-#GET /api/favorites/number
+#GET /api/favorites/number/:id
 Gets the total number of favorites that the current user has made
 {
   "message": "ok",

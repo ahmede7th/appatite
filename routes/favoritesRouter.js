@@ -12,7 +12,7 @@ favoritesRouter
   .post(favoritesController.updateFavorite);
 
 favoritesRouter
-  .route(`/number`)
+  .route(`/number/:id`)
   .get(favoritesController.getUserCountFavorites);
 
 module.exports = favoritesRouter;

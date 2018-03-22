@@ -102,9 +102,9 @@ module.exports = {
     favorites
     .getUserFavorites(req.params.id)
     .then(favorites => {
-      console.log('GOT THE FAVORITES FOR RESTAURANT WORKED--->', favorites);
+      console.log('GOT THE FAVORITES FOR USER WORKED--->', favorites);
     }).catch(err => {
-      console.log('GOT THE FAVORITES FOR RESTAURANT FAILED--->', err);
+      console.log('GOT THE FAVORITES FOR USER FAILED--->', err);
     });
   },
 };
