@@ -52,6 +52,7 @@ const Header = () => {
     </BrowserRouter>
     <SearchBar />
 </div>
+
   );
 };
 

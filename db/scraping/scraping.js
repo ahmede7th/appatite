@@ -3,9 +3,9 @@ const axios = require('axios');
 
 //let term='chinese';
 // let term='american';
-// let term='italian';
+ let term='italian';
 // let term='korean';
- let term='indian';
+ //let term='indian';
 
 let location = 'newyork'
 
