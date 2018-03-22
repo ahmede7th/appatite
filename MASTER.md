@@ -299,9 +299,22 @@ Gets the names of all restaurants that a user has favorited, based on the curren
 
 #GET /api/favorites/:id
 Gets the total number of favorites for the restaurant based on the restaurant name in req.params.id
+{
+  "message": "ok",
+      "data": [
+        {"count": "1"}
+      ]
+  ]
+}
 
 #POST /api/favorites/:id
 Either adds a user / restaurant key value pair to the favorites table or deletes it
 
 #GET /api/favorites/number
 Gets the total number of favorites that the current user has made
+{
+  "message": "ok",
+    "data": [
+      {"count": "0"}
+    ]
+}

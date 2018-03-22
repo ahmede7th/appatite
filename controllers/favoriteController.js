@@ -67,6 +67,7 @@ module.exports = {
 
   getTotalFavorites(req, res, next) {
     const restaurantName = req.params.id;
+    console.log(restaurantName);
     favorites
       .getTotalFavorites(restaurantName)
       .then(totalFavorites => {

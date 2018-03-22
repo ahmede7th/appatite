@@ -16,10 +16,10 @@ module.exports = {
   },
 
   getTotalFavorites(name) {
-    console.log('INSIDE GET TOTAL FAVORITES');
+    console.log('INSIDE GET TOTAL FAVORITES', name);
     return favoriteDB.any(`SELECT COUNT(user_id)
                                           FROM favorites
-                                          WHERE restaurant_name = $[name]
+                                          WHERE restaurant_name = $1
                                           `, name);
   },
 

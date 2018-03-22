@@ -44,7 +44,7 @@ class RestSingle extends Component {
         console.log('error deleting', err);
       });
   }
-  
+
   goToFavorite() {
     return axios
       .post(
@@ -68,6 +68,7 @@ class RestSingle extends Component {
   }
 
   render() {
+    const name = (this.props.match.params.id).replace(/ /g, "%20")
     return (
 			<div className="restaurant-single">
 				<Header />
