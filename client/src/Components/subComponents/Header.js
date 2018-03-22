@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
+import SearchBar from '../SearchBar'
+import { Button } from 'reactstrap';
 
 require("react-bootstrap/lib/NavbarHeader")
 
@@ -20,8 +22,7 @@ require("react-bootstrap/lib/NavbarHeader")
 // </Nav>
 // </Navbar>;
 
-import SearchBar from '../SearchBar'
-//import { Button } from 'reactstrap';
+
 
 const Header = () => {
   return (
@@ -67,7 +68,7 @@ const Header = () => {
           </ul>
         </div>
       </nav>
-    
+
     <SearchBar />
 </div>
   );
