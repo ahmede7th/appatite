@@ -44,12 +44,11 @@ class UserReviews extends Component {
 	showAll() {
 		return(
 			this.state.apiData.map((el) => {
-				return ( 
+				return (
 					<div>
-						<p><Link to={`/main/${el.restaurant_name}`}>{el.restaurant_name}<br/></Link> 
-						{el.content}<br/>{new Date(el.date_created).getFullYear()}</p>
-						<button onClick={this.buttonClick} value={el.id}>Edit</button>
-						{this.state.click ? <ReviewEdit review={el} key={el.id} /> : ''}
+						<p><Link to={`/main/${el.restaurant_name}`}>{el.restaurant_name}<br/></Link></p>
+						<ReviewEdit review={el} key={el.id} />
+						{el.content}<br/>{new Date(el.date_created).getFullYear()}
 					</div>
 				)
 			})

@@ -10,6 +10,8 @@ import UserNumFavorites from './Components/UserNumFavorites';
 import UserRestaurantFavorites from './Components/UserRestaurantFavorites';
 import RestaurantUserFavorites from './Components/RestaurantUserFavorites';
 import RestaurantNumFavorites from './Components/RestaurantNumFavorites';
+import reviewEdit from './Components/subComponents/ReviewEdit';
+import UserReviews from './Components/UserReviews';
 
 class App extends Component {
   render() {
@@ -26,6 +28,7 @@ class App extends Component {
           <Route exact path="/user/favorites/num/:id" component={UserNumFavorites} />
           <Route exact path="/restaurant/favorites/:id" component={RestaurantUserFavorites} />
           <Route exact path="/restaurant/favorites/num/:id" component={RestaurantNumFavorites} />
+          <Route path="/user/myreviews" component={UserReviews} />
         </div>
       </Router>
     );
