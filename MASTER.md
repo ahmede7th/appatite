@@ -5,7 +5,6 @@ STILL TO IMPLEMENT:
 4.) Pulling reviews from yelp api and displaying them...both in the main page(possibly have the first / most liked review displayed) and on the RestSingle page(more reviews with a button on the bottom that 'onClick' displays ten more reviews or something like that)
 5.) General CSS / Bootstrapping
 6.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
-7.)
 
 #GET /api/user/:id
 Returns information about one specific user based on username in the database.

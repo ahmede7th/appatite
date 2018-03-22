@@ -31,11 +31,8 @@
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "pg-promise": "^8.2.2",
-<<<<<<< HEAD
     "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0"
-=======
+    "react-dom": "^16.2.0",
     "set-cookie-parser": "^2.1.1"
->>>>>>> 36d9c9e9a71e58b146a4ccf4f277bb6663fee6b7
   }
 }
