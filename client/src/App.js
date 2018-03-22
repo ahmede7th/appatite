@@ -12,6 +12,8 @@ import RestCreate from './Components/RestCreate';
 import AllFavorites from './Components/AllFavorites';
 import Restaurants from './Restaurants';
 import NumFavorites from './Components/UserFavorites';
+import UserReviews from './Components/UserReviews';
+import ReviewEdit from './Components/subComponents/ReviewEdit';
 
 class App extends Component {
   render() {
@@ -26,6 +28,7 @@ class App extends Component {
           <Route path="/main/:id/edit" component={RestEdit} />
           <Route path="/user/favorites" component={AllFavorites} />
           <Route path="/user/favorites/num" component={NumFavorites} />
+          <Route path="/user/myreviews" component={UserReviews} />
         </div>
       </Router>
     );

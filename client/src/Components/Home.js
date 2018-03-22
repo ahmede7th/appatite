@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter, Link } from 'react-router-dom';
+import TokenService from '../Auth/Services/TokenService';
+
 import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import Footer from './subComponents/Footer';
 import RestCreate from '../Components/RestCreate';
-import { BrowserRouter, Link } from 'react-router-dom';
-import TokenService from '../Auth/Services/TokenService';
+
 
 class Home extends Component {
 	constructor() {

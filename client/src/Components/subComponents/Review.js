@@ -6,17 +6,19 @@ class Review extends Component {
 	constructor() {
 		super();
 		this.state={
-			apiDataLoaded: false,
+			initialReviews: false,
 			apiData: null,
-			show: false,
-			user: window.localStorage.getItem('id'),
+			showForm: false,
+			showAll: false,
+			user: window.localStorage.getItem('username'),
 			user_id: '',
 			content: '',
 			fireRedirect: false
 		}
 		this.inputChange = this.inputChange.bind(this)
 		this.formSubmit = this.formSubmit.bind(this)
-		this.buttonClick = this.buttonClick.bind(this)
+		this.buttonClickForm = this.buttonClickForm.bind(this)
+		this.buttonClickAll = this.buttonClickAll.bind(this)
 	}
 
 	componentDidMount() {
@@ -24,27 +26,25 @@ class Review extends Component {
 			.then(review => {
 				console.log('all reviews', review)
 				this.setState({
-					apiDataLoaded: true,
+					initialReviews: true,
 					apiData: review.data.data
 				})
 			})
 			.catch(err => {
 				console.log('no reviews exists')
 			});
-
-		axios.get(`/api/user/${this.state.user}`)
-			.then(username => {
-				console.log('GOT USER INFO', username)
-				this.setState({user_id: username.data.data.username})  // user based on ID not username
-			})
-			.catch(err => {
-				console.log('Error User info', err)
-			})
 	}
 
-	buttonClick() {
+	buttonClickForm() {
 		this.setState({
-			show: !this.state.show
+			showForm: !this.state.showForm
+		})
+	}
+
+	buttonClickAll() {
+		this.setState({
+			showAll: !this.state.showAll,
+			initialReviews: !this.state.initialReviews
 		})
 	}
 
@@ -63,7 +63,7 @@ class Review extends Component {
 			method: 'POST',
 			url: `/api/review/${this.props.name}`,
 			data: {
-				user_id: this.state.user_id,
+				user_id: this.state.user,
 				restaurant_name: this.props.name,
 				content: this.state.content
 			}
@@ -79,39 +79,46 @@ class Review extends Component {
 		})
 	}
 
-	editReview() {
-		axios({
-			method: 'PUT',
-			url: '/api/'
-		})
+	showReviews() {
+		if (this.state.initialReviews) {
+			return this.state.apiData.map((el, i) => {				// shows initial 3
+				if (i < 3) {
+					return <p>{el.content}</p>
+				}
+			})
+		}
 	}
 
-	showReviews() {
-		if (this.state.apiDataLoaded) {
-			return this.state.apiData.map((el, i) => {
+	showAllReviews() {
+		if (this.state.showAll) {
+			return this.state.apiData.map((el) => {					// shows all reviews
 				return <p>{el.content}</p>
 			})
 		}
 	}
 
 	render() {
-		console.log('current user: ', this.state.user_id)
+		console.log('current user: ', this.state.user)
 		console.log('apiData', this.state.apiData)
 		return (
 			<div className="review">
-			 	{this.state.apiDataLoaded ? this.showReviews() : 'no reviews'}
-				<div class="form-group">
-				<button onClick={this.buttonClick}>Review</button>
-					<div class="col-md-4">
-				   		{this.state.show ? 
-					   		<form onSubmit={this.formSubmit}>
-					   			<input type="hidden" name={this.state.user_id} />
-					   			<input type="hidden" name="restaurant_name" value={this.props.name} />
-					  	    	<textarea class="form-control" type="text" rows="3" onChange={this.inputChange} name="content" placeholder={`leave a review for ${this.props.name}`} />
-					  	    	<input type="submit" value="submit" />
-					  	    </form> : ''}
-				    </div>
-				</div>
+
+			 	{this.state.initialReviews ? this.showReviews() : ''}
+			 	<button onClick={this.buttonClickAll}>All Reviews</button>
+			 		{this.state.showAll ? this.showAllReviews() : ''}
+					<div class="form-group">
+						<button onClick={this.buttonClickForm}>Review</button>
+							<div class="col-md-4">
+						   		{this.state.showForm ? 
+							   		<form onSubmit={this.formSubmit}>
+							   			<input type="hidden" name={this.state.user} />
+							   			<input type="hidden" name="restaurant_name" value={this.props.name} />
+							  	    	<textarea class="form-control" type="text" rows="3" onChange={this.inputChange} name="content" placeholder={`leave a review for ${this.props.name}`} />
+							  	    	<input type="submit" value="submit" />
+							  	    </form> : ''}
+						    </div>
+					</div>
+
 			</div>
 		)
 	}
