@@ -44,19 +44,13 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="#">
-                My Favorites
-              </Link>
-              <span className="sr-only">(current)</span>
-            </li>{' '}
-            <li className="nav-item">
-              <Link className="nav-link" to="#">
-                Friends
-              </Link>
+              <Link className="nav-link" to="/user/myreviews">
+                My Reviews
+              </Link>  
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">
-                Search
+              <Link className="nav-link" to="/user/favorites">
+                My Favorites
               </Link>
             </li>
             <li className="nav-item">
