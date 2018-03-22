@@ -1,50 +1,22 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
+require("react-bootstrap/lib/NavbarHeader")
 
-const Header = () => {
-  return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link class="navbar-brand" to="/main">
-          Home
-        </Link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <Link class="nav-link" to="#">
-                My Favorites
-              </Link>
-              <span class="sr-only">(current)</span>
-            </li>{' '}
-            <li class="nav-item">
-              <Link class="nav-link" to="#">
-                Friends
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="#">
-                Search
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="#">
-                ...
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-  );
-};
+<Navbar>
+  <Navbar.Header>
+    <Navbar.Brand>
+      <a href='#home'>APP-etite</a>
+    <Navbar.Brand>
+  <Navbar.Header>
+<Nav>
+  <NavItem eventKey={1} href="#">
+My Account
+</NavItem>
+  <NavDropdown eventKey={2} title="MENU" id="basic-nav-dropdown">
+    <MenuItem eventKey={2.1}>Favorites</MenuItem>
+    <MenuItem eventKey={2.2}>Log Out </MenuItem>
+  </NavDropdown>
+</Nav>
+</Navbar>;
 
 export default Header;

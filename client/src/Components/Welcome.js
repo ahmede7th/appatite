@@ -6,13 +6,17 @@ const Welcome = () => {
 			<h1>Welcome</h1>
 
 			<p>
-			   Are you hungry?  Are you always looking for places to eat
-		   	   only to find a 5 star rated restaurant written by people who have
-			   no idea what good food is?  You have come to the right place
+			  It can be pretty embarrassing to bring a date to a restaurant that no longer exists,<br/>
+        especially if there are no other good restaurants in the area.<br/>
+
+        Appetite.com is a comparison website that allows you to compare ratings and reviews from the best restaurant related review sites.<br/>
+
+        Bone Apetite
 			</p>
 
+      <button><a href="/login">Log In</a></button>
 			<button><a href="/register">Sign up</a></button>
-			<button><a href="/login">Log In</a></button>
+
 		</div>
 	)
 }
