@@ -39,7 +39,7 @@ class UserReviews extends Component {
 	showAll() {
 		return(
 			this.state.apiData.map((el) => {
-				return ( 
+				return (
 					<div>
 						<Link to={`/main/${el.restaurant_name}`}>{el.restaurant_name}<br/></Link>
 						<p>{el.content}<br/>

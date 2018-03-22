@@ -1,14 +1,14 @@
 Arguments: 
-  /usr/local/Cellar/node/9.8.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js start
+  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js start
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS
+  /usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:/Users/Nicole/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.8.0
+  9.7.1
 
 Platform: 
   darwin x64
@@ -35,11 +35,8 @@ npm manifest:
     },
     "homepage": "https://github.com/CRHarding/appatite#readme",
     "dependencies": {
-  
       "axios": "^0.18.0",
-  
       "bcrypt": "^1.0.3",
-  
       "body-parser": "^1.18.2",
       "cors": "^2.8.4",
       "dotenv": "^5.0.1",
@@ -49,7 +46,9 @@ npm manifest:
       "method-override": "^2.3.10",
       "morgan": "^1.9.0",
       "path": "^0.12.7",
-      "pg-promise": "^8.2.2"
+      "pg-promise": "^8.2.2",
+      "react-bootstrap": "^0.32.1",
+      "react-dom": "^16.2.0"
     }
   }
 
@@ -1256,12 +1255,12 @@ Trace:
   Exit code: 1
   Command: sh
   Arguments: -c node server.js
-  Directory: /Users/Paji/Desktop/Projects/appatite
+  Directory: /Users/Nicole/WDI/unit03/projects/appatite
   Output:
   
-      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:180:13)
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:127:13)
       at maybeClose (internal/child_process.js:936:16)
       at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
