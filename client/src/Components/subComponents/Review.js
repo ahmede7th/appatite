@@ -83,7 +83,9 @@ class Review extends Component {
 		if (this.state.initialReviews) {
 			return this.state.apiData.map((el, i) => {				// shows initial 3
 				if (i < 3) {
-					return <p>{el.content}</p>
+					return <p><small>user:{' '}</small>
+						   <i>{el.user_id}:    </i>
+						   {el.content}</p>
 				}
 			})
 		}
