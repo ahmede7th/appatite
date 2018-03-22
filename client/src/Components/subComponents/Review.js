@@ -26,7 +26,7 @@ class Review extends Component {
 				console.log('single review', review)
 				this.setState({
 					apiDataLoaded: true,
-					apiData: review.data.data[0].content
+					apiData: review.data.data
 				})
 			})
 			.catch(err => {
@@ -90,11 +90,11 @@ class Review extends Component {
 		return (
 			<div className="review">
 				<p>Reviews: {this.state.apiData}</p>
-			
+
 				<div class="form-group">
 				<button onClick={this.buttonClick}>Review</button>
 					<div class="col-md-4">
-				   		{this.state.show ? 
+				   		{this.state.show ?
 					   		<form onSubmit={this.formSubmit}>
 					   			<input type="hidden" name={this.state.user} />
 					   			<input type="hidden" name="restaurant_name" value={this.props.name} />
