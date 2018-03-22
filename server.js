@@ -7,7 +7,6 @@ const cors = require('cors');
 const tokenService = require('./services/TokenService');
 const favoritesRouter = require('./routes/favoritesRouter');
 const reviewRouter = require('./routes/reviewRouter');
-const apiRouter = require('./routes/apiRoutes')
 const restaurantRouter = require('./routes/restaurantRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
