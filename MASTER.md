@@ -2,11 +2,9 @@ STILL TO IMPLEMENT:
 1.) Displaying whether a user has favorited a restaurant already or not in the RestSingle page
 2.) Displaying user page with list of restaurants that they've already favorited
 3.) Fixing homepage where you only see the first ten restaurants or so that are around where you currently are (perhaps have a button on the bottom that 'onClick' displays ten more from the database? Have a counter in state that keeps track of how many are currently displayed (by orders of ten) to keep track of what to pull from the db)
-4.) Fixing posting of a review (probably my own bug...)
-5.) Pulling reviews from yelp api and displaying them...both in the main page(possibly have the first / most liked review displayed) and on the RestSingle page(more reviews with a button on the bottom that 'onClick' displays ten more reviews or something like that)
-6.) General CSS / Bootstrapping
-7.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
-8.)
+4.) Pulling reviews from yelp api and displaying them...both in the main page(possibly have the first / most liked review displayed) and on the RestSingle page(more reviews with a button on the bottom that 'onClick' displays ten more reviews or something like that)
+5.) General CSS / Bootstrapping
+6.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
 
 #GET /api/user/:id
 Returns information about one specific user based on username in the database.

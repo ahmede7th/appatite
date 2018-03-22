@@ -3,16 +3,24 @@ const favoritesRouter = express.Router();
 const favoritesController = require('../controllers/favoriteController');
 
 favoritesRouter
-  .route(`/user`)
-  .post(favoritesController.getUserFavorites);
-
-favoritesRouter
   .route(`/:id`)
   .get(favoritesController.getTotalFavorites)
   .post(favoritesController.updateFavorite);
 
 favoritesRouter
-  .route(`/number/:id`)
+  .route(`/user/restaurants/:id`)
+  .get(favoritesController.getUserRestaurantFavorites);
+
+favoritesRouter
+  .route(`/user/num/:id`)
   .get(favoritesController.getUserCountFavorites);
+
+favoritesRouter
+  .route(`/restaurant/num/:id`)
+  .get(favoritesController.getRestaurantCountFavorites);
+
+favoritesRouter
+  .route(`/restaurant/users/:id`)
+  .get(favoritesController.getRestaurantUserFavorites);
 
 module.exports = favoritesRouter;

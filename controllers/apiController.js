@@ -2,6 +2,7 @@ const axios = require('axios');
 module.exports = {
 
   getAllYelp(req,res,next){
+    console.log('GETTING ALL YELP');
   axios({
     method:'get',
     url:`https://api.yelp.com/v3/businesses/search?term=pizza&location=11218`,
