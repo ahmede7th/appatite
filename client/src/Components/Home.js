@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
-
 import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
@@ -14,8 +13,6 @@ class Home extends Component {
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null,
-			yelpDataLoaded:false,
-			apiYelp:null,
 			show: false,
 			logoutUser: false,
 			lat: null,
@@ -28,7 +25,6 @@ class Home extends Component {
 	};
 
   componentDidMount() {
-//calls database for our restaurants
 		axios
       .get(`/api/restaurant`)
       .then(restaurants => {
@@ -40,23 +36,23 @@ class Home extends Component {
       })
       .catch(err => {
         console.log('nope :', err);
-			}),
+			})}
 
-//calls yelps api for restaurant
-			 axios
-       .get(`http://localhost:3001/api/yelp`)
-       .then(restaurants => {
-				 console.log('apiYelp----->',restaurants.data.data)
-         this.setState({
-					 yelpDataLoaded:true,
-           apiYelp: restaurants.data.data.businesses,
-         });
-				 	console.log(this.state.apiYelp)
-			 })
-       .catch(err => {
-         console.log('nope :', err);
-        })
-  }
+// //calls yelps api for restaurant
+// 			 axios
+//        .get(`http://localhost:3001/api/yelp`)
+//        .then(restaurants => {
+// 				 console.log('apiYelp----->',restaurants.data.data)
+//          this.setState({
+// 					 yelpDataLoaded:true,
+//            apiYelp: restaurants.data.data.businesses,
+//          });
+// 				 	console.log(this.state.apiYelp)
+// 			 })
+//        .catch(err => {
+//          console.log('nope :', err);
+//         })
+  // }
 
   logout(ev) {
     ev.preventDefault();
@@ -100,14 +96,14 @@ class Home extends Component {
 		//this.yelpListing()
   };
 
-	yelpListing(){
-		if (this.state.yelpDataLoaded) {
-			return this.state.apiYelp.map((el, i) => {
-				 //console.log('YELP API EL.NAME',el.name)
-				 return <Yelp yelp={el} key={el.id} />;
-	})
-}
-};
+// 	yelpListing(){
+// 		if (this.state.yelpDataLoaded) {
+// 			return this.state.apiYelp.map((el, i) => {
+// 				 //console.log('YELP API EL.NAME',el.name)
+// 				 return <Yelp yelp={el} key={el.id} />;
+// 	})
+// }
+// };
 
 
 
@@ -122,8 +118,8 @@ class Home extends Component {
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-							<h1>------------_YELP_----------------------------</h1>
-							{this.state.yelpDataLoaded? this.yelpListing():'failed to load'}
+
+							{/* {this.state.yelpDataLoaded? this.yelpListing():'failed to load'} */}
             </div>
             <button onClick={this.logout}>Logout?</button>
             {/* <Footer /> */}

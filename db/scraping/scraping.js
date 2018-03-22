@@ -1,6 +1,5 @@
 //name+, rating+, cuisine+, img_src+, loc+
 const axios = require('axios');
-
 //let term='chinese';
 // let term='american';
  let term='italian';
@@ -19,10 +18,10 @@ function getAllYelp(req, res) {
       Authorization: 'Bearer xJjNsj4RmbcDR8jxrabVdG5hRpgkvMRStRNwJC5OurUUy14vSSgKyqTCQ-wZ0NbuM7Jg4yj8_il2FVeVSgC3Usd7D_Xvf6v6OVJ3gSedXlOpcJzl8VWleQHRDPyuWnYx'
     }
   }).then(response => {
-
+    
     for (let i = 0; i < 20; i++) {
       //console.log(response.data.businesses[i].id, )
-      full += '(' + '\''+response.data.businesses[i].name+'\''
+      full += '(' + '\''+response.data.businesses[i].id+'\''
       full += ',' + response.data.businesses[i].rating
       // full += '   ' + response.data.businesses[i].coordinates.latitude
       // full += '   ' + response.data.businesses[i].coordinates.longitude
