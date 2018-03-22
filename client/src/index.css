@@ -1,14 +1,18 @@
 body {
+  background-color: #141F66;
+  color: FFFCD1;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
+header{
+  color: FFFCD1;
 
+}
 footer {
    position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   color: black;
-   text-align: center;
+
+}
+.Home, .Welcome, .userLogin, .SearchBar{
+  color:FFFCD1;
 }
