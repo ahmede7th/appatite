@@ -64,6 +64,7 @@ const Header = () => {
 
     <SearchBar />
 </div>
+
   );
 };
 

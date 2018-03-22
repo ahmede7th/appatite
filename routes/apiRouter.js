@@ -6,7 +6,9 @@ apiRouter
   .route(`/`)
   .get(apiController.getAllYelp);
 
-  apiRouter
-  .route('/')
+apiRouter
+  .route('/reviews')
+  .get(apiController.getAllYelpReviews);
+
 
 module.exports = apiRouter;

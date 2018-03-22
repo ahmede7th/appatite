@@ -14,6 +14,8 @@ class Home extends Component {
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null,
+			yelpDataLoaded:false,
+			apiYelp:null,
 			show: false,
 			logoutUser: false,
 			lat: null,
@@ -26,7 +28,8 @@ class Home extends Component {
 	};
 
   componentDidMount() {
-    return axios
+//calls database for our restaurants
+		axios
       .get(`/api/restaurant`)
       .then(restaurants => {
         console.log('Restaurants ->', restaurants);
@@ -37,7 +40,22 @@ class Home extends Component {
       })
       .catch(err => {
         console.log('nope :', err);
-      });
+			}),
+
+//calls yelps api for restaurant
+			 axios
+       .get(`http://localhost:3001/api/yelp`)
+       .then(restaurants => {
+				 console.log('apiYelp----->',restaurants.data.data)
+         this.setState({
+					 yelpDataLoaded:true,
+           apiYelp: restaurants.data.data.businesses,
+         });
+				 	console.log(this.state.apiYelp)
+			 })
+       .catch(err => {
+         console.log('nope :', err);
+        })
   }
 
   logout(ev) {
@@ -71,13 +89,27 @@ class Home extends Component {
     });
   }
 
+//el.name key el.id
+
   mainListing() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
-  }
+		//this.yelpListing()
+  };
+
+	yelpListing(){
+		if (this.state.yelpDataLoaded) {
+			return this.state.apiYelp.map((el, i) => {
+				 //console.log('YELP API EL.NAME',el.name)
+				 return <Yelp yelp={el} key={el.id} />;
+	})
+}
+};
+
+
 
   render() {
     if (this.state.logoutUser) {
@@ -90,6 +122,8 @@ class Home extends Component {
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+							<h1>------------_YELP_----------------------------</h1>
+							{this.state.yelpDataLoaded? this.yelpListing():'failed to load'}
             </div>
             <button onClick={this.logout}>Logout?</button>
             {/* <Footer /> */}
