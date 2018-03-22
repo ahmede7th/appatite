@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Header from './subComponents/Header';
 
 class RestEdit extends Component {
 	constructor() {
@@ -70,6 +71,7 @@ class RestEdit extends Component {
 		console.log('this props', this.props)
 		return (
 			<div className="restaurant-edit">
+				<Header />
 				<h1>Edit:  {this.state.name}</h1>
 				<form onSubmit={this.formSubmit}>
 					<input type='hidden' name='name' value={this.state.name} />

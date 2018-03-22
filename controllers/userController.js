@@ -20,7 +20,7 @@ module.exports = {
   },
 
   getOneUser(req, res, next) {
-    console.log(`INSIDE GETONE--->`, req.params.id);
+    console.log(`INSIDE GETONEUSER--->`, req.params.id);
     userDB
     .getOneUser(req.params.id)
     .then(user => {
