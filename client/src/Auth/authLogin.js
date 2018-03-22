@@ -13,7 +13,6 @@ export default class authLogin extends Component {
     this.props.submit(data);
   }
 
-
   render() {
     return (
       <div>
@@ -21,6 +20,6 @@ export default class authLogin extends Component {
         <UserLoginForm submit={this.onSubmit} />
         <p><Link to="/"><button>Back Home</button></Link></p>
       </div>
-    )
+    );
   }
 }
