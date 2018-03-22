@@ -48,7 +48,7 @@ module.exports = {
 
   editReview(review) {
     return reviewDB.one(`UPDATE reviews SET content = $[content]
-                                          WHERE id = $[id]
+                                          WHERE id = $1
                                           RETURNING *`, review);
   },
 
