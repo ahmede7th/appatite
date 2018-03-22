@@ -70,6 +70,7 @@ class ReviewEdit extends Component {
 		return (
 			<div>
 				<button onClick={this.buttonClick}>Edit</button>
+				<button onClick={this.deleteReview}>Delete</button>
 				{this.state.click ?
 					<form onSubmit={this.submitForm}>
 						<input type="hidden" name="id" value={this.props.review.id} />
@@ -77,7 +78,6 @@ class ReviewEdit extends Component {
 						<input class="btn btn-primary" type="submit" value="submit" />
 					</form>
 				: ''}
-				<button onClick={this.deleteReview} />
 				{this.state.fireRedirect ? window.location.reload() : '' }
 			</div>
 		)

@@ -106,8 +106,6 @@ class Home extends Component {
 // }
 // };
 
-
-
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
