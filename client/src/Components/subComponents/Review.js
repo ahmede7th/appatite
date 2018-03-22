@@ -9,7 +9,7 @@ class Review extends Component {
 			apiDataLoaded: false,
 			apiData: null,
 			show: false,
-			user: window.localStorage.getItem('id'),
+			user: window.localStorage.getItem('username'),
 			user_id: '',
 			content: '',
 			fireRedirect: false
@@ -17,13 +17,12 @@ class Review extends Component {
 		this.inputChange = this.inputChange.bind(this)
 		this.formSubmit = this.formSubmit.bind(this)
 		this.buttonClick = this.buttonClick.bind(this)
-		this.getUser = this.getUser.bind(this)
 	}
 
 	componentDidMount() {
 		axios.get(`/api/review/${this.props.name}`)
 			.then(review => {
-				console.log('single review', review)
+				console.log('all reviews', review)
 				this.setState({
 					apiDataLoaded: true,
 					apiData: review.data.data
@@ -31,7 +30,7 @@ class Review extends Component {
 			})
 			.catch(err => {
 				console.log('no reviews exists')
-			})
+			});
 	}
 
 	buttonClick() {
@@ -51,11 +50,12 @@ class Review extends Component {
 
 	formSubmit(e) {
 		e.preventDefault()
+		console.log('FORM SUBMIT --->', this.state.user_id);
 		axios({
 			method: 'POST',
 			url: `/api/review/${this.props.name}`,
 			data: {
-				user_id: this.state.user_id,
+				user_id: this.state.user,
 				restaurant_name: this.props.name,
 				content: this.state.content
 			}
@@ -71,32 +71,33 @@ class Review extends Component {
 		})
 	}
 
-	getUser() {
-		axios.get(`/api/user/${this.state.user}`)
-			.then(user => {
-				console.log('GOT USER INFO', user)
-				this.setState({user_id: user.data.name})
-			})
-			.catch(err => {
-				console.log('Error User info', err)
-			})
+	editReview() {
+		axios({
+			method: 'PUT',
+			url: '/api/'
+		})
+	}
 
+	showReviews() {
+		if (this.state.apiDataLoaded) {
+			return this.state.apiData.map((el, i) => {
+				return <p>{el.content}</p>
+			})
+		}
 	}
 
 	render() {
-		console.log('USER:', this.state.user)
-		console.log('data: ',this.state.apiData)
-
+		console.log('current user: ', this.state.user_id)
+		console.log('apiData', this.state.apiData)
 		return (
 			<div className="review">
-				<p>Reviews: {this.state.apiData}</p>
-
+			 	{this.state.apiDataLoaded ? this.showReviews() : 'no reviews'}
 				<div class="form-group">
 				<button onClick={this.buttonClick}>Review</button>
 					<div class="col-md-4">
 				   		{this.state.show ?
 					   		<form onSubmit={this.formSubmit}>
-					   			<input type="hidden" name={this.state.user} />
+					   			<input type="hidden" name={this.state.user_id} />
 					   			<input type="hidden" name="restaurant_name" value={this.props.name} />
 					  	    	<textarea class="form-control" type="text" rows="3" onChange={this.inputChange} name="content" placeholder={`leave a review for ${this.props.name}`} />
 					  	    	<input type="submit" value="submit" />

@@ -12,6 +12,7 @@ const restaurantRouter = require('./routes/restaurantRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
 const authService = require('./services/AuthService');
+const yelpRouter = require('./routes/apiRouter');
 
 const PORT = process.env.PORT || 3001;
 
@@ -41,6 +42,7 @@ app.use('/api/review', reviewRouter);
 app.use('/api/restaurant', restaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/user/auth', authRouter);
+app.use('/api/yelp', yelpRouter);
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
