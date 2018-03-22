@@ -4,7 +4,7 @@ const apiController = require('../controllers/apiController');
 
 apiRouter
   .route(`/`)
-  .post(apiController.getAllYelp);
+  .get(apiController.getAllYelp);
 
   apiRouter
   .route('/')

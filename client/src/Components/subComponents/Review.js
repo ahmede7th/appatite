@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class Review extends Component {
 	constructor() {
@@ -59,6 +58,7 @@ class Review extends Component {
 
 	formSubmit(e) {
 		e.preventDefault()
+		console.log('FORM SUBMIT --->', this.state.user_id);
 		axios({
 			method: 'POST',
 			url: `/api/review/${this.props.name}`,
@@ -102,7 +102,6 @@ class Review extends Component {
 		console.log('apiData', this.state.apiData)
 		return (
 			<div className="review">
-
 			 	{this.state.initialReviews ? this.showReviews() : ''}
 			 	<button onClick={this.buttonClickAll}>All Reviews</button>
 			 		{this.state.showAll ? this.showAllReviews() : ''}
@@ -118,7 +117,6 @@ class Review extends Component {
 							  	    </form> : ''}
 						    </div>
 					</div>
-
 			</div>
 		)
 	}

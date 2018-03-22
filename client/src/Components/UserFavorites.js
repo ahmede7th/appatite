@@ -34,7 +34,7 @@ class Home extends Component {
   numFavorites() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el) => {
-        return <div><p>el</p></div>;
+        return <div>el</div>;
       });
     }
   }
@@ -43,7 +43,7 @@ class Home extends Component {
     return (
         <div>
           <h1>USER FAVORITES!</h1>
-          {this.numFavorites}
+          <p>{this.numFavorites()}</p>
         </div>
     );
   }

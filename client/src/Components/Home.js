@@ -6,9 +6,24 @@ import TokenService from '../Auth/Services/TokenService';
 import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
-import Footer from './subComponents/Footer';
 import RestCreate from '../Components/RestCreate';
 
+{/* <Navbar>
+  <Navbar.Header>
+    <Navbar.Brand>
+      <a href='#home'>APP-etite</a>
+    <Navbar.Brand>
+  <Navbar.Header>
+<Nav>
+  <NavItem eventKey={1} href="#">
+My Account
+</NavItem>
+  <NavDropdown eventKey={2} title="MENU" id="basic-nav-dropdown">
+    <MenuItem eventKey={2.1}>Favorites</MenuItem>
+    <MenuItem eventKey={2.2}>Log Out </MenuItem>
+  </NavDropdown>
+</Nav>
+</Navbar>; */}
 
 class Home extends Component {
 	constructor() {
