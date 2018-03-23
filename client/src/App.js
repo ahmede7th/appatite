@@ -11,6 +11,7 @@ import RestaurantUserFavorites from './Components/RestaurantUserFavorites';
 import RestaurantNumFavorites from './Components/RestaurantNumFavorites';
 import reviewEdit from './Components/subComponents/ReviewEdit';
 import UserReviews from './Components/UserReviews';
+import UserAccount from './Components/UserAccount';
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path="/restaurant/favorites/:id" component={RestaurantUserFavorites} />
           <Route exact path="/restaurant/favorites/num/:id" component={RestaurantNumFavorites} />
           <Route path="/user/myreviews" component={UserReviews} />
+          <Route path="/user/account" component={UserAccount} />
         </div>
       </Router>
     );

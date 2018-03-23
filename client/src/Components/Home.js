@@ -6,7 +6,6 @@ import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import RestCreate from '../Components/RestCreate';
-import Yelp from './yelpComponents/Yelp';
 
 class Home extends Component {
 	constructor() {

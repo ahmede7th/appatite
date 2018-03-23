@@ -28,9 +28,8 @@ module.exports = {
   // },
 
   update(user) {
-    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname],
-                                          username = $[username], password = $[password],
-                                          about_me = $[about_me], auth = $[auth]
+    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname], 
+                                          about_me = $[about_me]
                                           WHERE username=$[username] RETURNING *`, user);
   },
 
