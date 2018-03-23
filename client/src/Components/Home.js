@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter, Link } from 'react-router-dom';
+import TokenService from '../Auth/Services/TokenService';
 import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
-import Footer from './subComponents/Footer';
 import RestCreate from '../Components/RestCreate';
-import { BrowserRouter, Link } from 'react-router-dom';
-import TokenService from '../Auth/Services/TokenService';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      apiDataLoaded: false,
-      apiData: null,
-      show: false,
-      logoutUser: false,
-    };
-    this.buttonClick = this.buttonClick.bind(this);
-    this.logout = this.logout.bind(this);
-  }
+	constructor() {
+		super();
+		this.state = {
+			apiDataLoaded: false,
+			apiData: null,
+			show: false,
+			logoutUser: false,
+			lat: null,
+			long: null
+		}
+		this.buttonClick = this.buttonClick.bind(this)
+		this.getLocation = this.getLocation.bind(this)
+		this.showPosition = this.showPosition.bind(this)
+		this.logout = this.logout.bind(this)
+	};
 
   componentDidMount() {
-    return axios
+		axios
       .get(`/api/restaurant`)
       .then(restaurants => {
         console.log('Restaurants ->', restaurants);
@@ -33,10 +36,24 @@ class Home extends Component {
       })
       .catch(err => {
         console.log('nope :', err);
-      });
-  }
+			})}
 
-<<<<<<< HEAD
+// //calls yelps api for restaurant
+// 			 axios
+//        .get(`http://localhost:3001/api/yelp`)
+//        .then(restaurants => {
+// 				 console.log('apiYelp----->',restaurants.data.data)
+//          this.setState({
+// 					 yelpDataLoaded:true,
+//            apiYelp: restaurants.data.data.businesses,
+//          });
+// 				 	console.log(this.state.apiYelp)
+// 			 })
+//        .catch(err => {
+//          console.log('nope :', err);
+//         })
+  // }
+
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
@@ -44,44 +61,23 @@ class Home extends Component {
       logoutUser: true,
     });
   }
-=======
-	buttonClick() {
-		this.setState({
-			show: !this.state.show
-		})
-<<<<<<< HEAD
-=======
-	};
 
-	// Location() {
-	// 	axios.get('')
-	// 		.then(response => {
-	// 			console.log('geolocation', response)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('geolocation', err)
-	// 		})
-	// };
+	getLocation() {
+	    if (navigator.geolocation) {
+	    	console.log('getting users position')
+	        navigator.geolocation.getCurrentPosition(this.showPosition);
+	    } else {
+	        console.log("Geolocation is not supported by this browser.");
+	   	  }
+	}
 
-	mainListing() {
-		if (this.state.apiDataLoaded) {
-			return this.state.apiData.map((el, i) => {
-				return <Restaurants restaurants={el} key={el.id} />
-			})
-		}
->>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
-	};
-
-	// Location() {
-	// 	axios.get('')
-	// 		.then(response => {
-	// 			console.log('geolocation', response)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('geolocation', err)
-	// 		})
-	// };
->>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
+	showPosition(position) {
+		console.log('users location has been set', position)
+	    this.setState({
+	     	lat: position.coords.latitude,
+	     	long: position.coords.longitude
+	     })
+	}
 
   buttonClick() {
     this.setState({
@@ -89,52 +85,46 @@ class Home extends Component {
     });
   }
 
-<<<<<<< HEAD
+//el.name key el.id
+
   mainListing() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
-  }
+		//this.yelpListing()
+  };
+
+// 	yelpListing(){
+// 		if (this.state.yelpDataLoaded) {
+// 			return this.state.apiYelp.map((el, i) => {
+// 				 //console.log('YELP API EL.NAME',el.name)
+// 				 return <Yelp yelp={el} key={el.id} />;
+// 	})
+// }
+// };
 
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
       return (
-        <BrowserRouter>
           <div className="container-fluid">
             <Header />
             <div className="jumbotron">
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+
+							{/* {this.state.yelpDataLoaded? this.yelpListing():'failed to load'} */}
             </div>
             <button onClick={this.logout}>Logout?</button>
-            <Footer />
+            {/* <Footer /> */}
           </div>
-        </BrowserRouter>
       );
     }
   }
 }
-=======
-	render() {
-		return (
-			<div className="container-fluid">
-				<Header />
-					<div className="jumbotron">
-					<button onClick={this.buttonClick}>Biz owner</button>
-					
-					{this.state.show ? <RestCreate /> : ''}
-					{this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-					</div>
-				<Footer />
-			</div>
-		)
-	}
-};
->>>>>>> 59f1428af8c944b7c355b61de287384b5b69e711
 
 export default Home;

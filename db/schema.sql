@@ -21,7 +21,7 @@ CREATE TABLE users (
 
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) UNIQUE,
+  name VARCHAR(255),
   rating INTEGER DEFAULT 0,
   cuisine VARCHAR(255),
   img_src VARCHAR(255),

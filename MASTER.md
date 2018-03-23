@@ -1,3 +1,11 @@
+STILL TO IMPLEMENT:
+1.) Displaying whether a user has favorited a restaurant already or not in the RestSingle page
+2.) Displaying user page with list of restaurants that they've already favorited
+3.) Fixing homepage where you only see the first ten restaurants or so that are around where you currently are (perhaps have a button on the bottom that 'onClick' displays ten more from the database? Have a counter in state that keeps track of how many are currently displayed (by orders of ten) to keep track of what to pull from the db)
+4.) Pulling reviews from yelp api and displaying them...both in the main page(possibly have the first / most liked review displayed) and on the RestSingle page(more reviews with a button on the bottom that 'onClick' displays ten more reviews or something like that)
+5.) General CSS / Bootstrapping
+6.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
+
 #GET /api/user/:id
 Returns information about one specific user based on username in the database.
 {
@@ -284,3 +292,37 @@ Deletes a review from the database.
 
 
 -------------------
+
+/api/favorites
+
+#POST /api/favorites/user
+Gets the names of all restaurants that a user has favorited, based on the currently logged in user
+{
+  "message": "ok",
+  "data": [
+  {"restaurant_name": "Caseys Palace"},
+  {"restaurant_name": "The French Laundry"}
+  }
+}
+
+#GET /api/favorites/:id
+Gets the total number of favorites for the restaurant based on the restaurant name in req.params.id
+{
+  "message": "ok",
+      "data": [
+        {"count": "1"}
+      ]
+  ]
+}
+
+#POST /api/favorites/:id
+Either adds a user / restaurant key value pair to the favorites table or deletes it
+
+#GET /api/favorites/number/:id
+Gets the total number of favorites that the current user has made
+{
+  "message": "ok",
+    "data": [
+      {"count": "0"}
+    ]
+}
