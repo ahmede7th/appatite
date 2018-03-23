@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Restaurants = props => {
   return (
     <div className="restaurant">
-      <h1>{props.restaurants.names}</h1>
+      <h1>{props.restaurants.name}</h1>
       <p>
         Rating: <small>{props.restaurants.rating}</small>
       </p>

@@ -46,6 +46,8 @@ class RestSingle extends Component {
   }
 
   goToFavorite() {
+    console.log('GO TO FAVORITE DATA--->', this.state.apiData.name)
+    console.log(window.localStorage.getItem('username'));
     return axios
       .post(
         `/api/favorites/${this.props.match.params.id}`,
@@ -53,6 +55,8 @@ class RestSingle extends Component {
         {
           headers: {
             user: window.localStorage.getItem('id'),
+            user_name: window.localStorage.getItem('username'),
+            restaurant_name: this.state.apiData.name,
           },
         },
       )

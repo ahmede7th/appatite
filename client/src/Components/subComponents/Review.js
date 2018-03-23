@@ -11,6 +11,8 @@ class Review extends Component {
       showAll: false,
       user: window.localStorage.getItem('username'),
       user_id: '',
+      restaurant_id: '',
+      restaurant_name: '',
       content: '',
       fireRedirect: false,
       restaurantName: '',
@@ -22,6 +24,7 @@ class Review extends Component {
   }
 
   componentDidMount() {
+    console.log('CURRENT USER--->', window.localStorage.getItem('username'));
     axios
       .get(`/api/review/${this.props.name}`)
       .then(review => {
@@ -69,13 +72,14 @@ class Review extends Component {
   }
 
   formSubmit(e) {
-    console.log('FORM SUBMIT --->', this.state.user_id);
     axios({
       method: 'POST',
       url: `/api/review/${this.props.name}`,
       data: {
-        user_id: this.state.user,
-        restaurant_name: this.props.name,
+        user_id: window.localStorage.getItem('id'),
+        user_name: window.localStorage.getItem('username'),
+        restaurant_id: this.props.name,
+        restaurant_name: this.state.restaurantName,
         content: this.state.content,
       },
     })
@@ -92,13 +96,14 @@ class Review extends Component {
 
   showReviews() {
     if (this.state.initialReviews) {
+      console.log(this.state.apiData);
       return this.state.apiData.map((el, i) => {
         // shows initial 3
         if (i < 3) {
           return (
             <p>
               <small>user: </small>
-              <i>{el.user_id}: </i>
+              <i>{el.user_name}: </i>
               {el.content}
             </p>
           );
@@ -110,8 +115,13 @@ class Review extends Component {
   showAllReviews() {
     if (this.state.showAll) {
       return this.state.apiData.map(el => {
-        // shows all reviews
-        return <p>{el.content}</p>;
+        return (
+          <p>
+            <small>user: </small>
+            <i>{el.user_name}: </i>
+            {el.content}
+          </p>
+        );
       });
     }
   }
@@ -128,7 +138,10 @@ class Review extends Component {
           <div class="col-md-4">
             {this.state.showForm ? (
               <form onSubmit={this.formSubmit}>
-                <input type="hidden" name={this.state.user} />
+                <input
+                  type="hidden"
+                  name={window.localStorage.getItem('username')}
+                />
                 <input
                   type="hidden"
                   name="restaurant_name"
@@ -140,7 +153,9 @@ class Review extends Component {
                   rows="3"
                   onChange={this.inputChange}
                   name="content"
-                  placeholder={`leave a review for ${this.state.restaurantName}`}
+                  placeholder={`leave a review for ${
+                    this.state.restaurantName
+                  }`}
                 />
                 <input type="submit" value="submit" />
               </form>
