@@ -74,10 +74,10 @@ module.exports = {
   updateReviewById(req, res, next) {
     reviewDB
       .editReview({
-        user_id: req.body.username,
-        restaurant_name: req.body.restaurantName,
+        //user_id: req.body.username,
+        //restaurant_name: req.body.restaurantName,
         content: req.body.content,
-        id: req.params.id,
+        id: req.body.id,
       })
       .then(review => {
         console.log('UPDATING REVIEW WORKED--->', review);

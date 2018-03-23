@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import TokenService from '../Auth/Services/TokenService';
-import Home from '../Components/Home';
-import Register from '../Auth/Register';
-import Login from '../Auth/authLogin';
+import TokenService from '../../Auth/Services/TokenService';
+import Home from '../../Components/Home';
+import Register from '../../Auth/Register';
+import Login from '../../Auth/authLogin';
 
 class userLogin extends Component {
   constructor(props) {

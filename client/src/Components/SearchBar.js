@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import '../App.css';
-
-
+import axios from 'axios'
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {term:''};
+    this.state = {
+      term: 'pizza',
+      location: 'New york',
+      apiDataLoaded: false,
+      apiData: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   handleChange(event) {
@@ -16,73 +21,44 @@ class SearchBar extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('this was typed and entered ' + this.state.term);
+    console.log('this was typed and entered ' + this.state.term);
 
     event.preventDefault();
   }
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
+componentDidMount(){
 
-        <input type="text" placeholder="search" value={this.state.value} onChange={this.handleChange} />
+  // fetch(`https://api.yelp.com/v3/businesses/search?term=${this.state.term}&location=${this.state.location}`)
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(myJson) {
+  //     console.log(myJson);
+  //   });
+  //
 
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
+
+//   axios({
+//     method:'post',
+//     url:`/api/restaurant`,
+//     headers: {
+//             "Access-Control-Allow-Origin" : "*",
+//             Authorization: 'Bearer xJjNsj4RmbcDR8jxrabVdG5hRpgkvMRStRNwJC5OurUUy14vSSgKyqTCQ-wZ0NbuM7Jg4yj8_il2FVeVSgC3Usd7D_Xvf6v6OVJ3gSedXlOpcJzl8VWleQHRDPyuWnYx',
+//               }
+//   }).then(response => {
+//     console.log(response.data)
+//   }).catch(err=>{console.log(err)})
 }
 
 
 
+    render() {
+      return (<form onSubmit={this.handleSubmit}>
 
+        <input type="text" placeholder="search" value={this.state.value} onChange={this.handleChange}/>
+        <input type="submit" value="Submit"/>
+      </form>);
+    }
+  }
 
-
-//
-// class SearchBar extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       term: 'food',
-//       location: '10010'
-//     }
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-//
-//   handleChange(e) {
-//     this.props.setState({term: e.target.value});
-//   }
-//
-//   handleSubmit(e) {
-//     // console.log('hello').then(e => {
-//     //   this.setState({this: e.value})
-//     // });
-//     e.preventDefault();
-//
-//     console.log('this.state---->',this.state)
-//   }
-//
-//
-//   // <form onSubmit={this.handleSubmit}>
-//   //         <label>
-//   //           Name:
-//   //           <input type="text" value={this.state.value} onChange={this.handleChange} />
-//   //         </label>
-//   //         <input type="submit" value="Submit" />
-//   //       </form>
-//
-//
-//   render() {
-//     return (
-//       <div className="SearchBar">
-//       <form onSubmint={this.handleSubmit}>
-//         <input type="text" name="search" placeholder="Search.." value={this.state.term} onChange={this.handleChange}/>
-//       <input type="submit" value="Submit" />
-//         </form>
-//       </div>
-//       )
-//         }
-// }
-
-export default SearchBar
+  export default SearchBar
