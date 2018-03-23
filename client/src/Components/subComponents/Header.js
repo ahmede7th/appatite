@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import SearchBar from '../SearchBar'
+import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 require("react-bootstrap/lib/NavbarHeader");
 
@@ -21,6 +24,7 @@ My Account
 </Nav>
 </Navbar>; */}
 
+
 //import { Button } from 'reactstrap';
 
 const Header = () => {
@@ -34,7 +38,7 @@ const Header = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/user/myreviews">
                 My Reviews
-              </Link>  
+              </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/user/favorites">
