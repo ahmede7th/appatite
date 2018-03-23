@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import SearchBar from '../SearchBar'
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar'
 
 
 require("react-bootstrap/lib/NavbarHeader");

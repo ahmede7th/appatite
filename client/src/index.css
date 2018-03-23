@@ -13,6 +13,7 @@ footer {
    position: fixed;
 
 }
-.Home, .Welcome, .userLogin, .SearchBar{
+
+.Home, .Welcome, .userLogin, .SearchBar {
   color:FFFCD1;
 }
