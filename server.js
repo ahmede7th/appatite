@@ -11,6 +11,7 @@ const restaurantRouter = require('./routes/restaurantRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
 const authService = require('./services/AuthService');
+const followerRouter = require('./routes/followerRouter');
 
 const PORT = process.env.PORT || 3001;
 
@@ -40,6 +41,7 @@ app.use('/api/review', reviewRouter);
 app.use('/api/restaurant', restaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/user/auth', authRouter);
+app.use('/api/follower', followerRouter);
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
