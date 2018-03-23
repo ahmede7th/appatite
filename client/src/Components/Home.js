@@ -6,6 +6,7 @@ import Restaurants from './RestaurantComponents/Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import RestCreate from '../Components/RestaurantComponents/RestCreate';
+import Footer from './subComponents/Footer';
 
 class Home extends Component {
   constructor() {
@@ -94,7 +95,7 @@ class Home extends Component {
             {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
           </div>
           <button onClick={this.logout}>Logout?</button>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       );
     }
