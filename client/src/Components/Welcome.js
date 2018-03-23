@@ -44,15 +44,15 @@ class Welcome extends Component {
 
   renderWelcome() {
     return (
-      <div>
-        <container className="welcome">
-        <h1>Welcome</h1>
-        <p>
+
+      <div className="welcome">
+        <h1 className="col-9">App-A-TITE</h1>
+        <p className="col-6">
           Are you hungry? Are you always looking for places to eat only to find
           a 5 star rated restaurant written by people who have no idea what good
           food is? You have come to the right place
         </p>
-        </container>
+        <div className="col-4">
       <Button outline color="primary">
           <a href="/register">Sign up</a>
         </Button>
@@ -60,6 +60,7 @@ class Welcome extends Component {
           <a href="/login">Log In</a>
         </Button>
       </div>
+    </div>
     );
   }
 

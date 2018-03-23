@@ -12,6 +12,7 @@ import RestaurantNumFavorites from './Components/RestaurantNumFavorites';
 import reviewEdit from './Components/subComponents/ReviewEdit';
 import UserReviews from './Components/UserReviews';
 
+
 class App extends Component {
   render() {
     return (
