@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Welcome from './Components/Welcome';
 import Home from './Components/Home';
-import userLogin from './Components/userLogin';
-import RestSingle from './Components/RestSingle';
-import RestEdit from './Components/RestEdit';
-import UserNumFavorites from './Components/UserNumFavorites';
-import UserRestaurantFavorites from './Components/UserRestaurantFavorites';
-import RestaurantUserFavorites from './Components/RestaurantUserFavorites';
-import RestaurantNumFavorites from './Components/RestaurantNumFavorites';
+import userLogin from './Components/UserComponents/userLogin';
+import RestSingle from './Components/RestaurantComponents/RestSingle';
+import RestEdit from './Components/RestaurantComponents/RestEdit';
+import UserNumFavorites from './Components/UserComponents/UserNumFavorites';
+import UserRestaurantFavorites from './Components/UserComponents/UserRestaurantFavorites';
+import RestaurantUserFavorites from './Components/RestaurantComponents/RestaurantUserFavorites';
+import RestaurantNumFavorites from './Components/RestaurantComponents/RestaurantNumFavorites';
 import reviewEdit from './Components/subComponents/ReviewEdit';
-import UserReviews from './Components/UserReviews';
+import UserReviews from './Components/UserComponents/UserReviews';
 
 class App extends Component {
   render() {

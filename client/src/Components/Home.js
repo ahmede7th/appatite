@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
-import Restaurants from './Restaurants';
+import Restaurants from './RestaurantComponents/Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
-import RestCreate from '../Components/RestCreate';
+import RestCreate from '../Components/RestaurantComponents/RestCreate';
 
 class Home extends Component {
 	constructor() {
