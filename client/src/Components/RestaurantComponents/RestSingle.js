@@ -68,13 +68,12 @@ class RestSingle extends Component {
   }
 
   render() {
-    const name = (this.props.match.params.id).replace(/ /g, "%20")
     return (
 			<div className="restaurant-single">
 				<Header />
 					<h1>single</h1>
 					<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
-					<button><Link to={`/main/${name}/edit`}>Edit</Link></button>
+					<button><Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link></button>
 					<button onClick={this.deleteRestaurant}>Delete posting</button>
 					<RestMap />
 					<Review name={this.props.match.params.id} />

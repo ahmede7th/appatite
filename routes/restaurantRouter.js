@@ -5,13 +5,9 @@ const restaurantController = require('../controllers/restaurantController');
 restaurantRouter
   .route(`/`)
   .get(restaurantController.getAllRestaurants)
-  .post(restaurantController.createRestaurant, restaurantController.getAllYelp);
-  //.post(restaurantController.getAllYelp)
+  .post(restaurantController.createRestaurant);
 
-restaurantRouter
-  .route('/:id')
-  .get(restaurantController.getOneRestaurant)
-  .post(restaurantController.getAllYelpReviews)
+restaurantRouter.route('/:id').get(restaurantController.getOneRestaurant);
 
 restaurantRouter
   .route(`/edit/:id`)
