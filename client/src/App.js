@@ -29,7 +29,7 @@ class App extends Component {
           <Route exact path="/restaurant/favorites/:id" component={RestaurantUserFavorites} />
           <Route exact path="/restaurant/favorites/num/:id" component={RestaurantNumFavorites} />
           <Route exact path="/user/myreviews" component={UserReviews} />
-          <Route path="/user/:id" component = {UserPage} />
+          <Route exact path="/user/:id" component = {UserPage} />
 
         </div>
       </Router>
