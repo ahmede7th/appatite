@@ -30,6 +30,7 @@ class App extends Component {
           <Route exact path="/restaurant/favorites/num/:id" component={RestaurantNumFavorites} />
           <Route exact path="/user/:id" component = {UserPage} />
           <Route path="/user/myreviews" component={UserReviews} />
+          <Route path="/user/account" component={UserAccount} />
         </div>
       </Router>
     );

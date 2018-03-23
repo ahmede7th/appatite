@@ -64,10 +64,10 @@ module.exports = {
         fname: req.body.fname,
         lname: req.body.lname,
         username: req.body.username,
-        password: req.body.password,
-        aboutme: req.body.aboutme,
-        auth: req.body.auth,
-        id: req.params.id,
+        // password: req.body.password,
+        about_me: req.body.about_me,
+        // auth: req.body.auth,
+        // id: req.params.id,
       })
       .then(user => {
         console.log('UPDATING USER WORKED--->', user);
