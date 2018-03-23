@@ -10,6 +10,7 @@ import UserRestaurantFavorites from './Components/UserComponents/UserRestaurantF
 import RestaurantUserFavorites from './Components/RestaurantComponents/RestaurantUserFavorites';
 import RestaurantNumFavorites from './Components/RestaurantComponents/RestaurantNumFavorites';
 import reviewEdit from './Components/subComponents/ReviewEdit';
+import UserAccount from './Components/UserComponents/UserAccount';
 import UserReviews from './Components/UserComponents/UserReviews';
 import UserPage from './Components/UserComponents/UserPage';
 
@@ -24,13 +25,12 @@ class App extends Component {
           <Route exact path="/main" component={Home} />
           <Route exact path="/main/:id" component={RestSingle} />
           <Route path="/main/:id/edit" component={RestEdit} />
-          <Route exact path="/user/favorites/:id" component={UserRestaurantFavorites} />
-          <Route exact path="/user/favorites/num/:id" component={UserNumFavorites} />
           <Route exact path="/restaurant/favorites/:id" component={RestaurantUserFavorites} />
           <Route exact path="/restaurant/favorites/num/:id" component={RestaurantNumFavorites} />
-          <Route exact path="/user/myreviews" component={UserReviews} />
-          <Route exact path="/user/:id" component = {UserPage} />
-
+          <Route path="/user/account" component={UserAccount} />
+          <Route path="/user/myreviews" component={UserReviews} />
+          <Route path="/user/myfavorites" component={UserRestaurantFavorites} />
+          <Route exact path="/user/favorites/num/:id" component={UserNumFavorites} />
         </div>
       </Router>
     );
