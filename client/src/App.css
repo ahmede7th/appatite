@@ -1,17 +1,23 @@
-input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+.welcome {
+  font-family: "Bubblegum Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px grey;
+  width: 300px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -100px;
 }
 
-input[type=text]:focus {
-    width: 100%;
+body {
+  height: 200px;
+  background-color: #cccccc;
+  background-image: url("background.jpg");
+  background-size: cover;
 }

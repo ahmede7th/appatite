@@ -6,7 +6,7 @@ import Restaurants from './Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import RestCreate from '../Components/RestCreate';
-import Yelp from './yelpComponents/Yelp';
+import Footer from './subComponents/Footer';
 
 class Home extends Component {
 	constructor() {
@@ -39,21 +39,6 @@ class Home extends Component {
         console.log('nope :', err);
 			})}
 
-// //calls yelps api for restaurant
-// 			 axios
-//        .get(`http://localhost:3001/api/yelp`)
-//        .then(restaurants => {
-// 				 console.log('apiYelp----->',restaurants.data.data)
-//          this.setState({
-// 					 yelpDataLoaded:true,
-//            apiYelp: restaurants.data.data.businesses,
-//          });
-// 				 	console.log(this.state.apiYelp)
-// 			 })
-//        .catch(err => {
-//          console.log('nope :', err);
-//         })
-  // }
 
   logout(ev) {
     ev.preventDefault();
@@ -94,17 +79,9 @@ class Home extends Component {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
-		//this.yelpListing()
+
   };
 
-// 	yelpListing(){
-// 		if (this.state.yelpDataLoaded) {
-// 			return this.state.apiYelp.map((el, i) => {
-// 				 //console.log('YELP API EL.NAME',el.name)
-// 				 return <Yelp yelp={el} key={el.id} />;
-// 	})
-// }
-// };
 
   render() {
     if (this.state.logoutUser) {
@@ -118,10 +95,10 @@ class Home extends Component {
               {this.state.show ? <RestCreate /> : ''}
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
 
-							{/* {this.state.yelpDataLoaded? this.yelpListing():'failed to load'} */}
+
             </div>
             <button onClick={this.logout}>Logout?</button>
-            {/* <Footer /> */}
+            <Footer />
           </div>
       );
     }

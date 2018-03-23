@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS users cascade;
 DROP TABLE IF EXISTS friends cascade;
 DROP TABLE IF EXISTS restaurants cascade;
 DROP TABLE IF EXISTS favorites cascade;
-DROP TABLE IF EXISTS reviews cascade;
-DROP TABLE IF EXISTS reactions;
+DROP TABLE IF EXISTS reviews ;
+DROP TABLE IF EXISTS reaction;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,

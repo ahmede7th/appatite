@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container-fluid router" align="center">
+        <div className="container-fluid-router" align="center">
           <Route exact path="/" component={Welcome} />
           <Route path="/register" component={userLogin} />
           <Route path="/login" component={userLogin} />
