@@ -5,7 +5,11 @@ import TokenService from '../Auth/Services/TokenService';
 import Restaurants from './RestaurantComponents/Restaurants';
 import Welcome from './Welcome';
 import Header from './subComponents/Header';
+<<<<<<< HEAD
 import RestCreate from '../Components/RestaurantComponents/RestCreate';
+=======
+import RestCreate from '../Components/RestCreate';
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
 import Footer from './subComponents/Footer';
 
 class Home extends Component {
@@ -37,8 +41,13 @@ class Home extends Component {
       })
       .catch(err => {
         console.log('nope :', err);
+<<<<<<< HEAD
       });
   }
+=======
+			})}
+
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
 
   logout(ev) {
     ev.preventDefault();
@@ -80,19 +89,39 @@ class Home extends Component {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
+<<<<<<< HEAD
   }
+=======
+
+  };
+
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
 
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
       return (
+<<<<<<< HEAD
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
             <button onClick={this.buttonClick}>Biz owner</button>
             {this.state.show ? <RestCreate /> : ''}
             {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+=======
+          <div className="container-fluid">
+            <Header />
+            <div className="jumbotron">
+              <button onClick={this.buttonClick}>Biz owner</button>
+              {this.state.show ? <RestCreate /> : ''}
+              {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
+
+
+            </div>
+            <button onClick={this.logout}>Logout?</button>
+            <Footer />
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
           </div>
           <button onClick={this.logout}>Logout?</button>
           <Footer />

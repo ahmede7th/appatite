@@ -44,6 +44,10 @@ class Welcome extends Component {
 
   renderWelcome() {
     return (
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
       <div className="welcome">
         <h1 className="col-9">App-A-TITE</h1>
         <p className="col-6">
@@ -59,6 +63,7 @@ class Welcome extends Component {
           <a href="/login">Log In</a>
         </Button>
       </div>
+    </div>
     );
   }
 
