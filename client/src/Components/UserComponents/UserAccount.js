@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from './subComponents/Header';
+import TokenService from '../../Auth/Services/TokenService';
+import Header from '../subComponents/Header';
+import Welcome from '../Welcome';
 
 class UserAccount extends Component {
 	constructor() {
@@ -12,11 +14,13 @@ class UserAccount extends Component {
 			lname: '',
 			about_me: '',
 			user: window.localStorage.getItem('username'),
-			click: false
+			click: false,
+			logoutUser: false
 		}
 		this.buttonClick = this.buttonClick.bind(this)
 		this.inputChange = this.inputChange.bind(this)
 		this.submitForm = this.submitForm.bind(this)
+		this.deleteUser = this.deleteUser.bind(this)
 	}
 
 	componentDidMount() {
@@ -34,11 +38,11 @@ class UserAccount extends Component {
 	}
 
 	submitForm(e) {
-		e.preventDefault()
 		axios({
 			method: 'PUT',
 			url: `/api/user/edit/${this.state.user}`,
 			data: {
+				username: this.state.user,
 				fname: this.state.fname,
 				lname: this.state.lname,
 				about_me: this.state.about_me
@@ -60,6 +64,25 @@ class UserAccount extends Component {
 		})
 	}
 
+	deleteUser() {
+		if (window.confirm('Are you sure?')) {
+			alert('account deleted')
+			axios.delete(`/api/user/delete/${this.state.user}`)
+				.then(user => {
+					console.log('DELETED USER', user)
+					TokenService.destroy();
+				    this.setState({
+				      logoutUser: true,
+				    });
+				})
+				.catch(err => {
+					console.log('ERROR deleting user', err)
+				})
+		} else {
+			alert('you canceled')
+		}
+	}
+
 	renderUser() {
 		const user = this.state.apiData
 		return (
@@ -73,12 +96,16 @@ class UserAccount extends Component {
 	}
 
 	render() {
+		if (this.state.logoutUser) {
+		    return <Welcome />
+		    } else {
 		return (
 			<div>
 				<Header />
 				<h1>user account</h1>
 				{this.state.apiDataLoaded ? this.renderUser() : "loading user"}
 				<button onClick={this.buttonClick}>Edit</button>
+				<button onClick={this.deleteUser}>Delete</button>
 				{this.state.click ? 
 					<form onSubmit={this.submitForm}>
 						<input type="text" name="fname" onChange={this.inputChange} value={this.state.fname} placeholder={this.state.apiData.fname} />
@@ -88,7 +115,8 @@ class UserAccount extends Component {
 					</form> : ''}
 			</div>
 		)
-	}
+		}
+	}	
 }
 
-export default UserAccount
+export default UserAccount;

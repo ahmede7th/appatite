@@ -18,7 +18,7 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/user/favorites">
+              <Link className="nav-link" to="/user/myfavorites">
                 My Favorites
               </Link>
             </li>

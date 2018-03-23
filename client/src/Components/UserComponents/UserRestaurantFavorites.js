@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Header from '../subComponents/Header'
 
 class Home extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+      <Header />
         <h1>USER FAVORITES!</h1>
         {this.userRestaurantFavorites()}
       </div>
