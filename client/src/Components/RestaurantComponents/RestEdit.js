@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import Header from './subComponents/Header';
+import Header from '../subComponents/Header';
 
 class RestEdit extends Component {
 	constructor() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Header from './subComponents/Header';
-import ReviewEdit from './subComponents/ReviewEdit';
+import Header from '../subComponents/Header';
+import ReviewEdit from '../subComponents/ReviewEdit';
 
 class UserReviews extends Component {
 	constructor() {
