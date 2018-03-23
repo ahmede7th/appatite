@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TokenService from '../Auth/Services/TokenService';
 import Home from '../Components/Home';
+import { Button } from 'reactstrap';
 
 class Welcome extends Component {
   constructor() {
@@ -43,22 +44,26 @@ class Welcome extends Component {
 
   renderWelcome() {
     return (
-      <div>
-        <h1>Welcome</h1>
+<<<<<<< HEAD
+=======
 
-        <p>
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
+      <div className="welcome">
+        <h1 className="col-9">App-A-TITE</h1>
+        <p className="col-6">
           Are you hungry? Are you always looking for places to eat only to find
           a 5 star rated restaurant written by people who have no idea what good
           food is? You have come to the right place
         </p>
-
-        <button>
+        <div className="col-4">
+      <Button outline color="primary">
           <a href="/register">Sign up</a>
-        </button>
-        <button>
+        </Button>
+        <Button outline color="primary">
           <a href="/login">Log In</a>
-        </button>
+        </Button>
       </div>
+    </div>
     );
   }
 
