@@ -1,72 +1,7 @@
 \c appatite_db;
 
-INSERT INTO users (fname, lname, username, password, about_me, auth, loc) VALUES
-(
-  'Casey',
-  'Harding',
-  'CR Harding',
-  'Casey',
-  'I just loooooove food!',
-  1,
-  0
-),
-(
-  'Tom',
-  'Choe',
-  'DooeitsTom',
-  'Tom',
-  'Give me fried chicken and a donut and I will die happy',
-  1,
-  0
-),
-(
-  'Nicole',
-  'Zelingher',
-  'NZ',
-  'NZ',
-  'You want a foodie? I will give you a foodie right in the kisser if you try to get fresh with me!',
-  1,
-  0
-),
-(
-  'Muhammad',
-  'Ahmed',
-  'MO',
-  'MO',
-  'What do you think you know about Rafiqis, punk?',
-  1,
-  0
-);
-
 INSERT INTO restaurants(name, rating, cuisine, img_src, loc) VALUES
-(
-  'Caseys Palace',
-  4,
-  'Everything but the plate',
-  'img_src',
-  0
-),
-(
-  'Toms Garden',
-  4,
-  'I have fried chicken so good that it will make your toes curl!',
-  'img_src',
-  0
-),
-(
-  'Nicoles Ice Cream Heaven',
-  4,
-  'Ice cream straight from the big guy upstairs!',
-  'img_src',
-  0
-),
-(
-  'Muhammads House of Grilled Cheese',
-  5,
-  'Seriously...it is my house, and it is made out of grilled cheese.',
-  'img_src',
-  0
-),
+
 -- chinese
 ('Wah Fung No 1',4.5,'Chinese','https://s3-media2.fl.yelpcdn.com/bphoto/QrbtEYSiE_AQkqu59Qmp4Q/o.jpg','79 Chrystie St,New York, NY 10002'),
 ('Bao Bao Cafe',4.5,'Noodles','https://s3-media2.fl.yelpcdn.com/bphoto/pjJHmOiblI-oVf6NBjgL9g/o.jpg','106 Greenwich St,New York, NY 10006'),
@@ -172,8 +107,3 @@ INSERT INTO restaurants(name, rating, cuisine, img_src, loc) VALUES
 ('Malai Marke Indian Cuisine',4,'Indian','https://s3-media4.fl.yelpcdn.com/bphoto/9Y7DEFs5opzPi9Tk4jSOWA/o.jpg','318 E 6th St,New York, NY 10003'),
 ('Namaste',4,'Indian','https://s3-media3.fl.yelpcdn.com/bphoto/OuVMf5MCK0CSk0I1Kg7Vow/o.jpg','195 5th Ave,Brooklyn, NY 11217'),
 ('Indian Accent',4.5,'Indian','https://s3-media2.fl.yelpcdn.com/bphoto/QJrR6LJt07yYb9lNLLbLVQ/o.jpg','123 W 56th St,New York, NY 10019')
-
-
-
-
-
