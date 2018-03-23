@@ -9,24 +9,24 @@ module.exports = {
 
   getAllReviewsByUsername(username) {
     return reviewDB.any(`SELECT * FROM reviews
-                                          WHERE user_id = $1`, username);
+                                          WHERE user_name = $1`, username);
   },
 
   addReview(review) {
-    return reviewDB.one(`INSERT INTO reviews(user_id, restaurant_id, content)
-                                          VALUES($[user_id], $[restaurant_id], $[content])
+    return reviewDB.one(`INSERT INTO reviews(user_id, user_name, restaurant_id, restaurant_name, content)
+                                          VALUES($[user_id], $[user_name], $[restaurant_id], $[restaurant_name], $[content])
                                           RETURNING *
                                           `, review);
   },
 
   getYourReviews(review) {
-    return reviewDB.any(`SELECT user_id, restaurant_id, content, id, date_posted
+    return reviewDB.any(`SELECT *
                                           FROM reviews
                                           WHERE user_id = $1`, review);
   },
 
   getPublicReviews(user) {
-    return reviewDB.any(`SELECT user_id, restaurant_id, content, id, date_posted
+    return reviewDB.any(`SELECT *
                                           FROM reviews
                                           WHERE user_id != $1
                                           RETURNING *
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getFriendReviews(friend) {
-    return reviewDB.any(`SELECT user_id, content
+    return reviewDB.any(`SELECT user_id, content, restaurant_name
                                           FROM reviews
                                           WHERE username = $1
                                           `, friend);

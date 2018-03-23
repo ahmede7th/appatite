@@ -2,8 +2,8 @@ const favoriteDB = require('../config/connection');
 
 module.exports = {
   addFavorite(favorite) {
-    return favoriteDB.one(`INSERT INTO favorites(user_id, restaurant_id)
-                                          VALUES($[user_id], $[restaurant_id])
+    return favoriteDB.one(`INSERT INTO favorites(user_id, user_name, restaurant_id, restaurant_name)
+                                          VALUES($[user_id], $[user_name], $[restaurant_id], $[restaurant_name])
                                           RETURNING *`, favorite);
   },
 
@@ -29,7 +29,7 @@ module.exports = {
   },
 
   getUserRestaurantFavorites(user) {
-    return favoriteDB.any(`SELECT restaurant_id
+    return favoriteDB.any(`SELECT restaurant_name
                                           FROM favorites
                                           WHERE user_id = $1
                                           `, user);

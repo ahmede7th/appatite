@@ -4,7 +4,8 @@ const TokenService = require('../services/TokenService');
 module.exports = {
   //add the user / restaurant to the favorite database
   updateFavorite(req, res, next) {
-    const favorite = { user_id: parseInt(req.headers.user), restaurant_id: req.params.id };
+    const favorite = { user_id: parseInt(req.headers.user), user_name: req.headers.user_name, restaurant_id: req.params.id, restaurant_name:  req.headers.restaurant_name};
+    console.log('INSIDE UPDATE FAVORITE--->', favorite);
     favorites.alreadyFavorites(favorite)
     .then(favorite => {
       console.log('UPDATE FAVORITE WORKED--->', favorite);

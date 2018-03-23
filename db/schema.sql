@@ -4,7 +4,12 @@ DROP TABLE IF EXISTS users cascade;
 DROP TABLE IF EXISTS restaurants cascade;
 DROP TABLE IF EXISTS followers cascade;
 DROP TABLE IF EXISTS favorites cascade;
+<<<<<<< HEAD
 DROP TABLE IF EXISTS reviews;
+=======
+DROP TABLE IF EXISTS reviews ;
+DROP TABLE IF EXISTS reaction;
+>>>>>>> 2d0ceb431e760ac4316a0d83d32b1971740db756
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -38,14 +43,18 @@ CREATE TABLE followers (
 CREATE TABLE favorites (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+  user_name VARCHAR(255),
   restaurant_id INTEGER REFERENCES restaurants(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+  restaurant_name VARCHAR(255),
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
-  user_id VARCHAR(255) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+  user_name VARCHAR(255),
   restaurant_id INTEGER REFERENCES restaurants(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+  restaurant_name VARCHAR(255),
   content VARCHAR(700),
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
 );
