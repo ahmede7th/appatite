@@ -75,7 +75,7 @@ class RestSingle extends Component {
     return (
 			<div className="restaurant-single">
 				<Header />
-					<h1>single</h1>
+          <br/>
 					<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
 					<button><Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link></button>
 					<button onClick={this.deleteRestaurant}>Delete posting</button>

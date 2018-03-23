@@ -16,7 +16,7 @@ class Home extends Component {
   componentDidMount() {
     const user = window.localStorage.getItem('id');
     console.log('INSIDE COMPONENT DID MOUNT USERFAVORITES--->', user);
-    return axios
+    axios
       .get(`/api/favorites/user/restaurants/${user}`)
       .then(favorites => {
         console.log('USER FAVORITES ->', favorites.data.data);
@@ -33,7 +33,7 @@ class Home extends Component {
   userRestaurantFavorites() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
-        return <p>{el.restaurant_name}</p>;
+        return <p>{el.restaurant_id}</p>;
       });
     }
   }
