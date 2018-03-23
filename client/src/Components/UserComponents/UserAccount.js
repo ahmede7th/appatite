@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TokenService from '../Auth/Services/TokenService';
-import Header from './subComponents/Header';
-import Welcome from './Welcome';
+import TokenService from '../../Auth/Services/TokenService';
+import Header from '../subComponents/Header';
+import Welcome from '../Welcome';
 
 class UserAccount extends Component {
 	constructor() {
