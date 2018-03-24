@@ -51,7 +51,6 @@ class RestSingle extends Component {
                   );
                 });
 
-                console.log('DOES THIS USER LIKE THIS?--->', user);
                 if (user.length > 0) {
                   this.setState({
                     favorite: true,
@@ -89,7 +88,6 @@ class RestSingle extends Component {
   }
 
   goToFavorite() {
-    console.log('HELLOOOOOOO?!');
     return axios
       .post(
         `/api/favorites/${this.props.match.params.id}`,
@@ -115,14 +113,12 @@ class RestSingle extends Component {
   }
 
   renderFavoriteUsers() {
-    console.log('RENDER FAVORITE USERS--->', this.state.favoriteUsers);
     return this.state.favoriteUsers.map(el => {
       return <p>{el.username}</p>;
     });
   }
 
   render() {
-    console.log('location apiData: ', this.state.apiData)
     return (
       <div className="restaurant-single">
         <Header />
@@ -139,7 +135,7 @@ class RestSingle extends Component {
         </p>
         <p>
           Number of favorites:{' '}
-          {this.state.favoriteNumber ? this.state.favoriteNumber : ''}
+          {this.state.favoriteNumber > 0 ? this.state.favoriteNumber : ''}
         </p>
         <p>
           Users who Favorite:{this.state.favoriteUsers
