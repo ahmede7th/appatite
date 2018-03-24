@@ -13,32 +13,62 @@ class RestSingle extends Component {
       apiData: null,
       fireRedirect: false,
       favorite: false,
-      favoriteNumber: '',
+      favoriteNumber: null,
+      favoriteUsers: null,
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
+    this.renderFavoriteUsers = this.renderFavoriteUsers.bind(this);
   }
 
   componentDidMount() {
     return axios
       .get(`/api/restaurant/${this.props.match.params.id}`)
       .then(restaurant => {
-        console.log('single ->', restaurant);
         this.setState({
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
         });
-        axios.get(`/api/favorites/restaurant/num/${this.props.match.params.id}`)
-        .then(favorites => {
-          console.log('RESTAURANT FAVORITES ->', favorites.data.data[0].count);
-          this.setState({
-            apiDataLoaded: true,
-            favoriteNumber: favorites.data.data[0].count,
+        axios
+          .get(`/api/favorites/restaurant/num/${this.props.match.params.id}`)
+          .then(favorites => {
+            console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
+            this.setState({
+              favoriteNumber: favorites.data.data[0].count,
+            });
+            axios
+              .get(
+                `/api/favorites/restaurant/users/${this.props.match.params.id}`,
+              )
+              .then(users => {
+                console.log(
+                  'USERS WHO LIKE THE RESTAURANT--->',
+                  users.data.data,
+                );
+                const user = users.data.data.filter(function (user) {
+                  return (
+                    user.username === window.localStorage.getItem('username')
+                  );
+                });
+
+                console.log('DOES THIS USER LIKE THIS?--->', user);
+                if (user.length > 0) {
+                  this.setState({
+                    favorite: true,
+                  });
+                }
+
+                this.setState({
+                  favoriteUsers: users.data.data,
+                });
+              })
+              .catch(err => {
+                console.log('ERROR IN GET USERS WHO LIKE RESTAURANT--->', err);
+              });
+          })
+          .catch(err => {
+            console.log('nope :', err);
           });
-        })
-        .catch(err => {
-          console.log('nope :', err);
-        });
       })
       .catch(err => {
         console.log(err);
@@ -59,8 +89,7 @@ class RestSingle extends Component {
   }
 
   goToFavorite() {
-    console.log('GO TO FAVORITE DATA--->', this.state.apiData.name)
-    console.log(window.localStorage.getItem('username'));
+    console.log('HELLOOOOOOO?!');
     return axios
       .post(
         `/api/favorites/${this.props.match.params.id}`,
@@ -74,33 +103,55 @@ class RestSingle extends Component {
         },
       )
       .then(favorite => {
-        console.console.log('GOT FAVORITE SINGLE PAGE--->', favorite);
         this.setState({
           favorite: true,
         });
       })
       .catch(err => {
-        console.log('I EXPECTED THIS THE HAPPEN SO IM HAPPY--->', err);
         this.setState({
           favorite: !this.state.favorite,
         });
       });
   }
 
+  renderFavoriteUsers() {
+    console.log('RENDER FAVORITE USERS--->', this.state.favoriteUsers);
+    return this.state.favoriteUsers.map(el => {
+      return <p>{el.username}</p>;
+    });
+  }
+
   render() {
     return (
-			<div className="restaurant-single">
-				<Header />
-          <br/>
-					<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
-					<button><Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link></button>
-					<button onClick={this.deleteRestaurant}>Delete posting</button>
-					<RestMap />
-          <p>Yelp Rating: {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars</p>
-          <p>Favorites: {this.state.apiDataLoaded ? this.state.favoriteNumber: ''}</p>
-					<Review name={this.props.match.params.id} />
-          <button onClick={this.goToFavorite}>{this.state.favorite ? 'Unfavorite this baby!' : 'Favorite this baby!'}</button>
-          {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
+      <div className="restaurant-single">
+        <Header />
+        <br />
+        <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
+        <button>
+          <Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link>
+        </button>
+        <button onClick={this.deleteRestaurant}>Delete posting</button>
+        <RestMap />
+        <p>
+          Yelp Rating:{' '}
+          {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars
+        </p>
+        <p>
+          Number of favorites:{' '}
+          {this.state.favoriteNumber ? this.state.favoriteNumber : ''}
+        </p>
+        <p>
+          Users who Favorite:{this.state.favoriteUsers
+            ? this.renderFavoriteUsers()
+            : ''}
+        </p>
+        <Review name={this.props.match.params.id} />
+        <button onClick={this.goToFavorite}>
+          {this.state.favorite
+            ? 'Unfavorite this baby!'
+            : 'Favorite this baby!'}
+        </button>
+        {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );
   }

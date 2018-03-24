@@ -28,7 +28,6 @@ class Review extends Component {
     axios
       .get(`/api/review/${this.props.name}`)
       .then(review => {
-        console.log('all reviews', review);
         this.setState({
           initialReviews: true,
           apiData: review.data.data,
@@ -44,7 +43,6 @@ class Review extends Component {
     axios
       .get(`/api/restaurant/${this.props.name}`)
       .then(restaurant => {
-        console.log('got the restaurant', restaurant.data.data[0].name);
         this.setState({
           showForm: !this.state.showForm,
           restaurantName: restaurant.data.data[0].name,
@@ -96,7 +94,6 @@ class Review extends Component {
 
   showReviews() {
     if (this.state.initialReviews) {
-      console.log(this.state.apiData);
       return this.state.apiData.map((el, i) => {
         // shows initial 3
         if (i < 3) {
@@ -127,7 +124,6 @@ class Review extends Component {
   }
 
   render() {
-    console.log('current user: ', this.state.user);
     return (
       <div className="review">
         {this.state.initialReviews ? this.showReviews() : ''}

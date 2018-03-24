@@ -29,7 +29,6 @@ class Home extends Component {
     axios
       .get(`/api/restaurant`)
       .then(restaurants => {
-        console.log('Restaurants ->', restaurants);
         this.setState({
           apiDataLoaded: true,
           apiData: restaurants.data.data,
@@ -76,7 +75,6 @@ class Home extends Component {
 
   mainListing() {
     if (this.state.apiDataLoaded) {
-      console.log(this.state.apiData);
       return this.state.apiData.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
       });
