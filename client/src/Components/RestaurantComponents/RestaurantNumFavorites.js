@@ -36,7 +36,7 @@ class AllFavorites extends Component {
 
   render() {
     return (
-      <div>
+      <div className="welcome">
         <h1>NUMBER OF RESTAURANT FAVORITES!</h1>
         {this.restaurantNumFavorites()}
       </div>

@@ -77,6 +77,7 @@ export default class UserRegisterForm extends Component {
               value={this.state.about_me}
             />
           </label>
+          <br/>
           <button type="submit" value="Submit">
             Submit
           </button>

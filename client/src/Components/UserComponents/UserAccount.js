@@ -5,6 +5,7 @@ import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
 import UserNumFavorites from './UserNumFavorites';
 import UserRestaurantFavorites from './UserRestaurantFavorites';
+import { Button } from 'reactstrap';
 
 class UserAccount extends Component {
   constructor() {
@@ -109,49 +110,28 @@ class UserAccount extends Component {
     );
   }
 
-  render() {
-    if (this.state.logoutUser) {
-      return <Welcome />;
-    } else {
-      return (
-        <div>
-          <Header />
-          <h1>user account</h1>
-          {this.state.apiDataLoaded ? this.renderUser() : 'loading user'}
-          <button onClick={this.buttonClick}>Edit</button>
-          <button onClick={this.deleteUser}>Delete</button>
-          {this.state.click ? (
-            <form onSubmit={this.submitForm}>
-              <input
-                type="text"
-                name="fname"
-                onChange={this.inputChange}
-                value={this.state.fname}
-                placeholder={this.state.apiData.fname}
-              />
-              <input
-                type="text"
-                name="lname"
-                onChange={this.inputChange}
-                value={this.state.lname}
-                placeholder={this.state.apiData.lname}
-              />
-              <input
-                type="text"
-                name="about_me"
-                onChange={this.inputChange}
-                value={this.state.about_me}
-                placeholder={this.state.apiData.about_me}
-              />
-              <input type="submit" value="submit" />
-            </form>
-          ) : (
-            ''
-          )}
-        </div>
-      );
-    }
-  }
+	render() {
+		if (this.state.logoutUser) {
+		    return <Welcome />
+		    } else {
+		return (
+			<div className="welcome">
+				<Header />
+				<h1>user account</h1>
+				{this.state.apiDataLoaded ? this.renderUser() : "loading user"}
+				<Button color="primary" onClick={this.buttonClick}>Edit</Button>
+				<Button color="primary" onClick={this.deleteUser}>Delete</Button>
+				{this.state.click ?
+					<form onSubmit={this.submitForm}>
+						<input type="text" name="fname" onChange={this.inputChange} value={this.state.fname} placeholder={this.state.apiData.fname} />
+						<input type="text" name="lname" onChange={this.inputChange} value={this.state.lname} placeholder={this.state.apiData.lname} />
+						<input type="text" name="about_me" onChange={this.inputChange} value={this.state.about_me} placeholder={this.state.apiData.about_me} />
+						<input type="submit" value="submit" />
+					</form> : ''}
+			</div>
+		)
+		}
+	}
 }
 
 export default UserAccount;

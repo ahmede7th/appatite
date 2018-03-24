@@ -50,6 +50,7 @@ export default class UserLoginForm extends Component {
               value={this.state.password}
             />
           </label>
+          <br />
           <button type="submit" value="Submit">
             Submit
           </button>
