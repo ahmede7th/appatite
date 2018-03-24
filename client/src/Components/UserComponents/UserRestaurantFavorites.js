@@ -46,10 +46,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-      <Header />
-        <h1>USER FAVORITES!</h1>
-              <br/>
-        {this.userRestaurantFavorites()}
+        {window.localStorage.getItem('username')} favorited: <br/> {this.userRestaurantFavorites()}
       </div>
     );
   }
