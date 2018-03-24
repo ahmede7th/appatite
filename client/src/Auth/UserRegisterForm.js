@@ -33,7 +33,7 @@ export default class UserRegisterForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            First Name
+            First Name -
             <input
               type="text"
               name="fname"
@@ -42,7 +42,7 @@ export default class UserRegisterForm extends Component {
             />
           </label>
           <label>
-            Last Name
+            Last Name -
             <input
               type="text"
               name="lname"
@@ -51,7 +51,7 @@ export default class UserRegisterForm extends Component {
             />
           </label>
           <label>
-            User Name
+            User Name -
             <input
               type="text"
               name="username"
@@ -60,7 +60,7 @@ export default class UserRegisterForm extends Component {
             />
           </label>
           <label>
-            Password
+            Password -
             <input
               type="text"
               name="password"
@@ -69,7 +69,7 @@ export default class UserRegisterForm extends Component {
             />
           </label>
           <label>
-            About Me
+            About Me-
             <input
               type="text"
               name="about_me"

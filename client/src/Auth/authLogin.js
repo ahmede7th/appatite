@@ -15,7 +15,7 @@ export default class authLogin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="welcome">
         <p>I'm a login</p>
         <UserLoginForm submit={this.onSubmit} />
         <p><Link to="/"><button>Back Home</button></Link></p>
