@@ -19,12 +19,15 @@ class Home extends Component {
       lat: null,
       long: null,
       restaurants: [],
+      next20: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.showPosition = this.showPosition.bind(this);
     this.logout = this.logout.bind(this);
-    // this.getRestaurants = this.getRestaurants.bind(this);
+    this.getRestaurants = this.getRestaurants.bind(this);
+    this.mainListing = this.mainListing.bind(this);
+    this.updateMain = this.updateMain.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +77,7 @@ class Home extends Component {
   }
 
   getRestaurants() {
+    console.log(this.state.apiData);
     this.state.apiData.splice(0, 20).map((el, i) => {
       this.state.restaurants.push(el);
     });
@@ -86,6 +90,12 @@ class Home extends Component {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
+  }
+
+  updateMain() {
+    this.setState({
+      next20: true,
+    });
   }
 
   render() {
@@ -104,7 +114,8 @@ class Home extends Component {
             <button onClick={this.buttonClick}>ADD</button>
             {this.state.show ? <RestCreate /> : ''}
             {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-            <button onClick={this.getRestaurants}>See More</button>
+            {this.state.next20 ? this.mainListing(): 'failed to load'}
+            <button onClick={this.updateMain}>See More</button>
             <button onClick={this.logout}>Logout?</button>
             <Footer />
           </div>
