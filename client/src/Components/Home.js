@@ -116,7 +116,7 @@ class Home extends Component {
             <button onClick={this.buttonClick}>ADD</button>
             {this.state.show ? <RestCreate /> : ''}
             {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-            {this.state.next20 ? this.mainListing(): 'failed to load'}
+            {this.state.next20 ? this.mainListing() : ''}
             <button onClick={this.updateMain}>See More</button>
             <button onClick={this.logout}>Logout?</button>
             <Footer />
