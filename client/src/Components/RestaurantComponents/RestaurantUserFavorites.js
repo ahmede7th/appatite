@@ -9,14 +9,14 @@ class Home extends Component {
       apiData: null,
       user: null,
     };
-    this.restaurantUserFavorites = this.restaurantUserFavorites.bind(this);
+    this.userRestaurantFavorites = this.userRestaurantFavorites.bind(this);
     this.renderUser = this.renderUser.bind(this);
   }
 
   componentDidMount() {
     console.log('inside component did mount restaurant user favorites', this.props.user);
     return axios
-      .get(`/api/favorites/restaurant/users/${this.props.user}`)
+      .get(`/api/favorites/user/restaurants/${this.props.user}`)
       .then(favorites => {
         console.log('USER FAVORITES ->', favorites.data.data);
         this.setState({
@@ -30,12 +30,11 @@ class Home extends Component {
       });
   }
 
-  restaurantUserFavorites() {
-    if (this.state.apiDataLoaded) {
-      return this.state.apiData.map((el, i) => {
-        return <p>{el.username}</p>;
-      });
-    }
+  userRestaurantFavorites() {
+    console.log(this.state.apiData);
+    return this.state.apiData.map((el, i) => {
+      return <p>{el.restaurant_name}</p>;
+    });
   }
 
   renderUser() {
@@ -51,7 +50,7 @@ class Home extends Component {
     return (
       <div className="welcome">
         {this.state.apiDataLoaded ? this.renderUser() : '' }
-        {this.restaurantUserFavorites()}
+        {this.state.apiDataLoaded ? this.userRestaurantFavorites() : ''}
       </div>
     );
   }
