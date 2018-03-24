@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button} from 'reactstrap';
+
 
 export default class UserLoginForm extends Component {
   constructor(props) {
@@ -30,30 +32,37 @@ export default class UserLoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form__field">
         <form onSubmit={this.handleSubmit}>
           <label>
             User Name -
             <input
+              class="form__input"
+              pattern= ".{1,}" required
               type="text"
               name="username"
               onChange={this.handleChange}
               value={this.state.username}
             />
           </label>
+
           <label>
             Password -
             <input
-              type="text"
+              class="form__input"
+              pattern=".{6,}" required
+              type="password"
               name="password"
               onChange={this.handleChange}
               value={this.state.password}
-            />
+            /><span class="icon"></span>
           </label>
+
           <br />
-          <button type="submit" value="Submit">
+          <Button color='primary' type="submit" value="Submit">
             Submit
-          </button>
+          </Button>
+          <br/>
         </form>
       </div>
     );

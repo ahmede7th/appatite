@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'reactstrap';
 
 export default class UserRegisterForm extends Component {
   constructor(props) {
@@ -78,9 +79,9 @@ export default class UserRegisterForm extends Component {
             />
           </label>
           <br/>
-          <button type="submit" value="Submit">
+          <Button color='primary' type="submit" value="Submit">
             Submit
-          </button>
+          </Button>
         </form>
       </div>
     );
