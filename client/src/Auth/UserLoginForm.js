@@ -33,7 +33,7 @@ export default class UserLoginForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            User Name
+            User Name -
             <input
               type="text"
               name="username"
@@ -42,7 +42,7 @@ export default class UserLoginForm extends Component {
             />
           </label>
           <label>
-            Password
+            Password -
             <input
               type="text"
               name="password"

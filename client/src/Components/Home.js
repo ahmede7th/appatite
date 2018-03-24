@@ -31,7 +31,6 @@ class Home extends Component {
     axios
       .get(`/api/restaurant`)
       .then(restaurants => {
-        console.log('Restaurants ->', restaurants);
         this.setState({
           apiDataLoaded: true,
           apiData: restaurants.data.data,

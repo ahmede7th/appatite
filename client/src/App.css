@@ -1,24 +1,8 @@
-/*.welcome {
-  font-size: 20px;
-  font-style: normal;
-  font-variant: normal;
-  text-shadow: 2px 2px 4px grey;
-  position: absolute;
-  font-family: "Bubblegum Sans";
-  color: white;
-  z-index: 15;
- }*/
-
-/* input[type=text]:focus {
-    width: 100%; */
-
-/*body {
-  text-align: center;
+body {
   background-color: #cccccc;
-  background-image: url("background.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background: cover;
- }
-
-*/
+  background: url("background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
