@@ -18,11 +18,13 @@ class Home extends Component {
       logoutUser: false,
       lat: null,
       long: null,
+      restaurants: null
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.showPosition = this.showPosition.bind(this);
     this.logout = this.logout.bind(this);
+    this.getRestaurants = this.getRestaurants.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +40,6 @@ class Home extends Component {
         console.log('nope :', err);
       });
   }
-
 
   logout(ev) {
     ev.preventDefault();
@@ -67,22 +68,32 @@ class Home extends Component {
 
   buttonClick() {
     this.setState({
-      show: !this.state.show,
+      show: !this.state.show
     });
   }
 
-  //el.name key el.id
+  getRestaurants() {
+    let rest20;
+    const rest = this.state.apiData.slice(0, 20).map((el) => {
+      rest20.push(el)
+      console.log('rest20')
+    })
+    
+  }
 
   mainListing() {
-    if (this.state.apiDataLoaded) {
-      return this.state.apiData.map((el, i) => {
+    this.getRestaurants()
+    if (this.state.restaurants) {
+      console.log('restaurants to be displayed',this.state.retaurants);
+      return this.state.restaurants.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
       });
     }
   }
 
-
   render() {
+    console.log('current 20 ', this.state.restaurants)
+    this.getLocation()
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -90,21 +101,11 @@ class Home extends Component {
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
-            <button onClick={this.buttonClick}>Biz owner</button>
+            <small>Don't see a restaurant you want to review? ADD!</small><br/>
+            <button onClick={this.buttonClick}>ADD</button>
             {this.state.show ? <RestCreate /> : ''}
-            {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-          <div className="container-fluid">
-            <Header />
-            <div className="jumbotron">
-              <button onClick={this.buttonClick}>Biz owner</button>
-              {this.state.show ? <RestCreate /> : ''}
-              {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-
-
-            </div>
-            <button onClick={this.logout}>Logout?</button>
-            <Footer />
-          </div>
+            {this.state.restaurants ? this.mainListing() : 'failed to load'}
+            <button onClick={this.getRestaurants}>See More</button>
           <button onClick={this.logout}>Logout?</button>
           <Footer />
         </div>

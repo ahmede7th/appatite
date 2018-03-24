@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from '../subComponents/Header'
+import { Link } from 'react-router-dom';
+import Header from '../subComponents/Header';
 
 class Home extends Component {
   constructor() {
@@ -33,7 +34,11 @@ class Home extends Component {
   userRestaurantFavorites() {
     if (this.state.apiDataLoaded) {
       return this.state.apiData.map((el, i) => {
-        return <p>{el.restaurant_id}</p>;
+        return <Link to={`/main/${el.restaurant_id}`}>
+                <strong>{el.restaurant_name}</strong>
+                              <br/>
+                              <br/>
+               </Link>
       });
     }
   }
@@ -43,6 +48,7 @@ class Home extends Component {
       <div>
       <Header />
         <h1>USER FAVORITES!</h1>
+              <br/>
         {this.userRestaurantFavorites()}
       </div>
     );

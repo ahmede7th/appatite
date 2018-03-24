@@ -24,19 +24,19 @@ class UserReviews extends Component {
         this.setState({
           apiDataLoaded: true,
           apiData: reviews.data.data,
-        });
-        axios
-          .get(`/api/restaurant/${this.props.name}`)
-          .then(restaurant => {
-            console.log('got the restaurant', restaurant.data.data[0].name);
-            this.setState({
-              showForm: !this.state.showForm,
-              restaurantName: restaurant.data.data[0].name,
-            });
-          })
-          .catch(err => {
-            console.log('getting the restaurant failed--->', err);
-          });
+        }); 
+        // axios
+        //   .get(`/api/restaurant/${this.props.name}`)
+        //   .then(restaurant => {
+        //     console.log('got the restaurant', restaurant.data.data[0].name);
+        //     this.setState({
+        //       showForm: !this.state.showForm,
+        //       restaurantName: restaurant.data.data[0].name,
+        //     });
+        //   })
+        //   .catch(err => {
+        //     console.log('getting the restaurant failed--->', err);
+        //   });
       })
       .catch(err => {
         console.log('no user reviews', err);
@@ -51,18 +51,19 @@ class UserReviews extends Component {
   }
 
   showAll() {
-    console.log(this.state.apiData);
+    console.log('apiData', this.state.apiData);
     return this.state.apiData.map(el => {
       return (
         <div>
-          <Link to={`/main/${el.restaurant_name}`}>
-            {this.state.restaurantName}
+          <Link to={`/main/${el.restaurant_id}`}>
+            {el.restaurant_name}
             <br />
+            
           </Link>
           <p>
             {el.content}
             <br />
-            {el.date_created}
+            {new Date(el.date_created).toDateString()}
           </p>
           <ReviewEdit review={el} key={el.id} />
           <br />
