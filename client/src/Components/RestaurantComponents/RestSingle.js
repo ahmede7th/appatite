@@ -13,6 +13,7 @@ class RestSingle extends Component {
       apiData: null,
       fireRedirect: false,
       favorite: false,
+      favoriteNumber: '',
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
@@ -26,6 +27,17 @@ class RestSingle extends Component {
         this.setState({
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
+        });
+        axios.get(`/api/favorites/restaurant/num/${this.props.match.params.id}`)
+        .then(favorites => {
+          console.log('RESTAURANT FAVORITES ->', favorites.data.data[0].count);
+          this.setState({
+            apiDataLoaded: true,
+            favoriteNumber: favorites.data.data[0].count,
+          });
+        })
+        .catch(err => {
+          console.log('nope :', err);
         });
       })
       .catch(err => {
@@ -85,6 +97,7 @@ class RestSingle extends Component {
 					<button onClick={this.deleteRestaurant}>Delete posting</button>
 					<RestMap />
           <p>Yelp Rating: {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars</p>
+          <p>Favorites: {this.state.apiDataLoaded ? this.state.favoriteNumber: ''}</p>
 					<Review name={this.props.match.params.id} />
           <button onClick={this.goToFavorite}>{this.state.favorite ? 'Unfavorite this baby!' : 'Favorite this baby!'}</button>
           {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
