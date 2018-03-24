@@ -129,7 +129,7 @@ class RestSingle extends Component {
         <Button color="primary" size="sm" block style={{position:'center', marginBottom: '1rem'}}>
           <Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link>
         </Button>
-        <button onClick={this.deleteRestaurant}>Delete posting</button>
+        <Button color="primary" onClick={this.deleteRestaurant}>Delete posting</Button>
         <RestMap />
         <p>
           Yelp Rating:{' '}
@@ -145,11 +145,11 @@ class RestSingle extends Component {
             : ''}
         </p>
         <Review name={this.props.match.params.id} />
-        <button onClick={this.goToFavorite}>
+        <Button color="primary" onClick={this.goToFavorite}>
           {this.state.favorite
             ? 'Unfavorite this baby!'
             : 'Favorite this baby!'}
-        </button>
+        </Button>
         {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );

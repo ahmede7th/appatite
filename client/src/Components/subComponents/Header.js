@@ -8,7 +8,7 @@ import {Collapse, Button, CardBody, Card} from 'reactstrap';
 
 const Header = (props) => {
   return (
-    <div>
+    <div className="header">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/main">
           Home
