@@ -121,6 +121,7 @@ class RestSingle extends Component {
   }
 
   render() {
+
     return (
       <div className="welcome">
         <Header />
@@ -130,7 +131,7 @@ class RestSingle extends Component {
           <Link to={`/main/${this.props.match.params.id}/edit`} className="welcome">Edit</Link>
         </Button>
         <Button color="primary" onClick={this.deleteRestaurant}>Delete posting</Button>
-        <RestMap />
+        {this.state.apiDataLoaded ? <RestMap location={this.state.apiData.loc} /> : 'failed to load map'}
         <p>
           Yelp Rating:{' '}
           {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars

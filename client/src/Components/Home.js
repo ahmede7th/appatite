@@ -138,21 +138,30 @@ class Home extends Component {
         <div className="home">
             <Header logout={this.logout} />
             <div className="jumbotron">
-              {this.state.showLocation ? (
-                <RestMap location={this.state.location} />
-              ) : (
-                'no map'
-              )}
               <small>Don't see a restaurant you want to review? ADD!</small>
               <br />
               <button onClick={this.buttonClick}>ADD</button>
               <button onClick={this.buttonClick}>Biz owner</button>
+
               {this.state.show ? <RestCreate /> : ''}
               {this.state.gotUsers ? this.displayUsers() : ''}
-              {this.state.apiDataLoaded && !this.state.next20
-                ? this.mainListing()
-                : 'failed to load'}
-              {this.state.next20 ? this.mainListing(`${this.state.count}`) : ''}
+      
+                <div className ="row">
+                  <div className ="col-sm">
+                    {this.state.apiDataLoaded && !this.state.next20
+                      ? this.mainListing()
+                      : 'failed to load'}
+                    {this.state.next20 ? this.mainListing(`${this.state.count}`) : ''}
+                  </div>
+                  <div className="col-sm" align="center">
+                    <p className="map text-center">Restaurants near you</p>
+                      {this.state.showLocation ? (
+                      <RestMap location={this.state.location} />
+                      ) : (
+                        'no map'
+                      )}
+                  </div>
+                </div>
               <button onClick={this.updateMain}>See More</button>
             </div>
             <button onClick={this.logout}>Logout?</button>

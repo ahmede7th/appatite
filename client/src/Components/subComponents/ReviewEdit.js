@@ -65,30 +65,30 @@ class ReviewEdit extends Component {
     });
   }
 
-  render() {
-    console.log('Props id', this.props.review.id);
-    return (
-      <div>
-        <button onClick={this.buttonClick}>Edit</button>
-        <button onClick={this.deleteReview}>Delete</button>
-        {this.state.click ? (
-          <form onSubmit={this.submitForm}>
-            <input type="hidden" name="id" value={this.props.review.id} />
-            <input
-              type="text"
-              name="content"
-              onChange={this.inputChange}
-              placeholder={this.props.review.content}
-            />
-            <input class="btn btn-primary" type="submit" value="submit" />
-          </form>
-        ) : (
-          ''
-        )}
-        {this.state.fireRedirect ? window.location.reload() : ''}
-      </div>
-    );
+    render() {
+      console.log('Props id', this.props.review.id);
+      return (
+        <div>
+          <button onClick={this.buttonClick}>Edit</button>
+          <button onClick={this.deleteReview}>Delete</button>
+          {this.state.click ? (
+            <form onSubmit={this.submitForm}>
+              <input type="hidden" name="id" value={this.props.review.id} />
+              <input
+                type="text"
+                name="content"
+                onChange={this.inputChange}
+                placeholder={this.props.review.content}
+              />
+              <input class="btn btn-primary" type="submit" value="submit" />
+            </form>
+          ) : (
+            ''
+          )}
+          {this.state.fireRedirect ? window.location.reload() : ''}
+        </div>
+      );
+    }
   }
-}
 
 export default ReviewEdit;
