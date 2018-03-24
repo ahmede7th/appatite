@@ -9,11 +9,14 @@ const Restaurants = props => {
 
   return (<div className="restaurant">
     <h1>{props.restaurants.name}</h1>
-    <p>
-      Rating:
-      <small>{props.restaurants.rating}</small>
-      <div style={{position:'center'}}><ReactStars count={props.restaurants.rating} onChange={ratingChanged} size={20} edit={false} color1={'#ffd700'} position={'center'}/></div>
-    </p>
+
+
+
+    <p>Rating:</p><ReactStars count={props.restaurants.rating} onChange={ratingChanged} size={20} edit={false} color1={'#ffd700'} position={'center'}/>
+
+
+
+
     <p>
       Cuisine:
       <strong>{props.restaurants.cuisine}</strong>

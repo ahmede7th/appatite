@@ -126,8 +126,8 @@ class RestSingle extends Component {
         <Header />
         <br />
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
-        <Button color="primary" size="sm" block style={{position:'center', marginBottom: '1rem'}}>
-          <Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link>
+        <Button color="primary">
+          <Link to={`/main/${this.props.match.params.id}/edit`} className="welcome">Edit</Link>
         </Button>
         <Button color="primary" onClick={this.deleteRestaurant}>Delete posting</Button>
         <RestMap />
