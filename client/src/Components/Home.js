@@ -7,6 +7,7 @@ import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
+import RestMap from '../subComponents/RestaurantComponents/RestMap';
 
 class Home extends Component {
   constructor() {
@@ -15,6 +16,7 @@ class Home extends Component {
       apiDataLoaded: false,
       apiData: null,
       show: false,
+      userLocation: false,
       logoutUser: false,
       lat: null,
       long: null,
@@ -61,6 +63,7 @@ class Home extends Component {
   showPosition(position) {
     console.log('users location has been set', position);
     this.setState({
+      showLocation: true,
       lat: position.coords.latitude,
       long: position.coords.longitude,
     });
@@ -90,7 +93,7 @@ class Home extends Component {
   render() {
     console.log('current data', this.state.restaurants)
     console.log('current apiData', this.state.apiData)
-    // this.getLocation()
+    this.getLocation()
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -98,6 +101,7 @@ class Home extends Component {
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
+            {this.state.showLocation ? <RestMap /> : 'no map'}
             <small>Don't see a restaurant you want to review? ADD!</small><br/>
             <button onClick={this.buttonClick}>ADD</button>
             {this.state.show ? <RestCreate /> : ''}
