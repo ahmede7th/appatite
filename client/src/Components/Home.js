@@ -7,6 +7,7 @@ import Welcome from './Welcome';
 import Header from './subComponents/Header';
 import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
+import RestMap from '../Components/RestaurantComponents/RestMap';
 
 class Home extends Component {
   constructor() {
@@ -15,9 +16,9 @@ class Home extends Component {
       apiDataLoaded: false,
       apiData: null,
       show: false,
+      showLocation: false,
       logoutUser: false,
-      lat: null,
-      long: null,
+      location: null,
       restaurants: [],
       next20: false,
       gotLocation: false,
@@ -26,7 +27,6 @@ class Home extends Component {
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
-    this.showPosition = this.showPosition.bind(this);
     this.logout = this.logout.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.mainListing = this.mainListing.bind(this);
@@ -70,22 +70,30 @@ class Home extends Component {
     });
   }
 
-  getLocation() {
-    if (navigator.geolocation) {
-      console.log('getting users position');
-      navigator.geolocation.getCurrentPosition(this.showPosition);
-    } else {
-      console.log('Geolocation is not supported by this browser.');
-    }
-  }
+  // getLocation() {
+  //   if (navigator.geolocation) {
+  //     console.log('getting users position');
+  //     navigator.geolocation.getCurrentPosition(this.showPosition);
+  //   } else {
+  //     console.log('Geolocation is not supported by this browser.');
+  //   }
+  // }
 
-  showPosition(position) {
-    console.log('users location has been set', position);
-    this.setState({
-      lat: position.coords.latitude,
-      long: position.coords.longitude,
-      next20: false,
-    });
+  getLocation() {
+    axios.request({
+        method: 'get',
+        url: "http://ipinfo.io/json/?token=ca0bf2e0b0eeac",
+      })
+      .then(result => {
+        console.log('geolocation', result);
+        this.setState({
+          location: 'restaurants near ' + result.data.postal,
+          showLocation: true
+        })
+      })
+      .catch(err => {
+        console.log('error in geolocation')
+      });
   }
 
   buttonClick() {
@@ -95,6 +103,9 @@ class Home extends Component {
   }
 
   getRestaurants() {
+      this.state.apiData.splice(0, 20).map((el, i) => {
+         this.state.restaurants.push(el)
+      })
     console.log(this.state.apiData);
     this.state.apiData.splice(0, 20).map((el, i) => {
       this.state.restaurants.push(el);
@@ -129,8 +140,9 @@ class Home extends Component {
   }
 
   render() {
-    console.log('current data', this.state.restaurants);
-    console.log('current apiData', this.state.apiData);
+    console.log('current data', this.state.restaurants)
+    console.log('current apiData', this.state.apiData)
+    console.log('user loc', this.state.location)
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -139,6 +151,7 @@ class Home extends Component {
           <div className="container-fluid">
             <Header />
             <div className="jumbotron">
+              {this.state.showLocation ? <RestMap location={this.state.location} /> : 'no map'}
               <small>Don't see a restaurant you want to review? ADD!</small>
               <br />
               <button onClick={this.buttonClick}>ADD</button>
