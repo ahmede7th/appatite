@@ -14,7 +14,6 @@ import UserAccount from './Components/UserComponents/UserAccount';
 import UserReviews from './Components/UserComponents/UserReviews';
 import UserPage from './Components/UserComponents/UserPage';
 
-
 class App extends Component {
   render() {
     return (
@@ -37,6 +36,7 @@ class App extends Component {
             component={RestaurantNumFavorites}
           />
           <Route path="/user/account" component={UserAccount} />
+          <Route path="/user/page/:id" component={UserPage} />
           <Route path="/user/myreviews" component={UserReviews} />
           <Route path="/user/myfavorites" component={UserRestaurantFavorites} />
           <Route
