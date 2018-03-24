@@ -20,8 +20,8 @@ module.exports = {
                                           `, name);
   },
 
-  getUsernameFollowers(name) {
-    return followerDB.any(`SELECT username
+  getFriendUsernameFollowers(name) {
+    return followerDB.any(`SELECT user_id
                                             FROM followers
                                             WHERE follower_name = $1
                                             `, name);
@@ -31,6 +31,13 @@ module.exports = {
     return followerDB.any(`SELECT COUNT(follower_name)
                                           FROM followers
                                           WHERE user_id = $1`, user);
+  },
+
+  getUserUsernameFollowers(user) {
+    return followerDB.any(`SELECT follower_name
+                                          FROM followers
+                                          WHERE user_id = $1
+                                          `, user);
   },
 
   alreadyFollows(follower) {

@@ -46,16 +46,17 @@ class Home extends Component {
           apiData: restaurants.data.data,
         });
         axios
-        .get(`/api/user/all/${window.localStorage.getItem('username')}`)
-        .then(foundUsers => {
-          console.log('FOUND USERS--->', foundUsers.data.data);
-          this.setState({
-            users: foundUsers.data.data,
-            gotUsers: true,
+          .get(`/api/user/all/${window.localStorage.getItem('username')}`)
+          .then(foundUsers => {
+            console.log('FOUND USERS--->', foundUsers.data.data);
+            this.setState({
+              users: foundUsers.data.data,
+              gotUsers: true,
+            });
+          })
+          .catch(err => {
+            console.log('FAILED IN GETTING USERS--->', err);
           });
-        }).catch(err => {
-          console.log('FAILED IN GETTING USERS--->', err);
-        })
       })
       .catch(err => {
         console.log('nope :', err);
@@ -80,19 +81,20 @@ class Home extends Component {
   // }
 
   getLocation() {
-    axios.request({
+    axios
+      .request({
         method: 'get',
-        url: "http://ipinfo.io/json/?token=ca0bf2e0b0eeac",
+        url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac',
       })
       .then(result => {
         console.log('geolocation', result);
         this.setState({
           location: 'restaurants near ' + result.data.postal,
-          showLocation: true
-        })
+          showLocation: true,
+        });
       })
       .catch(err => {
-        console.log('error in geolocation')
+        console.log('error in geolocation');
       });
   }
 
@@ -103,9 +105,9 @@ class Home extends Component {
   }
 
   getRestaurants() {
-      this.state.apiData.splice(0, 20).map((el, i) => {
-         this.state.restaurants.push(el)
-      })
+    this.state.apiData.splice(0, 20).map((el, i) => {
+      this.state.restaurants.push(el);
+    });
     console.log(this.state.apiData);
     this.state.apiData.splice(0, 20).map((el, i) => {
       this.state.restaurants.push(el);
@@ -140,9 +142,9 @@ class Home extends Component {
   }
 
   render() {
-    console.log('current data', this.state.restaurants)
-    console.log('current apiData', this.state.apiData)
-    console.log('user loc', this.state.location)
+    console.log('current data', this.state.restaurants);
+    console.log('current apiData', this.state.apiData);
+    console.log('user loc', this.state.location);
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -151,14 +153,20 @@ class Home extends Component {
           <div className="container-fluid">
             <Header />
             <div className="jumbotron">
-              {this.state.showLocation ? <RestMap location={this.state.location} /> : 'no map'}
+              {this.state.showLocation ? (
+                <RestMap location={this.state.location} />
+              ) : (
+                'no map'
+              )}
               <small>Don't see a restaurant you want to review? ADD!</small>
               <br />
               <button onClick={this.buttonClick}>ADD</button>
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
               {this.state.gotUsers ? this.displayUsers() : ''}
-              {this.state.apiDataLoaded && !this.state.next20 ? this.mainListing() : 'failed to load'}
+              {this.state.apiDataLoaded && !this.state.next20
+                ? this.mainListing()
+                : 'failed to load'}
               {this.state.next20 ? this.mainListing() : ''}
               <button onClick={this.updateMain}>See More</button>
             </div>
