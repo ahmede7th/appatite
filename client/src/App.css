@@ -19,6 +19,12 @@
   color: navy;
   z-index: 15;
 }
+
+.header{
+  position: fixed;
+  width: 100%;
+}
+
 body {
   background-color: #cccccc;
   background: url("background.jpg") no-repeat center center fixed;
