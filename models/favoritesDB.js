@@ -29,7 +29,7 @@ module.exports = {
   },
 
   getUserRestaurantFavorites(user) {
-    return favoriteDB.any(`SELECT restaurant_name
+    return favoriteDB.any(`SELECT restaurant_name, restaurant_id
                                           FROM favorites
                                           WHERE user_id = $1
                                           `, user);

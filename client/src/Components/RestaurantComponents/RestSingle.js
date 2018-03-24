@@ -122,6 +122,7 @@ class RestSingle extends Component {
   }
 
   render() {
+    console.log('location apiData: ', this.state.apiData)
     return (
       <div className="restaurant-single">
         <Header />
