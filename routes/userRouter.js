@@ -4,12 +4,15 @@ const userController = require('../controllers/userController');
 
 userRouter
   .route('/')
-  .get(userController.getAllUsers)
   .post(userController.createUser);
 
 userRouter
   .route(`/:id`)
-  .get(userController.getOneUser)
+  .get(userController.getOneUser);
+
+userRouter
+  .route(`/all/:id`)
+  .get(userController.getAllUsers);
 
 userRouter
   .route(`/edit/:id`)

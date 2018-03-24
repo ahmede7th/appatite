@@ -15,22 +15,42 @@ class Home extends Component {
       logoutUser: false,
       lat: null,
       long: null,
+      followers: null,
+      numFollowers: null,
+      showFollowCount: false,
     };
     this.getLocation = this.getLocation.bind(this);
     this.showPosition = this.showPosition.bind(this);
     this.logout = this.logout.bind(this);
     this.follow = this.follow.bind(this);
+    this.displayFollowers = this.displayFollowers.bind(this);
+    this.displayFollowersCount = this.displayFollowersCount.bind(this);
   }
 
   componentDidMount() {
     axios
-      .get(`/api/follower/${this.props.match.params.id}`)
+      .get(`/api/follower/friend/${this.props.match.params.id}`)
       .then(followers => {
-        console.log('GETTING FOLLOWERS IN REACT WORKED ->', followers.data);
+        console.log('GETTING FOLLOWERS IN REACT WORKED ->', followers.data.data);
         this.setState({
           apiDataLoaded: true,
-          apiData: followers.data.data,
+          followers: followers.data.data,
         });
+        axios
+          .get(`/api/follower/friend/num/${this.props.match.params.id}`)
+          .then(totalFollowers => {
+            console.log(
+              'GETTING NUMBER OF FOLLOWERS IN REACT WORKED--->',
+              totalFollowers.data.data,
+            );
+            this.setState({
+              showFollowCount: true,
+              numFollowers: totalFollowers.data.data,
+            });
+          })
+          .catch(err => {
+            console.log('GETTING NUMBER OF FOLLOWERS IN REACT FAILED--->', err);
+          });
       })
       .catch(err => {
         console.log('GETTING FOLLOWERS IN REACT FAILED--->', err);
@@ -84,6 +104,25 @@ class Home extends Component {
       });
   }
 
+  displayFollowers() {
+    console.log(this.state.followers);
+    return this.state.followers.map(el => {
+      let showHome = el.user_id === window.localStorage.getItem('username');
+      return (
+        <div>{el.user_id === window.localStorage.getItem('username') ? <Link to={`/user/account`}><p>{el.user_id}</p></Link> : <Link to={`/user/page/${el.user_id}`}><p>{el.user_id}</p></Link>}</div>
+      );
+    });
+  }
+
+  displayFollowersCount() {
+    console.log(this.state.numFollowers);
+    return (
+      <div>
+        <p>User {this.props.match.params.id} has {this.state.numFollowers[0].count} follower!</p>
+      </div>
+    )
+  }
+
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
@@ -92,7 +131,8 @@ class Home extends Component {
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
-            {this.state.apiDataLoaded ? <p>Got followers!</p> : ''}
+            {this.state.showFollowCount ? this.displayFollowersCount() : ''}
+            {this.state.apiDataLoaded ? this.displayFollowers() : ''}
           </div>
           <button onClick={this.follow}>Follow?</button>
           <button onClick={this.logout}>Logout?</button>

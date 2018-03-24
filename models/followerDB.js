@@ -13,17 +13,31 @@ module.exports = {
                                             AND follower_name = $[follower_name]`, follower);
   },
 
-  getUserFollowers(name) {
+  getFriendCountFollowers(name) {
     return followerDB.any(`SELECT COUNT(user_id)
                                           FROM followers
                                           WHERE follower_name = $1
                                           `, name);
   },
 
+  getFriendUsernameFollowers(name) {
+    return followerDB.any(`SELECT user_id
+                                            FROM followers
+                                            WHERE follower_name = $1
+                                            `, name);
+  },
+
   getUserCountFollowers(user) {
     return followerDB.any(`SELECT COUNT(follower_name)
                                           FROM followers
                                           WHERE user_id = $1`, user);
+  },
+
+  getUserUsernameFollowers(user) {
+    return followerDB.any(`SELECT follower_name
+                                          FROM followers
+                                          WHERE user_id = $1
+                                          `, user);
   },
 
   alreadyFollows(follower) {

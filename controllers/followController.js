@@ -54,7 +54,7 @@ module.exports = {
       });
   },
 
-  getUserFollowers(req, res, next) {
+  getUserUsernameFollowers(req, res, next) {
     follower
       .getUserFollowers(req.params.id)
       .then(followers => {
@@ -67,5 +67,33 @@ module.exports = {
       .catch(err => {
         console.log('GOT THE FOLLOWERS FOR USER FAILED--->', err);
       });
+  },
+
+  getFriendUsernameFollowers(req, res, next) {
+    follower
+      .getFriendUsernameFollowers(req.params.id)
+      .then(followers => {
+        res.json({
+          message: 'ok',
+          data: followers,
+        });
+      })
+      .catch(err => {
+        console.log('GOT THE USERNAMES OF FOLLOWERS FAILED--->', err);
+      });
+  },
+
+  getFriendCountFollowers(req, res, next) {
+    follower
+    .getFriendCountFollowers(req.params.id)
+    .then(followers => {
+      res.json({
+        message: 'ok',
+        data: followers,
+      });
+    })
+    .catch(err => {
+      console.log('GOT THE USERNAMES OF FRIENDS FOLLOWERS FAILED--->', err);
+    });
   },
 };
