@@ -18,7 +18,7 @@ class Home extends Component {
       logoutUser: false,
       lat: null,
       long: null,
-      restaurants: null
+      restaurants: []
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -74,18 +74,14 @@ class Home extends Component {
   }
 
   getRestaurants() {
-    let rest20;
-    const rest = this.state.apiData.slice(0, 20).map((el) => {
-      rest20.push(el)
-      console.log('rest20')
-    })
-    
+      this.state.apiData.splice(0, 20).map((el, i) => {
+         this.state.restaurants.push(el)
+      })
   }
 
   mainListing() {
     this.getRestaurants()
     if (this.state.restaurants) {
-      console.log('restaurants to be displayed',this.state.retaurants);
       return this.state.restaurants.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
       });
@@ -93,8 +89,9 @@ class Home extends Component {
   }
 
   render() {
-    console.log('current 20 ', this.state.restaurants)
-    this.getLocation()
+    console.log('current data', this.state.restaurants)
+    console.log('current apiData', this.state.apiData)
+    // this.getLocation()
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -105,7 +102,7 @@ class Home extends Component {
             <small>Don't see a restaurant you want to review? ADD!</small><br/>
             <button onClick={this.buttonClick}>ADD</button>
             {this.state.show ? <RestCreate /> : ''}
-            {this.state.restaurants ? this.mainListing() : 'failed to load'}
+            {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
             <button onClick={this.getRestaurants}>See More</button>
           <button onClick={this.logout}>Logout?</button>
           <Footer />
