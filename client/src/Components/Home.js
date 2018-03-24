@@ -71,15 +71,6 @@ class Home extends Component {
     });
   }
 
-  // getLocation() {
-  //   if (navigator.geolocation) {
-  //     console.log('getting users position');
-  //     navigator.geolocation.getCurrentPosition(this.showPosition);
-  //   } else {
-  //     console.log('Geolocation is not supported by this browser.');
-  //   }
-  // }
-
   getLocation() {
     axios
       .request({
@@ -87,7 +78,6 @@ class Home extends Component {
         url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac',
       })
       .then(result => {
-        console.log('geolocation', result);
         this.setState({
           location: 'restaurants near ' + result.data.postal,
           showLocation: true,
@@ -142,16 +132,12 @@ class Home extends Component {
   }
 
   render() {
-    console.log('current data', this.state.restaurants);
-    console.log('current apiData', this.state.apiData);
-    console.log('user loc', this.state.location);
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
       return (
         <div className="home">
-          <div className="container-fluid">
-            <Header />
+            <Header logout={this.logout} />
             <div className="jumbotron">
               {this.state.showLocation ? (
                 <RestMap location={this.state.location} />
@@ -172,7 +158,6 @@ class Home extends Component {
             </div>
             <button onClick={this.logout}>Logout?</button>
             <Footer />
-          </div>
         </div>
       );
     }
