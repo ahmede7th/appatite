@@ -40,7 +40,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="welcome">
       <Header />
         <h1>USER FAVORITES!</h1>
         {this.userRestaurantFavorites()}

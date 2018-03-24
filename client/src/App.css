@@ -3,17 +3,22 @@
   font-style: normal;
   font-variant: normal;
   text-shadow: 2px 2px 4px grey;
-  position: absolute;
+  position: center;
   font-family: "Bubblegum Sans";
   color: white;
   z-index: 15;
 }
 
-
-
-
-
-
+.home{
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  text-shadow: 2px 2px 4px grey;
+  position: center;
+  font-family: "Bubblegum Sans";
+  color: navy;
+  z-index: 15;
+}
 body {
   background-color: #cccccc;
   background: url("background.jpg") no-repeat center center fixed;

@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter} from 'react-router-dom';
 import SearchBar from '../SearchBar'
-import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {Collapse, Button, CardBody, Card} from 'reactstrap';
+
 
 const Header = () => {
   return (
@@ -31,7 +32,7 @@ const Header = () => {
 
       </nav>
 
-    <SearchBar />
+    {/* <SearchBar /> */}
 </div>
 
   );

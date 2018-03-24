@@ -4,6 +4,8 @@ import { Redirect, Link } from 'react-router-dom';
 import Header from '../subComponents/Header';
 import RestMap from './RestMap';
 import Review from '../subComponents/Review';
+import {Button} from 'reactstrap';
+
 
 class RestSingle extends Component {
   constructor() {
@@ -123,13 +125,13 @@ class RestSingle extends Component {
 
   render() {
     return (
-      <div className="restaurant-single">
+      <div className="welcome">
         <Header />
         <br />
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
-        <button>
+        <Button color="primary" size="sm" block style={{position:'center', marginBottom: '1rem'}}>
           <Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link>
-        </button>
+        </Button>
         <button onClick={this.deleteRestaurant}>Delete posting</button>
         <RestMap />
         <p>

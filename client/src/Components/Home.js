@@ -87,6 +87,7 @@ class Home extends Component {
       return <Welcome />;
     } else {
       return (
+        <div className="home">
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
@@ -99,8 +100,6 @@ class Home extends Component {
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
               {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-
-
             </div>
             <button onClick={this.logout}>Logout?</button>
             <Footer />
@@ -109,6 +108,7 @@ class Home extends Component {
           <Footer />
         </div>
       </div>
+    </div>
       );
     }
   }

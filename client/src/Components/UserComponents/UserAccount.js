@@ -3,6 +3,7 @@ import axios from 'axios';
 import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
+import {Button} from 'reactstrap';
 
 class UserAccount extends Component {
 	constructor() {
@@ -100,13 +101,13 @@ class UserAccount extends Component {
 		    return <Welcome />
 		    } else {
 		return (
-			<div>
+			<div className="welcome">
 				<Header />
 				<h1>user account</h1>
 				{this.state.apiDataLoaded ? this.renderUser() : "loading user"}
-				<button onClick={this.buttonClick}>Edit</button>
-				<button onClick={this.deleteUser}>Delete</button>
-				{this.state.click ? 
+				<Button color="primary" onClick={this.buttonClick}>Edit</Button>
+				<Button color="primary" onClick={this.deleteUser}>Delete</Button>
+				{this.state.click ?
 					<form onSubmit={this.submitForm}>
 						<input type="text" name="fname" onChange={this.inputChange} value={this.state.fname} placeholder={this.state.apiData.fname} />
 						<input type="text" name="lname" onChange={this.inputChange} value={this.state.lname} placeholder={this.state.apiData.lname} />
@@ -116,7 +117,7 @@ class UserAccount extends Component {
 			</div>
 		)
 		}
-	}	
+	}
 }
 
 export default UserAccount;
