@@ -7,19 +7,22 @@ class Home extends Component {
     this.state = {
       apiDataLoaded: false,
       apiData: null,
+      user: null,
     };
-    this.restaurantUserFavorites = this.restaurantUserFavorites.bind(this);
+    this.userRestaurantFavorites = this.userRestaurantFavorites.bind(this);
+    this.renderUser = this.renderUser.bind(this);
   }
 
   componentDidMount() {
-    console.log('inside component did mount restaurant user favorites', this.props.match.params.id);
+    console.log('inside component did mount restaurant user favorites', this.props.user);
     return axios
-      .get(`/api/favorites/restaurant/users/${this.props.match.params.id}`)
+      .get(`/api/favorites/user/restaurants/${this.props.user}`)
       .then(favorites => {
         console.log('USER FAVORITES ->', favorites.data.data);
         this.setState({
           apiDataLoaded: true,
           apiData: favorites.data.data,
+          user: this.props.userPage,
         });
       })
       .catch(err => {
@@ -27,20 +30,27 @@ class Home extends Component {
       });
   }
 
-  restaurantUserFavorites() {
-    console.log(this.state.apiDataLoaded);
-    if (this.state.apiDataLoaded) {
-      return this.state.apiData.map((el, i) => {
-        return <p>{el.username}</p>;
-      });
+  userRestaurantFavorites() {
+    console.log(this.state.apiData);
+    return this.state.apiData.map((el, i) => {
+      return <p>{el.restaurant_name}</p>;
+    });
+  }
+
+  renderUser() {
+    console.log(this.state.apiData);
+    if (this.state.apiData.length > 0) {
+      return <h1>RESTAURANT USER FAVORITES for {this.state.user}!</h1>;
+    } else {
+      return <h1>{this.state.user} hasn't favorited any restaurants yet!</h1>;
     }
   }
 
   render() {
     return (
       <div className="welcome">
-        <h1>RESTAURANT USER FAVORITES for {this.props.match.params.id}!</h1>
-        {this.restaurantUserFavorites()}
+        {this.state.apiDataLoaded ? this.renderUser() : '' }
+        {this.state.apiDataLoaded ? this.userRestaurantFavorites() : ''}
       </div>
     );
   }

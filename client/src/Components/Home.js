@@ -24,6 +24,7 @@ class Home extends Component {
       gotLocation: false,
       users: null,
       gotUsers: false,
+      count: 0,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -94,18 +95,14 @@ class Home extends Component {
     });
   }
 
-  getRestaurants() {
-    this.state.apiData.splice(0, 20).map((el, i) => {
-      this.state.restaurants.push(el);
-    });
-    console.log(this.state.apiData);
-    this.state.apiData.splice(0, 20).map((el, i) => {
+  getRestaurants(startIndex) {
+    this.state.apiData.splice(startIndex, 5).map((el, i) => {
       this.state.restaurants.push(el);
     });
   }
 
-  mainListing() {
-    this.getRestaurants();
+  mainListing(index) {
+    this.getRestaurants(index);
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
         return <Restaurants restaurants={el} key={el.id} />;
@@ -114,8 +111,10 @@ class Home extends Component {
   }
 
   updateMain() {
+    const newCount = this.state.count;
     this.setState({
       next20: true,
+      count: newCount + 1,
     });
   }
 
@@ -152,7 +151,7 @@ class Home extends Component {
                     {this.state.apiDataLoaded && !this.state.next20
                       ? this.mainListing()
                       : 'failed to load'}
-                    {this.state.next20 ? this.mainListing() : ''}
+                    {this.state.next20 ? this.mainListing(`${this.state.count}`) : ''}
                   </div>
                   <div className="col-sm" align="center">
                     <p className="map text-center">Restaurants near you</p>
@@ -163,7 +162,6 @@ class Home extends Component {
                       )}
                   </div>
                 </div>
-              
               <button onClick={this.updateMain}>See More</button>
             </div>
             <button onClick={this.logout}>Logout?</button>

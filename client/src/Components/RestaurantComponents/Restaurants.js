@@ -24,6 +24,5 @@ const Restaurants = props => {
               <Link to={`/main/${props.restaurants.id}`}>Click for more details</Link>
             </p>
           </div>);
-};
 
 export default Restaurants;

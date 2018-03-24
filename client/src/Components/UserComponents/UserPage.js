@@ -4,6 +4,7 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
+import RestaurantUserFavorites from '../RestaurantComponents/RestaurantUserFavorites';
 
 class Home extends Component {
   constructor() {
@@ -116,9 +117,14 @@ class Home extends Component {
 
   displayFollowersCount() {
     console.log(this.state.numFollowers);
+    let insertString = '';
+    if (this.state.numFollowers[0].count > 1) {
+      insertString = 's';
+    }
+
     return (
       <div>
-        <p>User {this.props.match.params.id} has {this.state.numFollowers[0].count} follower!</p>
+        <p>User {this.props.match.params.id} has {this.state.numFollowers[0].count} follower{insertString}!</p>
       </div>
     )
   }
@@ -131,9 +137,11 @@ class Home extends Component {
         <div className="container-fluid">
           <Header />
           <div className="jumbotron">
-            {this.state.showFollowCount ? this.displayFollowersCount() : ''}
-            {this.state.apiDataLoaded ? this.displayFollowers() : ''}
+            <h1>Welcome to {this.props.match.params.id}'s page!</h1>
           </div>
+          {this.state.showFollowCount ? this.displayFollowersCount() : ''}
+          {this.state.apiDataLoaded ? this.displayFollowers() : ''}
+          <RestaurantUserFavorites userPage={this.props.match.params.id} user={window.localStorage.getItem('id')}/>
           <button onClick={this.follow}>Follow?</button>
           <button onClick={this.logout}>Logout?</button>
           {/* <Footer /> */}
