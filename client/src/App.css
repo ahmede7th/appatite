@@ -1,4 +1,4 @@
-.welcome {
+/*.welcome {
   font-size: 20px;
   font-style: normal;
   font-variant: normal;
@@ -7,12 +7,12 @@
   font-family: "Bubblegum Sans";
   color: white;
   z-index: 15;
- }
+ }*/
 
 /* input[type=text]:focus {
     width: 100%; */
 
-body {
+/*body {
   text-align: center;
   background-color: #cccccc;
   background-image: url("background.jpg");
@@ -20,3 +20,5 @@ body {
   background-size: 100%;
   background: cover;
  }
+
+*/

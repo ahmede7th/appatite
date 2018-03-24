@@ -12,6 +12,7 @@ class RestSingle extends Component {
       apiDataLoaded: false,
       apiData: null,
       fireRedirect: false,
+      favorite: true
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
@@ -62,9 +63,6 @@ class RestSingle extends Component {
       )
       .then(favorite => {
         console.console.log('GOT FAVORITE SINGLE PAGE--->', favorite);
-        this.setState({
-          favorite: true,
-        });
       })
       .catch(err => {
         console.log('ERROR IN FAVORITE SINGLE PAGE--->', err);
@@ -72,6 +70,7 @@ class RestSingle extends Component {
   }
 
   render() {
+    console.log('location apiData: ', this.state.apiData)
     return (
 			<div className="restaurant-single">
 				<Header />
@@ -79,9 +78,10 @@ class RestSingle extends Component {
 					<h2>{this.state.apiDataLoaded ? this.state.apiData.name : 'failed to load'}</h2>
 					<button><Link to={`/main/${this.props.match.params.id}/edit`}>Edit</Link></button>
 					<button onClick={this.deleteRestaurant}>Delete posting</button>
-					<RestMap />
+					{this.state.apiDataLoaded ? <RestMap location={this.state.apiData.loc} />: 'no map'}
 					<Review name={this.props.match.params.id} />
-          <button onClick={this.goToFavorite}>Favorite This Baby!</button>
+          {this.state.favorite ? <button onClick={this.goToFavorite}>Fav This Restaurant</button>
+            : <button onClick={this.goToFavorite}>UnFav this restaurant</button> }
           {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );
