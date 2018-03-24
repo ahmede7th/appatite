@@ -93,7 +93,7 @@ class UserAccount extends Component {
     return (
       <div>
         <UserNumFavorites />
-        <UserRestaurantFavorites />
+        <UserRestaurantFavorites user={this.props.match.params.id}/>
         <p>
           username: {user.username}
           <br />

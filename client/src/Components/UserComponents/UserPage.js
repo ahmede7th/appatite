@@ -4,6 +4,7 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
+import RestaurantUserFavorites from '../RestaurantComponents/RestaurantUserFavorites';
 
 class Home extends Component {
   constructor() {
@@ -140,6 +141,7 @@ class Home extends Component {
           </div>
           {this.state.showFollowCount ? this.displayFollowersCount() : ''}
           {this.state.apiDataLoaded ? this.displayFollowers() : ''}
+          <RestaurantUserFavorites userPage={this.props.match.params.id} user={window.localStorage.getItem('id')}/>
           <button onClick={this.follow}>Follow?</button>
           <button onClick={this.logout}>Logout?</button>
           {/* <Footer /> */}
