@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter} from 'react-router-dom';
-import SearchBar from '../SearchBar'
+import { Redirect } from 'react-router-dom';
+import TokenService from '../../Auth/Services/TokenService';
+import SearchBar from '../SearchBar';
 import { Link } from 'react-router-dom';
 import {Collapse, Button, CardBody, Card} from 'reactstrap';
 
-
-const Header = () => {
+const Header = (props) => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,11 +29,11 @@ const Header = () => {
                 My Account
               </Link>
             </li>
+            <li className="nav-item">
+              <button onClick={props.logout}>LogOut</button>
+            </li>
           </ul>
-
       </nav>
-
-    {/* <SearchBar /> */}
 </div>
 
   );
