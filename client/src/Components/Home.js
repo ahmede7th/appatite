@@ -21,6 +21,8 @@ class Home extends Component {
       restaurants: [],
       next20: false,
       gotLocation: false,
+      users: null,
+      gotUsers: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -30,6 +32,7 @@ class Home extends Component {
     this.mainListing = this.mainListing.bind(this);
     this.updateMain = this.updateMain.bind(this);
     this.getLocation = this.getLocation.bind(this);
+    this.displayUsers = this.displayUsers.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +45,17 @@ class Home extends Component {
           apiDataLoaded: true,
           apiData: restaurants.data.data,
         });
+        axios
+        .get(`/api/user/all/${window.localStorage.getItem('username')}`)
+        .then(foundUsers => {
+          console.log('FOUND USERS--->', foundUsers.data.data);
+          this.setState({
+            users: foundUsers.data.data,
+            gotUsers: true,
+          });
+        }).catch(err => {
+          console.log('FAILED IN GETTING USERS--->', err);
+        })
       })
       .catch(err => {
         console.log('nope :', err);
@@ -102,6 +116,18 @@ class Home extends Component {
     });
   }
 
+  displayUsers() {
+    if (this.state.users) {
+      return this.state.users.map(el => {
+        return (
+          <Link to={`/user/page/${el.username}`}>
+            <p>{el.username}</p>
+          </Link>
+        );
+      });
+    }
+  }
+
   render() {
     console.log('current data', this.state.restaurants);
     console.log('current apiData', this.state.apiData);
@@ -118,6 +144,7 @@ class Home extends Component {
               <button onClick={this.buttonClick}>ADD</button>
               <button onClick={this.buttonClick}>Biz owner</button>
               {this.state.show ? <RestCreate /> : ''}
+              {this.state.gotUsers ? this.displayUsers() : ''}
               {this.state.apiDataLoaded && !this.state.next20 ? this.mainListing() : 'failed to load'}
               {this.state.next20 ? this.mainListing() : ''}
               <button onClick={this.updateMain}>See More</button>

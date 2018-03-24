@@ -17,18 +17,14 @@ module.exports = {
                                         user);
   },
 
-  getAllUsers() {
-    return userDB.any(`SELECT * FROM users`);
+  getAllUsers(username) {
+    return userDB.any(`SELECT *
+                                            FROM users
+                                            WHERE username != $1`, username);
   },
 
-  // getAllUsers(username) {
-  //   return userDB.any(`SELECT *
-  //                                           FROM users
-  //                                           WHERE username != $[username]`, username);
-  // },
-
   update(user) {
-    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname], 
+    return userDB.one(`UPDATE users SET fname = $[fname], lname = $[lname],
                                           about_me = $[about_me]
                                           WHERE username=$[username] RETURNING *`, user);
   },

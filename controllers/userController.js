@@ -3,7 +3,11 @@ const userDB = require(`../models/userDB`);
 
 module.exports = {
   getAllUsers(req, res, next) {
-    console.log(`INSIDE GET ALL USERS---->`, req.params);
+    console.log(`INSIDE GET ALL USERS---->`, req.params.id);
+    if (!req.params.id) {
+      req.params.id = 'null';
+    }
+
     userDB
       .getAllUsers(req.params.id)
       .then(users => {
