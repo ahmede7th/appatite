@@ -31,14 +31,13 @@ class AllFavorites extends Component {
 
   userNumFavorites() {
     if (this.state.apiDataLoaded) {
-      return <p>{this.state.apiData[0].count}</p>;
+      return <p>Number of favorites for {window.localStorage.getItem('username')}: {this.state.apiData[0].count}</p>;
     }
   }
 
   render() {
     return (
       <div>
-        <h1>NUMBER OF USER FAVORITES!</h1>
         {this.userNumFavorites()}
       </div>
     );

@@ -38,7 +38,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="welcome">
         <h1>RESTAURANT USER FAVORITES for {this.props.match.params.id}!</h1>
         {this.restaurantUserFavorites()}
       </div>

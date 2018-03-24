@@ -81,14 +81,6 @@ class Home extends Component {
       });
   }
 
-  // showPosition(position) {
-  //   console.log('users location has been set', position);
-  //   this.setState({
-  //     showLocation: true,
-  //     location: 'restaurants near ' + position.coords.latitude + ' ' + position.coords.longitude,
-  //   });
-  // }
-
   buttonClick() {
     this.setState({
       show: !this.state.show,
@@ -128,17 +120,20 @@ class Home extends Component {
       return <Welcome />;
     } else {
       return (
-        <div className="container-fluid">
-          <Header />
-          <div className="jumbotron">
-            {this.state.showLocation ? <RestMap location={this.state.location} /> : 'no map'}
-            <small>Don't see a restaurant you want to review? ADD!</small>
-            <br />
-            <button onClick={this.buttonClick}>ADD</button>
-            {this.state.show ? <RestCreate /> : ''}
-            {this.state.apiDataLoaded ? this.mainListing() : 'failed to load'}
-            {this.state.next20 ? this.mainListing() : ''}
-            <button onClick={this.updateMain}>See More</button>
+        <div className="home">
+          <div className="container-fluid">
+            <Header />
+            <div className="jumbotron">
+              {this.state.showLocation ? <RestMap location={this.state.location} /> : 'no map'}
+              <small>Don't see a restaurant you want to review? ADD!</small>
+              <br />
+              <button onClick={this.buttonClick}>ADD</button>
+              <button onClick={this.buttonClick}>Biz owner</button>
+              {this.state.show ? <RestCreate /> : ''}
+              {this.state.apiDataLoaded && !this.state.next20 ? this.mainListing() : 'failed to load'}
+              {this.state.next20 ? this.mainListing() : ''}
+              <button onClick={this.updateMain}>See More</button>
+            </div>
             <button onClick={this.logout}>Logout?</button>
             <Footer />
           </div>
