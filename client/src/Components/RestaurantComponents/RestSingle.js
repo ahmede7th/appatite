@@ -119,7 +119,6 @@ class RestSingle extends Component {
   }
 
   render() {
-    console.log('location apiData: ', this.state.apiData)
     return (
       <div className="restaurant-single">
         <Header />
@@ -136,7 +135,7 @@ class RestSingle extends Component {
         </p>
         <p>
           Number of favorites:{' '}
-          {this.state.favoriteNumber ? this.state.favoriteNumber : ''}
+          {this.state.favoriteNumber > 0 ? this.state.favoriteNumber : ''}
         </p>
         <p>
           Users who Favorite:{this.state.favoriteUsers
