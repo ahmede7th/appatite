@@ -12,7 +12,7 @@ const Restaurants = props => {
     <p>
       Rating:
       <small>{props.restaurants.rating}</small>
-      <ReactStars count={props.restaurants.rating} onChange={ratingChanged} size={20} edit={false} color1={'#ffd700'} position={'right'}/>
+      <div style={{position:'center'}}><ReactStars count={props.restaurants.rating} onChange={ratingChanged} size={20} edit={false} color1={'#ffd700'} position={'center'}/></div>
     </p>
     <p>
       Cuisine:
