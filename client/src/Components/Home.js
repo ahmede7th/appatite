@@ -20,6 +20,7 @@ class Home extends Component {
       long: null,
       restaurants: [],
       next20: false,
+      gotLocation: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -28,12 +29,14 @@ class Home extends Component {
     this.getRestaurants = this.getRestaurants.bind(this);
     this.mainListing = this.mainListing.bind(this);
     this.updateMain = this.updateMain.bind(this);
+    this.getLocation = this.getLocation.bind(this);
   }
 
   componentDidMount() {
     axios
       .get(`/api/restaurant`)
       .then(restaurants => {
+        this.getLocation();
         console.log('Restaurants ->', restaurants);
         this.setState({
           apiDataLoaded: true,
@@ -101,7 +104,6 @@ class Home extends Component {
   render() {
     console.log('current data', this.state.restaurants);
     console.log('current apiData', this.state.apiData);
-    // this.getLocation()
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
