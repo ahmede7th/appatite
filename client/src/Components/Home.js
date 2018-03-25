@@ -29,6 +29,7 @@ class Home extends Component {
       map: true,
       reviews: false,
       restaurant: false,
+      update: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -41,6 +42,7 @@ class Home extends Component {
     this.renderMap = this.renderMap.bind(this);
     this.renderRestaurant = this.renderRestaurant.bind(this);
     this.showOne = this.showOne.bind(this);
+    this.updateThisModule = this.updateThisModule.bind(this);
   }
 
   componentDidMount() {
@@ -102,6 +104,19 @@ class Home extends Component {
     });
   }
 
+  updateThisModule() {
+    this.setState({
+      update: !this.state.update,
+    });
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps);
+  //   this.setState({
+  //     map: false,
+  //   });
+  // }
+
   getRestaurants(startIndex) {
     this.state.apiData.splice(startIndex, 5).map((el, i) => {
       this.state.restaurants.push(el);
@@ -115,7 +130,9 @@ class Home extends Component {
         return (
           <div>
             <Restaurants restaurants={el} key={el.id} />
-            <button onClick={this.showOne} value = {el.id}>Click for more details</button>
+            <button onClick={this.showOne} value={el.id}>
+              Click for more details
+            </button>
           </div>
         );
       });
@@ -132,7 +149,10 @@ class Home extends Component {
   renderRestaurant() {
     console.log('really working...', this.state.restaurant);
     return (
-      <RestSingle id={this.state.restaurant} />
+      <RestSingle
+        id={this.state.restaurant}
+        updateParent={this.updateThisModule}
+      />
     );
   }
 
@@ -167,9 +187,7 @@ class Home extends Component {
     }
   }
 
-  renderReviews() {
-
-  }
+  renderReviews() {}
 
   render() {
     if (this.state.logoutUser) {
@@ -177,33 +195,35 @@ class Home extends Component {
     } else {
       return (
         <div className="home">
-            <Header logout={this.logout} />
-            <div className="jumbotron">
-              <small>Don't see a restaurant you want to review? ADD!</small>
-              <br />
-              <button onClick={this.buttonClick}>ADD</button>
-              <button onClick={this.buttonClick}>Biz owner</button>
+          <Header logout={this.logout} />
+          <div className="jumbotron">
+            <small>Don't see a restaurant you want to review? ADD!</small>
+            <br />
+            <button onClick={this.buttonClick}>ADD</button>
+            <button onClick={this.buttonClick}>Biz owner</button>
 
-              {this.state.show ? <RestCreate /> : ''}
-              {this.state.gotUsers ? this.displayUsers() : ''}
+            {this.state.show ? <RestCreate /> : ''}
+            {this.state.gotUsers ? this.displayUsers() : ''}
 
-                <div className ="row">
-                  <div className ="col-sm">
-                    {this.state.apiDataLoaded && !this.state.next20
-                      ? this.mainListing()
-                      : ''}
-                    {this.state.next20 ? this.mainListing(`${this.state.count}`) : ''}
-                  </div>
-                  <div className="col-sm" align="center">
-                    {this.state.map && !this.state.reviews && !this.state.restaurant ? this.renderMap() : ''}
-                    {this.state.reviews ? this.renderReviews() : ''}
-                    {this.state.restaurant ? this.renderRestaurant() : ''}
-                  </div>
-                </div>
-              <button onClick={this.updateMain}>See More</button>
+            <div className="row">
+              <div className="col-sm">
+                {this.state.apiDataLoaded && !this.state.next20
+                  ? this.mainListing()
+                  : ''}
+                {this.state.next20
+                  ? this.mainListing(`${this.state.count}`)
+                  : ''}
+              </div>
+              <div className="col-sm" align="center">
+                {this.state.map ? this.renderMap() : ''}
+                {this.state.reviews ? this.renderReviews() : ''}
+                {this.state.restaurant ? this.renderRestaurant() : ''}
+              </div>
             </div>
-            <button onClick={this.logout}>Logout?</button>
-            <Footer />
+            <button onClick={this.updateMain}>See More</button>
+          </div>
+          <button onClick={this.logout}>Logout?</button>
+          <Footer />
         </div>
       );
     }
