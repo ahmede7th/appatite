@@ -42,7 +42,6 @@ class Home extends Component {
     this.renderMap = this.renderMap.bind(this);
     this.renderRestaurant = this.renderRestaurant.bind(this);
     this.showOne = this.showOne.bind(this);
-    this.updateThisModule = this.updateThisModule.bind(this);
   }
 
   componentDidMount() {
@@ -103,19 +102,6 @@ class Home extends Component {
       show: !this.state.show,
     });
   }
-
-  updateThisModule() {
-    this.setState({
-      update: !this.state.update,
-    });
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps);
-  //   this.setState({
-  //     map: false,
-  //   });
-  // }
 
   getRestaurants(startIndex) {
     this.state.apiData.splice(startIndex, 5).map((el, i) => {
