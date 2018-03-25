@@ -11,7 +11,7 @@ import RestMap from '../Components/RestaurantComponents/RestMap';
 import RestSingle from '../Components/RestaurantComponents/RestSingle';
 
 class Home extends Component {
-  constructor() {
+constructor() {
     super();
     this.state = {
       apiDataLoaded: false,
@@ -114,7 +114,7 @@ class Home extends Component {
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
         return (
-          <div>
+          <div key={i}>
             <Restaurants restaurants={el} key={el.id} />
             <button onClick={this.showOne} value={el.id}>
               Click for more details
@@ -129,6 +129,7 @@ class Home extends Component {
     console.log('working...', e.target.value);
     this.setState({
       restaurant: e.target.value,
+      map: false,
     });
   }
 
@@ -144,8 +145,15 @@ class Home extends Component {
 
   updateMain() {
     const newCount = this.state.count;
+    let iter;
+    if (this.state.next20) {
+      iter = 1;
+    } else {
+      iter = -1;
+    }
+
     this.setState({
-      next20: true,
+      next20: !this.state.next20,
       count: newCount + 1,
     });
   }
@@ -154,7 +162,7 @@ class Home extends Component {
     if (this.state.users) {
       return this.state.users.map(el => {
         return (
-          <Link to={`/user/page/${el.username}`}>
+          <Link key={el.id} to={`/user/page/${el.username}`}>
             <p>{el.username}</p>
           </Link>
         );
