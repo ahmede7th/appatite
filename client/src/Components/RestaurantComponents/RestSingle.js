@@ -123,11 +123,13 @@ class RestSingle extends Component {
   renderFavoriteUsers() {
     let linkRoute;
     return this.state.favoriteUsers.map((el, id) => {
+      console.log('HELP', el);
       if (el.username === window.localStorage.getItem('username')) {
         linkRoute = `/user/account`;
       } else {
-        linkRoute  = `/user/page/${el.username}`
+        linkRoute  = `/user/page/${el.username}`;
       }
+
       return (
         <Link key={el.id} to={linkRoute}>
           <p>{el.username}</p>
@@ -158,13 +160,11 @@ class RestSingle extends Component {
           {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars
         </p>
         <p>
-          Number of favorites:{' '}
-          {this.state.favoriteNumber > 0 ? this.state.favoriteNumber : ''}
+          {this.state.favoriteNumber > 0 ? `Number of favorites: ${this.state.favoriteNumber}` : ''}
         </p>
         <p>
-          Users who Favorite:{this.state.favoriteUsers
-            ? this.renderFavoriteUsers()
-            : ''}
+          {this.state.favoriteUsers ? `Users who Favorite:` : ''}
+          {this.state.favoriteUsers ? this.renderFavoriteUsers() : ''}
         </p>
         {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
         <Button color="primary" onClick={this.goToFavorite}>

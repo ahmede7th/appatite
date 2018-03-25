@@ -144,13 +144,6 @@ constructor() {
 
   updateMain() {
     const newCount = this.state.count;
-    let iter;
-    if (this.state.next20) {
-      iter = 1;
-    } else {
-      iter = -1;
-    }
-
     this.setState({
       next20: !this.state.next20,
       count: newCount + 1,
