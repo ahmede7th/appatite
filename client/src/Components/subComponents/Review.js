@@ -25,6 +25,7 @@ class Review extends Component {
 
   componentDidMount() {
     console.log('CURRENT USER--->', window.localStorage.getItem('username'));
+    console.log(this.props.name);
     axios
       .get(`/api/review/${this.props.name}`)
       .then(review => {

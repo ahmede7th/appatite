@@ -31,7 +31,7 @@ class RestSingle extends Component {
         this.setState({
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
-          id: this.props.id
+          id: restaurant.data.data[0].id,
         });
         axios
           .get(`/api/favorites/restaurant/num/${this.state.id}`)
@@ -145,7 +145,7 @@ class RestSingle extends Component {
             ? this.renderFavoriteUsers()
             : ''}
         </p>
-        <Review name={this.state.id} />
+        {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
         <Button color="primary" onClick={this.goToFavorite}>
           {this.state.favorite
             ? 'Unfavorite this baby!'

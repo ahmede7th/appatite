@@ -129,6 +129,13 @@ class Home extends Component {
     });
   }
 
+  renderRestaurant() {
+    console.log('really working...', this.state.restaurant);
+    return (
+      <RestSingle id={this.state.restaurant} />
+    );
+  }
+
   updateMain() {
     const newCount = this.state.count;
     this.setState({
@@ -162,13 +169,6 @@ class Home extends Component {
 
   renderReviews() {
 
-  }
-
-  renderRestaurant() {
-    console.log('really working...');
-    return (
-      <RestSingle id={this.state.restaurant} />
-    );
   }
 
   render() {
