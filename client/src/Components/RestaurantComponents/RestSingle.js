@@ -17,10 +17,12 @@ class RestSingle extends Component {
       favoriteNumber: null,
       favoriteUsers: null,
       id: null,
+      owner: false,
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
     this.renderFavoriteUsers = this.renderFavoriteUsers.bind(this);
+    this.renderOwner = this.renderOwner.bind(this);
   }
 
   componentWillReceiveProps(nextprops) {
@@ -34,6 +36,13 @@ class RestSingle extends Component {
     return axios
       .get(`/api/restaurant/${getId}`)
       .then(restaurant => {
+        console.log(window.localStorage.getItem('username'), restaurant.data.data[0].creator);
+        if (window.localStorage.getItem('username') === restaurant.data.data[0].creator) {
+          this.setState({
+            owner: true,
+          });
+        }
+
         this.setState({
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
@@ -138,18 +147,30 @@ class RestSingle extends Component {
     });
   }
 
+  renderOwner() {
+    if (this.state.owner) {
+      return (
+        <div>
+          <Button color="primary">
+            <Link to={`/main/${this.state.id}/edit`} className="welcome">
+              Edit
+            </Link>
+          </Button>
+          <Button color="primary" onClick={this.deleteRestaurant}>
+            Delete posting
+          </Button>
+        </div>
+      );
+    } else {
+      return '';
+    }
+  }
+
   render() {
     return (
       <div className="welcome">
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
-        <Button color="primary">
-          <Link to={`/main/${this.state.id}/edit`} className="welcome">
-            Edit
-          </Link>
-        </Button>
-        <Button color="primary" onClick={this.deleteRestaurant}>
-          Delete posting
-        </Button>
+        {this.state.apiDataLoaded ? this.renderOwner() : ''}
         {this.state.apiDataLoaded ? (
           <RestMap location={this.state.apiData.loc} />
         ) : (

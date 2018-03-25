@@ -2,9 +2,9 @@ const restaurantDB = require('../config/connection');
 
 module.exports = {
   save(restaurant) {
-    return restaurantDB.one(`INSERT INTO restaurants(name, rating, cuisine, img_src, loc)
+    return restaurantDB.one(`INSERT INTO restaurants(name, rating, cuisine, creator, img_src, loc)
                                               VALUES($[name], $[rating],
-                                              $[cuisine], $[img_src], $[loc])
+                                              $[cuisine], $[creator], $[img_src], $[loc])
                                               RETURNING *`, restaurant);
   },
 

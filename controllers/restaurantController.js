@@ -7,7 +7,6 @@ module.exports = {
     restaurantDB
     .getAllRestaurants()
     .then(restaurants => {
-      console.log('GET ALL RESTAURANTS WORKED---->', restaurants);
       res.json({
         message: 'ok',
         data: restaurants,
@@ -40,6 +39,7 @@ module.exports = {
       name: req.body.name,
       rating: req.body.rating,
       cuisine: req.body.cuisine,
+      creator: req.body.creator,
       img_src: 0,
       loc: 0,
     })

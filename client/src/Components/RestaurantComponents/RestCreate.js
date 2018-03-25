@@ -10,6 +10,7 @@ class RestCreate extends Component {
       cuisine: '',
       img_src: '',
       loc: '',
+      creator: '',
       fireRedirect: false,
     };
     this.inputChange = this.inputChange.bind(this);
@@ -33,6 +34,7 @@ class RestCreate extends Component {
         name: this.state.name,
         cuisine: this.state.cuisine,
         img_src: this.state.img_src,
+        creator: window.localStorage.getItem('username'),
         loc: this.state.loc,
       },
     })

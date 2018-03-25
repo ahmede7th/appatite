@@ -26,6 +26,7 @@ CREATE TABLE restaurants (
   cuisine VARCHAR(255),
   img_src VARCHAR(255),
   loc VARCHAR(255),
+  creator VARCHAR(255) DEFAULT 'yelp',
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
