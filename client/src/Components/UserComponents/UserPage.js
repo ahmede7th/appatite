@@ -5,6 +5,7 @@ import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
 import RestaurantUserFavorites from '../RestaurantComponents/RestaurantUserFavorites';
+import { Button } from 'reactstrap';
 
 class Home extends Component {
   constructor() {
@@ -19,6 +20,7 @@ class Home extends Component {
       followers: null,
       numFollowers: null,
       showFollowCount: false,
+      follower: false,
     };
     this.getLocation = this.getLocation.bind(this);
     this.showPosition = this.showPosition.bind(this);
@@ -33,10 +35,26 @@ class Home extends Component {
       .get(`/api/follower/friend/${this.props.match.params.id}`)
       .then(followers => {
         console.log('GETTING FOLLOWERS IN REACT WORKED ->', followers.data.data);
+        const newFollower = followers.data.data.filter(function (follower) {
+          return (
+            follower.username === window.localStorage.getItem('username')
+          );
+        });
+
+        console.log('HELP', newFollower);
+        let changeFollow;
+        if (newFollower) {
+          changeFollow = true;
+        } else {
+          changeFollow = false;
+        }
+
         this.setState({
           apiDataLoaded: true,
           followers: followers.data.data,
+          follower: changeFollow,
         });
+
         axios
           .get(`/api/follower/friend/num/${this.props.match.params.id}`)
           .then(totalFollowers => {
@@ -44,6 +62,7 @@ class Home extends Component {
               'GETTING NUMBER OF FOLLOWERS IN REACT WORKED--->',
               totalFollowers.data.data,
             );
+
             this.setState({
               showFollowCount: true,
               numFollowers: totalFollowers.data.data,
@@ -97,11 +116,14 @@ class Home extends Component {
       .then(followers => {
         console.console.log('GOT FOLLOWERS SINGLE PAGE--->', followers);
         this.setState({
-          followers: true,
+          follower: true,
         });
       })
       .catch(err => {
         console.log('ERROR IN FOLLOWERS SINGLE PAGE--->', err);
+        this.setState({
+          follower: !this.state.followers,
+        })
       });
   }
 
@@ -110,7 +132,7 @@ class Home extends Component {
     return this.state.followers.map(el => {
       let showHome = el.user_id === window.localStorage.getItem('username');
       return (
-        <div>{el.user_id === window.localStorage.getItem('username') ? <Link to={`/user/account`}><p>{el.user_id}</p></Link> : <Link to={`/user/page/${el.user_id}`}><p>{el.user_id}</p></Link>}</div>
+        <div>{showHome ? <Link to={`/user/account`}><p>{el.user_id}</p></Link> : <Link to={`/user/page/${el.user_id}`}><p>{el.user_id}</p></Link>}</div>
       );
     });
   }
@@ -118,7 +140,7 @@ class Home extends Component {
   displayFollowersCount() {
     console.log(this.state.numFollowers);
     let insertString = '';
-    if (this.state.numFollowers[0].count > 1) {
+    if (this.state.numFollowers[0].count > 1 || this.state.numFollowers[0].count === "0") {
       insertString = 's';
     }
 
@@ -142,7 +164,11 @@ class Home extends Component {
           {this.state.showFollowCount ? this.displayFollowersCount() : ''}
           {this.state.apiDataLoaded ? this.displayFollowers() : ''}
           <RestaurantUserFavorites userPage={this.props.match.params.id} user={window.localStorage.getItem('id')}/>
-          <button onClick={this.follow}>Follow?</button>
+          <Button color="primary" onClick={this.follow}>
+            {this.state.follower
+              ? 'Follow?'
+              : 'Unfollow?'}
+          </Button>
           <button onClick={this.logout}>Logout?</button>
           {/* <Footer /> */}
         </div>

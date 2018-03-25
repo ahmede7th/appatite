@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   constructor() {
@@ -33,7 +34,12 @@ class Home extends Component {
   userRestaurantFavorites() {
     console.log(this.state.apiData);
     return this.state.apiData.map((el, i) => {
-      return <p>{el.restaurant_name}</p>;
+      return (
+        <Link to={`/main/${el.restaurant_id}`}>
+          <strong>{el.restaurant_name}</strong>
+          <br/>
+        </Link>
+       );
     });
   }
 

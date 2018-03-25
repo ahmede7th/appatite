@@ -12,6 +12,7 @@ class Home extends Component {
     };
 
     this.userRestaurantFavorites = this.userRestaurantFavorites.bind(this);
+    this.renderUserFavorites = this.renderUserFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -37,16 +38,28 @@ class Home extends Component {
         return <Link to={`/main/${el.restaurant_id}`}>
                 <strong>{el.restaurant_name}</strong>
                               <br/>
-                              <br/>
                </Link>
       });
+    }
+  }
+
+  renderUserFavorites() {
+    let displayMessage;
+    if (this.state.apiData.length === 0) {
+      return `${window.localStorage.getItem('username')} has no favorites!`;
+    } else {
+      return (
+        <div>
+          <p>{window.localStorage.getItem('username')} favorited: <br/>{this.userRestaurantFavorites()}</p>
+        </div>
+      );
     }
   }
 
   render() {
     return (
       <div>
-        {window.localStorage.getItem('username')} favorited: <br/> {this.userRestaurantFavorites()}
+        {this.state.apiDataLoaded ? this.renderUserFavorites() : ''}
       </div>
     );
   }

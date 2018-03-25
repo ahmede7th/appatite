@@ -6,7 +6,6 @@ import RestMap from './RestMap';
 import Review from '../subComponents/Review';
 import {Button} from 'reactstrap';
 
-
 class RestSingle extends Component {
   constructor() {
     super();
@@ -25,8 +24,15 @@ class RestSingle extends Component {
   }
 
   componentWillReceiveProps(nextprops) {
+    let getId;
+    if (!this.props.id) {
+       getId = this.props.match.params.id;
+    } else {
+      getId = this.props.id
+    }
+
     return axios
-      .get(`/api/restaurant/${this.props.id}`)
+      .get(`/api/restaurant/${getId}`)
       .then(restaurant => {
         this.setState({
           apiDataLoaded: true,
@@ -78,10 +84,6 @@ class RestSingle extends Component {
       });
   }
 
-  // componentDidUpdate() {
-  //   this.props.updateParent();
-  // }
-
   deleteRestaurant() {
     return axios
       .delete(`/api/restaurant/delete/${this.state.id}`)
@@ -121,8 +123,12 @@ class RestSingle extends Component {
   }
 
   renderFavoriteUsers() {
-    return this.state.favoriteUsers.map(el => {
-      return <p>{el.username}</p>;
+    return this.state.favoriteUsers.map((el, id) => {
+      return (
+        <Link key={el.id} to={`/user/page/${el.username}`}>
+          <p>{el.username}</p>
+        </Link>
+      );
     });
   }
 
