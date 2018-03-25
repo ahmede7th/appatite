@@ -78,9 +78,9 @@ class RestSingle extends Component {
       });
   }
 
-  componentDidUpdate() {
-    this.props.updateParent();
-  }
+  // componentDidUpdate() {
+  //   this.props.updateParent();
+  // }
 
   deleteRestaurant() {
     return axios
