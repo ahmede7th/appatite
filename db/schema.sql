@@ -39,7 +39,7 @@ CREATE TABLE followers (
 CREATE TABLE favorites (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
-  user_name VARCHAR(255),
+  username VARCHAR(255),
   restaurant_id INTEGER REFERENCES restaurants(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
   restaurant_name VARCHAR(255),
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
@@ -48,7 +48,7 @@ CREATE TABLE favorites (
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
-  user_name VARCHAR(255),
+  username VARCHAR(255),
   restaurant_id INTEGER REFERENCES restaurants(id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
   restaurant_name VARCHAR(255),
   content VARCHAR(700),

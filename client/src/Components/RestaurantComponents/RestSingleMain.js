@@ -78,10 +78,6 @@ class RestSingleMain extends Component {
       });
   }
 
-  // componentDidUpdate() {
-  //   this.props.updateParent();
-  // }
-
   deleteRestaurant() {
     return axios
       .delete(`/api/restaurant/delete/${this.state.id}`)
@@ -103,7 +99,7 @@ class RestSingleMain extends Component {
         {
           headers: {
             user: window.localStorage.getItem('id'),
-            user_name: window.localStorage.getItem('username'),
+            username: window.localStorage.getItem('username'),
             restaurant_name: this.state.apiData.name,
           },
         },

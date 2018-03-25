@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Review extends Component {
   constructor() {
@@ -76,7 +77,7 @@ class Review extends Component {
       url: `/api/review/${this.props.name}`,
       data: {
         user_id: window.localStorage.getItem('id'),
-        user_name: window.localStorage.getItem('username'),
+        username: window.localStorage.getItem('username'),
         restaurant_id: this.props.name,
         restaurant_name: this.state.restaurantName,
         content: this.state.content,
@@ -92,16 +93,39 @@ class Review extends Component {
         console.log('error in review', err);
       });
   }
-
+  renderFavoriteUsers() {
+    let linkRoute;
+    return this.state.favoriteUsers.map((el, id) => {
+      if (el.username === window.localStorage.getItem('username')) {
+        linkRoute = `/user/account`;
+      } else {
+        linkRoute  = `/user/page/${el.username}`
+      }
+      return (
+        <Link key={el.id} to={linkRoute}>
+          <p>{el.username}</p>
+        </Link>
+      );
+    });
+  }
   showReviews() {
+    let linkRoute;
     if (this.state.initialReviews) {
       return this.state.apiData.map((el, i) => {
+        if (el.username === window.localStorage.getItem('username')) {
+          linkRoute = `/user/account`;
+        } else {
+          linkRoute  = `/user/page/${el.username}`
+        }
+
         // shows initial 3
+        console.log(el);
         if (i < 3) {
           return (
             <p>
-              <small>user: </small>
-              <i>{el.user_name}: </i>
+              <Link key={el.id} to={linkRoute}>
+                <i>{el.username}</i>
+              </Link>
               {el.content}
             </p>
           );
@@ -111,12 +135,20 @@ class Review extends Component {
   }
 
   showAllReviews() {
+    let linkRoute;
     if (this.state.showAll) {
       return this.state.apiData.map(el => {
+        if (el.username === window.localStorage.getItem('username')) {
+          linkRoute = `/user/account`;
+        } else {
+          linkRoute  = `/user/page/${el.username}`;
+        }
+
         return (
           <p>
-            <small>user: </small>
-            <i>{el.user_name}: </i>
+            <Link key={el.id} to={linkRoute}>
+              <i>{el.username}</i>
+            </Link>
             {el.content}
           </p>
         );

@@ -103,7 +103,7 @@ class RestSingle extends Component {
         {
           headers: {
             user: window.localStorage.getItem('id'),
-            user_name: window.localStorage.getItem('username'),
+            username: window.localStorage.getItem('username'),
             restaurant_name: this.state.apiData.name,
           },
         },
@@ -121,9 +121,15 @@ class RestSingle extends Component {
   }
 
   renderFavoriteUsers() {
+    let linkRoute;
     return this.state.favoriteUsers.map((el, id) => {
+      if (el.username === window.localStorage.getItem('username')) {
+        linkRoute = `/user/account`;
+      } else {
+        linkRoute  = `/user/page/${el.username}`
+      }
       return (
-        <Link key={el.id} to={`/user/page/${el.username}`}>
+        <Link key={el.id} to={linkRoute}>
           <p>{el.username}</p>
         </Link>
       );

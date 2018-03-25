@@ -9,12 +9,12 @@ module.exports = {
 
   getAllReviewsByUsername(username) {
     return reviewDB.any(`SELECT * FROM reviews
-                                          WHERE user_name = $1`, username);
+                                          WHERE username = $1`, username);
   },
 
   addReview(review) {
-    return reviewDB.one(`INSERT INTO reviews(user_id, user_name, restaurant_id, restaurant_name, content)
-                                          VALUES($[user_id], $[user_name], $[restaurant_id], $[restaurant_name], $[content])
+    return reviewDB.one(`INSERT INTO reviews(user_id, username, restaurant_id, restaurant_name, content)
+                                          VALUES($[user_id], $[username], $[restaurant_id], $[restaurant_name], $[content])
                                           RETURNING *
                                           `, review);
   },
