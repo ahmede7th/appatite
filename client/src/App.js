@@ -4,6 +4,7 @@ import Welcome from './Components/Welcome';
 import Home from './Components/Home';
 import userLogin from './Components/UserComponents/userLogin';
 import RestSingle from './Components/RestaurantComponents/RestSingle';
+import RestSingleMain from './Components/RestaurantComponents/RestSingleMain';
 import RestEdit from './Components/RestaurantComponents/RestEdit';
 import UserNumFavorites from './Components/UserComponents/UserNumFavorites';
 import UserRestaurantFavorites from './Components/UserComponents/UserRestaurantFavorites';
@@ -23,7 +24,7 @@ class App extends Component {
           <Route path="/register" component={userLogin} />
           <Route path="/login" component={userLogin} />
           <Route exact path="/main" component={Home} />
-          <Route exact path="/main/:id" component={RestSingle} />
+          <Route exact path="/main/:id" component={RestSingleMain} />
           <Route path="/main/:id/edit" component={RestEdit} />
           <Route
             exact

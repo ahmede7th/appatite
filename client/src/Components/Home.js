@@ -28,7 +28,7 @@ class Home extends Component {
       count: 0,
       map: true,
       reviews: false,
-      restaurant: false,
+      restaurant: null,
       update: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
@@ -99,7 +99,7 @@ class Home extends Component {
 
   buttonClick() {
     this.setState({
-      show: !this.state.show,
+      show: !this.state.show
     });
   }
 
@@ -129,6 +129,7 @@ class Home extends Component {
     console.log('working...', e.target.value);
     this.setState({
       restaurant: e.target.value,
+      map: false
     });
   }
 
@@ -137,7 +138,6 @@ class Home extends Component {
     return (
       <RestSingle
         id={this.state.restaurant}
-        updateParent={this.updateThisModule}
       />
     );
   }
@@ -166,7 +166,7 @@ class Home extends Component {
     if (this.state.showLocation) {
       return (
         <div>
-          <p className="map text-center">Restaurants near you</p>
+          <p className="text-center">Restaurants near you</p>
           <RestMap location={this.state.location} />
         </div>
       );
@@ -176,6 +176,7 @@ class Home extends Component {
   renderReviews() {}
 
   render() {
+    console.log('state restaurant', this.state.restaurant)
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -200,9 +201,10 @@ class Home extends Component {
                   ? this.mainListing(`${this.state.count}`)
                   : ''}
               </div>
-                <div className="col-sm" align="center">
+
+                <div className="col-sm">
                   {this.state.map ? this.renderMap() : ''}
-                  {this.state.reviews ? this.renderReviews() : ''}
+                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>

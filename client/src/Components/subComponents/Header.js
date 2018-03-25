@@ -6,6 +6,10 @@ import SearchBar from '../SearchBar';
 import { Link } from 'react-router-dom';
 import {Collapse, Button, CardBody, Card} from 'reactstrap';
 
+const refresh = () => {
+  window.location.reload()
+}
+
 const Header = (props) => {
   return (
     <div className="header">
@@ -17,11 +21,6 @@ const Header = (props) => {
             <li className="nav-item">
               <Link className="nav-link" to="/user/myreviews">
                 My Reviews
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/user/myfavorites">
-                My Favorites
               </Link>
             </li>
             <li className="nav-item">
