@@ -17,6 +17,7 @@ class RestSingle extends Component {
       favorite: false,
       favoriteNumber: null,
       favoriteUsers: null,
+      id: null,
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
@@ -25,14 +26,15 @@ class RestSingle extends Component {
 
   componentDidMount() {
     return axios
-      .get(`/api/restaurant/${this.props.match.params.id}`)
+      .get(`/api/restaurant/${this.props.id}`)
       .then(restaurant => {
         this.setState({
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
+          id: this.props.id
         });
         axios
-          .get(`/api/favorites/restaurant/num/${this.props.match.params.id}`)
+          .get(`/api/favorites/restaurant/num/${this.state.id}`)
           .then(favorites => {
             console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
             this.setState({
@@ -40,7 +42,7 @@ class RestSingle extends Component {
             });
             axios
               .get(
-                `/api/favorites/restaurant/users/${this.props.match.params.id}`,
+                `/api/favorites/restaurant/users/${this.state.id}`,
               )
               .then(users => {
                 console.log(
@@ -78,7 +80,7 @@ class RestSingle extends Component {
 
   deleteRestaurant() {
     return axios
-      .delete(`/api/restaurant/delete/${this.props.match.params.id}`)
+      .delete(`/api/restaurant/delete/${this.state.id}`)
       .then(restaurant => {
         this.setState({
           fireRedirect: true,
@@ -92,7 +94,7 @@ class RestSingle extends Component {
   goToFavorite() {
     return axios
       .post(
-        `/api/favorites/${this.props.match.params.id}`,
+        `/api/favorites/${this.state.id}`,
         { withCredentials: true },
         {
           headers: {
@@ -124,11 +126,9 @@ class RestSingle extends Component {
 
     return (
       <div className="welcome">
-        <Header />
-        <br />
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
         <Button color="primary">
-          <Link to={`/main/${this.props.match.params.id}/edit`} className="welcome">Edit</Link>
+          <Link to={`/main/${this.state.id}/edit`} className="welcome">Edit</Link>
         </Button>
         <Button color="primary" onClick={this.deleteRestaurant}>Delete posting</Button>
         {this.state.apiDataLoaded ? <RestMap location={this.state.apiData.loc} /> : 'failed to load map'}
@@ -145,7 +145,7 @@ class RestSingle extends Component {
             ? this.renderFavoriteUsers()
             : ''}
         </p>
-        <Review name={this.props.match.params.id} />
+        <Review name={this.state.id} />
         <Button color="primary" onClick={this.goToFavorite}>
           {this.state.favorite
             ? 'Unfavorite this baby!'

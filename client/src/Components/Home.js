@@ -8,6 +8,7 @@ import Header from './subComponents/Header';
 import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
 import RestMap from '../Components/RestaurantComponents/RestMap';
+import RestSingle from '../Components/RestaurantComponents/RestSingle';
 
 class Home extends Component {
   constructor() {
@@ -25,6 +26,9 @@ class Home extends Component {
       users: null,
       gotUsers: false,
       count: 0,
+      map: true,
+      reviews: false,
+      restaurant: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -34,6 +38,9 @@ class Home extends Component {
     this.updateMain = this.updateMain.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.displayUsers = this.displayUsers.bind(this);
+    this.renderMap = this.renderMap.bind(this);
+    this.renderRestaurant = this.renderRestaurant.bind(this);
+    this.showOne = this.showOne.bind(this);
   }
 
   componentDidMount() {
@@ -105,9 +112,21 @@ class Home extends Component {
     this.getRestaurants(index);
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
-        return <Restaurants restaurants={el} key={el.id} />;
+        return (
+          <div>
+            <Restaurants restaurants={el} key={el.id} />
+            <button onClick={this.showOne} value = {el.id}>Click for more details</button>
+          </div>
+        );
       });
     }
+  }
+
+  showOne(e) {
+    console.log('working...', e.target.value);
+    this.setState({
+      restaurant: e.target.value,
+    });
   }
 
   updateMain() {
@@ -130,6 +149,28 @@ class Home extends Component {
     }
   }
 
+  renderMap() {
+    if (this.state.showLocation) {
+      return (
+        <div>
+          <p className="map text-center">Restaurants near you</p>
+          <RestMap location={this.state.location} />
+        </div>
+      );
+    }
+  }
+
+  renderReviews() {
+
+  }
+
+  renderRestaurant() {
+    console.log('really working...');
+    return (
+      <RestSingle id={this.state.restaurant} />
+    );
+  }
+
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
@@ -145,21 +186,18 @@ class Home extends Component {
 
               {this.state.show ? <RestCreate /> : ''}
               {this.state.gotUsers ? this.displayUsers() : ''}
-      
+
                 <div className ="row">
                   <div className ="col-sm">
                     {this.state.apiDataLoaded && !this.state.next20
                       ? this.mainListing()
-                      : 'failed to load'}
+                      : ''}
                     {this.state.next20 ? this.mainListing(`${this.state.count}`) : ''}
                   </div>
                   <div className="col-sm" align="center">
-                    <p className="map text-center">Restaurants near you</p>
-                      {this.state.showLocation ? (
-                      <RestMap location={this.state.location} />
-                      ) : (
-                        'no map'
-                      )}
+                    {this.state.map && !this.state.reviews && !this.state.restaurant ? this.renderMap() : ''}
+                    {this.state.reviews ? this.renderReviews() : ''}
+                    {this.state.restaurant ? this.renderRestaurant() : ''}
                   </div>
                 </div>
               <button onClick={this.updateMain}>See More</button>
