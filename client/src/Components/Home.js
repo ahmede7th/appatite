@@ -28,7 +28,7 @@ constructor() {
       count: 0,
       map: true,
       reviews: false,
-      restaurant: false,
+      restaurant: null,
       update: false,
     };
     this.buttonClick = this.buttonClick.bind(this);
@@ -99,7 +99,7 @@ constructor() {
 
   buttonClick() {
     this.setState({
-      show: !this.state.show,
+      show: !this.state.show
     });
   }
 
@@ -138,7 +138,6 @@ constructor() {
     return (
       <RestSingle
         id={this.state.restaurant}
-        updateParent={this.updateThisModule}
       />
     );
   }
@@ -174,7 +173,7 @@ constructor() {
     if (this.state.showLocation) {
       return (
         <div>
-          <p className="map text-center">Restaurants near you</p>
+          <p className="text-center">Restaurants near you</p>
           <RestMap location={this.state.location} />
         </div>
       );
@@ -184,6 +183,7 @@ constructor() {
   renderReviews() {}
 
   render() {
+    console.log('state restaurant', this.state.restaurant)
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -191,10 +191,10 @@ constructor() {
         <div className="home">
           <Header logout={this.logout} />
           <div className="jumbotron">
+
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
             <button onClick={this.buttonClick}>ADD</button>
-            <button onClick={this.buttonClick}>Biz owner</button>
 
             {this.state.show ? <RestCreate /> : ''}
             {this.state.gotUsers ? this.displayUsers() : ''}
@@ -208,12 +208,14 @@ constructor() {
                   ? this.mainListing(`${this.state.count}`)
                   : ''}
               </div>
-              <div className="col-sm" align="center">
-                {this.state.map ? this.renderMap() : ''}
-                {this.state.reviews ? this.renderReviews() : ''}
-                {this.state.restaurant ? this.renderRestaurant() : ''}
-              </div>
+
+                <div className="col-sm">
+                  {this.state.map ? this.renderMap() : ''}
+                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
+                  {this.state.restaurant ? this.renderRestaurant() : ''}
+                </div>
             </div>
+
             <button onClick={this.updateMain}>See More</button>
           </div>
           <button onClick={this.logout}>Logout?</button>

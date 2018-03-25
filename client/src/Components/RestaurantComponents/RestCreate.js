@@ -25,7 +25,7 @@ class RestCreate extends Component {
   }
 
   formSubmit(e) {
-    e.preventDefault();
+    //e.preventDefault();
     axios({
       method: 'POST',
       url: '/api/restaurant',
@@ -77,7 +77,7 @@ class RestCreate extends Component {
           />
           <input type="submit" value="submit" />
         </form>
-        {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
+        {/*{this.state.fireRedirect ? <Redirect to="/main" /> : ''}*/}
       </div>
     );
   }

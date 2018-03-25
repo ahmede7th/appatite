@@ -75,6 +75,7 @@ class UserReviews extends Component {
   render() {
     return (
       <div className="welcome">
+        <Header />
         <h1>{this.state.user}'s Reviews</h1>
         <p> users reviews </p>
         {this.state.apiDataLoaded ? this.showAll() : ''}

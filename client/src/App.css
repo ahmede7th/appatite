@@ -35,7 +35,7 @@ body {
   background-size: cover;
 }
 
-/* .map {
+/*.restMap {
   position: fixed;
 } */
 
@@ -46,12 +46,9 @@ body {
   justify-content: center;
 } */
 
-
-
 .icon {
   font-size: 50px;
 }
-
 
 input {
   font: inherit;

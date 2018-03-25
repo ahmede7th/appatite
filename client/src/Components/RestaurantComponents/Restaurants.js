@@ -31,7 +31,6 @@ const Restaurants = props => {
         src={props.restaurants.img_src}
         alt="restaurant"
       />
-
     </div>
   );
 };

@@ -6,7 +6,8 @@ import RestMap from './RestMap';
 import Review from '../subComponents/Review';
 import {Button} from 'reactstrap';
 
-class RestSingle extends Component {
+
+class RestSingleMain extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,16 +24,9 @@ class RestSingle extends Component {
     this.renderFavoriteUsers = this.renderFavoriteUsers.bind(this);
   }
 
-  componentWillReceiveProps(nextprops) {
-    let getId;
-    if (!this.props.id) {
-       getId = this.props.match.params.id;
-    } else {
-      getId = this.props.id
-    }
-
+  componentDidMount() {
     return axios
-      .get(`/api/restaurant/${getId}`)
+      .get(`/api/restaurant/${this.props.match.params.id}`)
       .then(restaurant => {
         this.setState({
           apiDataLoaded: true,
@@ -84,6 +78,10 @@ class RestSingle extends Component {
       });
   }
 
+  // componentDidUpdate() {
+  //   this.props.updateParent();
+  // }
+
   deleteRestaurant() {
     return axios
       .delete(`/api/restaurant/delete/${this.state.id}`)
@@ -123,18 +121,15 @@ class RestSingle extends Component {
   }
 
   renderFavoriteUsers() {
-    return this.state.favoriteUsers.map((el, id) => {
-      return (
-        <Link key={el.id} to={`/user/page/${el.username}`}>
-          <p>{el.username}</p>
-        </Link>
-      );
+    return this.state.favoriteUsers.map(el => {
+      return <p>{el.username}</p>;
     });
   }
 
   render() {
     return (
       <div className="welcome">
+        <Header />
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
         {this.state.apiDataLoaded ? <RestMap location={this.state.apiData.loc} /> : 'failed to load map'}
         <p>
@@ -151,15 +146,15 @@ class RestSingle extends Component {
             : ''}
         </p>
         {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
-         <Button color="primary" onClick={this.goToFavorite}>
-            {this.state.favorite
-              ? 'Unfavorite this baby!'
-              : 'Favorite this baby!'}
-          </Button><br/>
-          <Button color="warning">
-            <Link to={`/main/${this.state.id}/edit`} className="welcome">Edit</Link>
-          </Button><br/>
-          <Button color="danger" onClick={this.deleteRestaurant}>Delete posting</Button>
+        <Button color="primary" onClick={this.goToFavorite}>
+          {this.state.favorite
+            ? 'Unfavorite this baby!'
+            : 'Favorite this baby!'}
+        </Button><br/>
+        <Button color="warning">
+          <Link to={`/main/${this.state.id}/edit`} className="welcome">Edit</Link>
+        </Button><br/>
+        <Button color="danger" onClick={this.deleteRestaurant}>Delete posting</Button>
         {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );
@@ -168,4 +163,4 @@ class RestSingle extends Component {
 
 
 
-export default RestSingle;
+export default RestSingleMain;
