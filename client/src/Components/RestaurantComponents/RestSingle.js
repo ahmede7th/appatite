@@ -82,13 +82,6 @@ class RestSingle extends Component {
     this.props.updateParent();
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps);
-  //   this.setState({
-  //     map: false,
-  //   });
-  // }
-
   deleteRestaurant() {
     return axios
       .delete(`/api/restaurant/delete/${this.state.id}`)
