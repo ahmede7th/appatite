@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import Header from '../subComponents/Header';
 import RestMap from './RestMap';
 import Review from '../subComponents/Review';
-import {Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 
 class RestSingle extends Component {
   constructor() {
@@ -26,9 +26,9 @@ class RestSingle extends Component {
   componentWillReceiveProps(nextprops) {
     let getId;
     if (!this.props.id) {
-       getId = this.props.match.params.id;
+      getId = this.props.match.params.id;
     } else {
-      getId = this.props.id
+      getId = this.props.id;
     }
 
     return axios
@@ -47,15 +47,13 @@ class RestSingle extends Component {
               favoriteNumber: favorites.data.data[0].count,
             });
             axios
-              .get(
-                `/api/favorites/restaurant/users/${this.state.id}`,
-              )
+              .get(`/api/favorites/restaurant/users/${this.state.id}`)
               .then(users => {
                 console.log(
                   'USERS WHO LIKE THE RESTAURANT--->',
                   users.data.data,
                 );
-                const user = users.data.data.filter(function (user) {
+                const user = users.data.data.filter(function(user) {
                   return (
                     user.username === window.localStorage.getItem('username')
                   );
@@ -136,7 +134,19 @@ class RestSingle extends Component {
     return (
       <div className="welcome">
         <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
-        {this.state.apiDataLoaded ? <RestMap location={this.state.apiData.loc} /> : 'failed to load map'}
+        <Button color="primary">
+          <Link to={`/main/${this.state.id}/edit`} className="welcome">
+            Edit
+          </Link>
+        </Button>
+        <Button color="primary" onClick={this.deleteRestaurant}>
+          Delete posting
+        </Button>
+        {this.state.apiDataLoaded ? (
+          <RestMap location={this.state.apiData.loc} />
+        ) : (
+          'failed to load map'
+        )}
         <p>
           Yelp Rating:{' '}
           {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars
@@ -151,21 +161,15 @@ class RestSingle extends Component {
             : ''}
         </p>
         {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
-         <Button color="primary" onClick={this.goToFavorite}>
-            {this.state.favorite
-              ? 'Unfavorite this baby!'
-              : 'Favorite this baby!'}
-          </Button><br/>
-          <Button color="warning">
-            <Link to={`/main/${this.state.id}/edit`} className="welcome">Edit</Link>
-          </Button><br/>
-          <Button color="danger" onClick={this.deleteRestaurant}>Delete posting</Button>
+        <Button color="primary" onClick={this.goToFavorite}>
+          {this.state.favorite
+            ? 'Unfavorite this baby!'
+            : 'Favorite this baby!'}
+        </Button>
         {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
       </div>
     );
   }
 }
-
-
 
 export default RestSingle;

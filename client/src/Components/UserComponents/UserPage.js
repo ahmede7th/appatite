@@ -34,11 +34,12 @@ class Home extends Component {
     axios
       .get(`/api/follower/friend/${this.props.match.params.id}`)
       .then(followers => {
-        console.log('GETTING FOLLOWERS IN REACT WORKED ->', followers.data.data);
-        const newFollower = followers.data.data.filter(function (follower) {
-          return (
-            follower.username === window.localStorage.getItem('username')
-          );
+        console.log(
+          'GETTING FOLLOWERS IN REACT WORKED ->',
+          followers.data.data,
+        );
+        const newFollower = followers.data.data.filter(function(follower) {
+          return follower.username === window.localStorage.getItem('username');
         });
 
         console.log('HELP', newFollower);
@@ -123,7 +124,7 @@ class Home extends Component {
         console.log('ERROR IN FOLLOWERS SINGLE PAGE--->', err);
         this.setState({
           follower: !this.state.followers,
-        })
+        });
       });
   }
 
@@ -132,7 +133,17 @@ class Home extends Component {
     return this.state.followers.map(el => {
       let showHome = el.user_id === window.localStorage.getItem('username');
       return (
-        <div>{showHome ? <Link to={`/user/account`}><p>{el.user_id}</p></Link> : <Link to={`/user/page/${el.user_id}`}><p>{el.user_id}</p></Link>}</div>
+        <div>
+          {showHome ? (
+            <Link to={`/user/account`}>
+              <p>{el.user_id}</p>
+            </Link>
+          ) : (
+            <Link to={`/user/page/${el.user_id}`}>
+              <p>{el.user_id}</p>
+            </Link>
+          )}
+        </div>
       );
     });
   }
@@ -140,15 +151,21 @@ class Home extends Component {
   displayFollowersCount() {
     console.log(this.state.numFollowers);
     let insertString = '';
-    if (this.state.numFollowers[0].count > 1 || this.state.numFollowers[0].count === "0") {
+    if (
+      this.state.numFollowers[0].count > 1 ||
+      this.state.numFollowers[0].count === '0'
+    ) {
       insertString = 's';
     }
 
     return (
       <div>
-        <p>User {this.props.match.params.id} has {this.state.numFollowers[0].count} follower{insertString}!</p>
+        <p>
+          User {this.props.match.params.id} has{' '}
+          {this.state.numFollowers[0].count} follower{insertString}!
+        </p>
       </div>
-    )
+    );
   }
 
   render() {
@@ -163,11 +180,12 @@ class Home extends Component {
           </div>
           {this.state.showFollowCount ? this.displayFollowersCount() : ''}
           {this.state.apiDataLoaded ? this.displayFollowers() : ''}
-          <RestaurantUserFavorites userPage={this.props.match.params.id} user={window.localStorage.getItem('id')}/>
+          <RestaurantUserFavorites
+            userPage={this.props.match.params.id}
+            user={window.localStorage.getItem('id')}
+          />
           <Button color="primary" onClick={this.follow}>
-            {this.state.follower
-              ? 'Follow?'
-              : 'Unfollow?'}
+            {this.state.follower ? 'Follow?' : 'Unfollow?'}
           </Button>
           <button onClick={this.logout}>Logout?</button>
           {/* <Footer /> */}
