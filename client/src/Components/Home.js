@@ -197,10 +197,10 @@ class Home extends Component {
         <div className="home">
           <Header logout={this.logout} />
           <div className="jumbotron">
+
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
             <button onClick={this.buttonClick}>ADD</button>
-            <button onClick={this.buttonClick}>Biz owner</button>
 
             {this.state.show ? <RestCreate /> : ''}
             {this.state.gotUsers ? this.displayUsers() : ''}
@@ -214,12 +214,13 @@ class Home extends Component {
                   ? this.mainListing(`${this.state.count}`)
                   : ''}
               </div>
-              <div className="col-sm" align="center">
-                {this.state.map ? this.renderMap() : ''}
-                {this.state.reviews ? this.renderReviews() : ''}
-                {this.state.restaurant ? this.renderRestaurant() : ''}
-              </div>
+                <div className="col-sm" align="center">
+                  {this.state.map ? this.renderMap() : ''}
+                  {this.state.reviews ? this.renderReviews() : ''}
+                  {this.state.restaurant ? this.renderRestaurant() : ''}
+                </div>
             </div>
+
             <button onClick={this.updateMain}>See More</button>
           </div>
           <button onClick={this.logout}>Logout?</button>
