@@ -27,7 +27,7 @@ const Restaurants = props => {
         <strong>{props.restaurants.cuisine}</strong>
       </p>
       <img
-        className="img-fluid"
+        className="img-fluid img-thumbnail"
         src={props.restaurants.img_src}
         alt="restaurant"
       />
