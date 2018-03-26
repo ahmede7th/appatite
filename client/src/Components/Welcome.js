@@ -61,12 +61,16 @@ class Welcome extends Component {
             Are you hungry? Are you always looking for places to eat only to find a 5 star rated restaurant written by people who have no idea what good food is? You have come to the right place
           </p>
           <div>
-            <Button outline="outline" color="primary">
-              <a href="/register">Sign up</a>
-            </Button>
-            <Button outline="outline" color="primary">
-              <a href="/login">Log In</a>
-            </Button>
+
+            <form action="/register" method="get">
+              <Button outline="outline" color="primary">Sign up</Button>
+            </form>
+
+
+            <form action="/login" method="get">
+              <Button outline="outline" color="primary">Log In</Button>
+                      </form>
+
           </div>
         </div>
 
