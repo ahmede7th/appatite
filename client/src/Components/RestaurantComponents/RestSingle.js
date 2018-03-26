@@ -25,12 +25,12 @@ class RestSingle extends Component {
     this.renderOwner = this.renderOwner.bind(this);
   }
 
-  componentWillReceiveProps(nextprops) {
+  componentWillReceiveProps(nextProps) {
     let getId;
-    if (!this.props.id) {
+    if (!nextProps.id) {
       getId = this.props.match.params.id;
     } else {
-      getId = this.props.id;
+      getId = nextProps.id;
     }
 
     return axios
