@@ -51,7 +51,7 @@ class RestCreate extends Component {
   render() {
     return (
       <div className="restaurant-create">
-        <h1>Create page</h1>
+        <h1>Add a restaurant</h1>
         <form onSubmit={this.formSubmit}>
           <input
             type="text"
