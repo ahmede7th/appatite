@@ -16,7 +16,8 @@ class Review extends Component {
       restaurant_name: '',
       content: '',
       fireRedirect: false,
-      restaurantName: ''
+      restaurantName: '',
+      showMore: false,
     };
     this.inputChange = this.inputChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
@@ -25,10 +26,15 @@ class Review extends Component {
   }
 
   componentWillReceiveProps() {
-    console.log('CURRENT USER--->', window.localStorage.getItem('username'));
-    console.log(this.props.name);
     axios.get(`/api/review/${this.props.name}`).then(review => {
-      this.setState({initialReviews: true, apiData: review.data.data});
+      console.log(review.data.data);
+      let showMoreReviews;
+      if (review.data.data.length > 3) {
+        showMoreReviews = true;
+      } else {
+        showMoreReviews = false;
+      }
+      this.setState({initialReviews: true, apiData: review.data.data, showMore: showMoreReviews});
     }).catch(err => {
       console.log('no reviews exists');
     });
@@ -143,7 +149,7 @@ class Review extends Component {
       <div className="review">
         {this.state.initialReviews ? this.showReviews() : ''}
         {this.state.showAll ? this.showAllReviews() : ''}
-        <button onClick={this.buttonClickAll}>All Reviews</button>
+        {this.state.showMore ? <button onClick={this.buttonClickAll}>All Reviews</button> : ''}
         <br/>
         <br/>
         <div class="form-group">
