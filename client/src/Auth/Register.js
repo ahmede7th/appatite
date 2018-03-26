@@ -21,7 +21,7 @@ export default class Register extends Component {
           <Button color="primary">Back Home</Button>
         </Link>
       </p>
-      <p>Password must be minimum of 6 chars</p>
+      <h3 className="pass">* Password must be minimum of 4 characters</h3>
     </div>);
   }
 }

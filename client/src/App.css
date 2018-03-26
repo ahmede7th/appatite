@@ -20,6 +20,11 @@
   z-index: 15;
 }
 
+.pass{
+  color: red;
+  text-shadow: 2px 2px 4px red;
+}
+
 .header{
   z-index: 20;
   /* position: fixed;  */
