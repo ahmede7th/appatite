@@ -6,9 +6,10 @@ const Restaurants = props => {
     console.log(newRating);
   };
 
-  return (<div className="restaurant">
+  return (<div className="restaurant" >
     <h1>{props.restaurants.name}</h1>
     <ReactStars
+      position= {'center'}
       count={props.restaurants.rating}
       onChange={ratingChanged} size={20}
       edit={false}

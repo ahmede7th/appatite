@@ -8,6 +8,5 @@ const Footer = () => {
       </small>
     </footer>
   );
-}
 
 export default Footer;  
