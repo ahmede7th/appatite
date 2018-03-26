@@ -124,9 +124,9 @@ class Home extends Component {
 
     return (<div>
       <p>
-        User {' ' + this.props.match.params.id+' '}
-        has{' '}
-        {this.state.numFollowers[0].count}
+        User {this.props.match.params.id+ ' '}
+        has
+        {' '+this.state.numFollowers[0].count+' '}
         follower{insertString}!
       </p>
     </div>);
