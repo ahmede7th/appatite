@@ -17,6 +17,7 @@ class RestSingle extends Component {
       favoriteNumber: null,
       favoriteUsers: null,
       id: null,
+      getId: null,
       owner: false,
       displayMessage: '',
       continue: false,
@@ -27,13 +28,20 @@ class RestSingle extends Component {
     this.renderOwner = this.renderOwner.bind(this);
   }
 
+<<<<<<< HEAD
+  componentWillReceiveProps(nextProps) {
+    console.log('inside RestSingle', nextProps)
+    let getId
+    if (!nextProps.id) {
+=======
   componentDidMount() {
     let getId;
     console.log('WHY NOT NOW--->', this.props.id);
     if (!this.props.id) {
+>>>>>>> ae10d9074b2d98285fdad5316687550fc8d23e9a
       getId = this.props.match.params.id;
     } else {
-      getId = this.props.id;
+      getId = nextProps.id;
     }
 
     return axios
