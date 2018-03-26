@@ -73,6 +73,10 @@ constructor() {
       });
   }
 
+  componentWillReceiveProps() {
+    console.log('I AM IN PROPS--->', this.props);
+  }
+
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
@@ -115,7 +119,8 @@ constructor() {
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
         return (
-          <div key={i}>
+          <div className="border-top border-primary" key={i}>
+            <br/>
             <Restaurants restaurants={el} key={el.id} />
             <Button color='primary' onClick={this.showOne} value={el.id}>
               Click for more details
@@ -185,7 +190,6 @@ constructor() {
         <div className="home">
           <Header logout={this.logout} />
           <div className="jumbotron">
-
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
             <Button color='primary' onClick={this.buttonClick}>ADD</Button>
@@ -194,7 +198,7 @@ constructor() {
             {this.state.gotUsers ? this.displayUsers() : ''}
 
             <div className="row">
-              <div className="col-sm">
+              <div className="col-sm" id="left">
                 {this.state.apiDataLoaded && !this.state.next20
                   ? this.mainListing()
                   : ''}
@@ -203,16 +207,14 @@ constructor() {
                   : ''}
               </div>
 
-                <div className="col-sm">
+                <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
                   {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
-
-            <Button color='primary' onClick={this.updateMain}>See More</Button>
+            <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
           </div>
-          <Button color='primary' onClick={this.logout}>Logout?</Button>
           <Footer />
         </div>
       );

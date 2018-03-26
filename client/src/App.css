@@ -22,8 +22,14 @@
 
 .header{
   z-index: 20;
-  /* position: fixed; */
+  /* position: fixed;  */
   width: 100%;
+}
+
+#seemore {
+  position: relative;
+  top: 5px;
+  right: 400px;
 }
 
 body {
@@ -88,4 +94,20 @@ input {
 
 .form__input:invalid + .icon::after {
   content: '😳';
+}
+
+#left {
+  border-style: solid;
+  width: 75%;
+  height: 500px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+#right {
+  border-style: solid;
+  overflow-y: scroll;
+  height: 500px;
+  width: 25%;
+  text-align: center;
 }

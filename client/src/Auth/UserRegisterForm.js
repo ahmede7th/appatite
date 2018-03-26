@@ -63,7 +63,7 @@ export default class UserRegisterForm extends Component {
           <label>
             Password -
             <input
-              type="text"
+              type="password"
               name="password"
               onChange={this.handleChange}
               value={this.state.password}
