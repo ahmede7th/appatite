@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 
 class AllFavorites extends Component {
@@ -7,7 +7,7 @@ class AllFavorites extends Component {
     this.state = {
       apiDataLoaded: false,
       apiData: null,
-      fireRedirect: false,
+      fireRedirect: false
     };
     this.userNumFavorites = this.userNumFavorites.bind(this);
   }
@@ -15,18 +15,12 @@ class AllFavorites extends Component {
   componentDidMount() {
     const user = window.localStorage.getItem('id');
     console.log('INSIDE COMPONENT DID MOUNT USER NUM FAVORITES--->', user);
-    return axios
-      .get(`/api/favorites/user/num/${user}`)
-      .then(favorites => {
-        console.log('USER FAVORITES ->', favorites.data.data);
-        this.setState({
-          apiDataLoaded: true,
-          apiData: favorites.data.data,
-        });
-      })
-      .catch(err => {
-        console.log('nope :', err);
-      });
+    return axios.get(`/api/favorites/user/num/${user}`).then(favorites => {
+      console.log('USER FAVORITES ->', favorites.data.data);
+      this.setState({apiDataLoaded: true, apiData: favorites.data.data});
+    }).catch(err => {
+      console.log('nope :', err);
+    });
   }
 
   userNumFavorites() {
@@ -36,11 +30,9 @@ class AllFavorites extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.userNumFavorites()}
-      </div>
-    );
+    return (<div>
+      {this.userNumFavorites()}
+    </div>);
   }
 }
 

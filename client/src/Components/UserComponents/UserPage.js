@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
@@ -34,10 +34,6 @@ class Home extends Component {
     axios
       .get(`/api/follower/friend/${this.props.match.params.id}`)
       .then(followers => {
-        console.log(
-          'GETTING FOLLOWERS IN REACT WORKED ->',
-          followers.data.data,
-        );
         const newFollower = followers.data.data.filter(function(follower) {
           return follower.username === window.localStorage.getItem('username');
         });
@@ -59,11 +55,6 @@ class Home extends Component {
         axios
           .get(`/api/follower/friend/num/${this.props.match.params.id}`)
           .then(totalFollowers => {
-            console.log(
-              'GETTING NUMBER OF FOLLOWERS IN REACT WORKED--->',
-              totalFollowers.data.data,
-            );
-
             this.setState({
               showFollowCount: true,
               numFollowers: totalFollowers.data.data,
@@ -81,14 +72,11 @@ class Home extends Component {
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
-    this.setState({
-      logoutUser: true,
-    });
+    this.setState({ logoutUser: true });
   }
 
   getLocation() {
     if (navigator.geolocation) {
-      console.log('getting users position');
       navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
       console.log('Geolocation is not supported by this browser.');
@@ -96,7 +84,6 @@ class Home extends Component {
   }
 
   showPosition(position) {
-    console.log('users location has been set', position);
     this.setState({
       lat: position.coords.latitude,
       long: position.coords.longitude,
@@ -107,7 +94,9 @@ class Home extends Component {
     return axios
       .post(
         `/api/follower/add/${this.props.match.params.id}`,
-        { withCredentials: true },
+        {
+          withCredentials: true,
+        },
         {
           headers: {
             user: window.localStorage.getItem('username'),
@@ -115,10 +104,7 @@ class Home extends Component {
         },
       )
       .then(followers => {
-        console.console.log('GOT FOLLOWERS SINGLE PAGE--->', followers);
-        this.setState({
-          follower: true,
-        });
+        this.setState({ follower: true });
       })
       .catch(err => {
         console.log('ERROR IN FOLLOWERS SINGLE PAGE--->', err);
@@ -158,14 +144,14 @@ class Home extends Component {
       insertString = 's';
     }
 
-    return (
-      <div>
-        <p>
-          User {this.props.match.params.id} has{' '}
-          {this.state.numFollowers[0].count} follower{insertString}!
-        </p>
-      </div>
-    );
+    return (<div>
+      <p>
+        User {this.props.match.params.id+ ' '}
+        has
+        {' '+this.state.numFollowers[0].count+' '}
+        follower{insertString}!
+      </p>
+    </div>);
   }
 
   render() {
@@ -173,13 +159,13 @@ class Home extends Component {
       return <Welcome />;
     } else {
       return (
-        <div className="container-fluid">
+        <div className="welcome">
           <Header />
-          <div className="jumbotron">
+          <div>
             <h1>Welcome to {this.props.match.params.id}'s page!</h1>
           </div>
           {this.state.showFollowCount ? this.displayFollowersCount() : ''}
-          {this.state.apiDataLoaded ? this.displayFollowers() : ''}
+          {this.state.apiDataLoaded ? this.displayFollowers() : '0'}
           <RestaurantUserFavorites
             userPage={this.props.match.params.id}
             user={window.localStorage.getItem('id')}
@@ -187,7 +173,9 @@ class Home extends Component {
           <Button color="primary" onClick={this.follow}>
             {this.state.follower ? 'Follow?' : 'Unfollow?'}
           </Button>
-          <button onClick={this.logout}>Logout?</button>
+          <Button color="primary" onClick={this.logout}>
+            Logout?
+          </Button>
           {/* <Footer /> */}
         </div>
       );
