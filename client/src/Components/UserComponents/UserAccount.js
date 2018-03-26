@@ -24,6 +24,7 @@ class UserAccount extends Component {
     this.inputChange = this.inputChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -95,12 +96,18 @@ class UserAccount extends Component {
     </div>);
   }
 
+  logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
+    this.setState({logoutUser: true});
+  }
+
   render() {
     if (this.state.logoutUser) {
       return <Welcome/>
     } else {
       return (<div className="welcome">
-        <Header/>
+        <Header logout={this.logout}/>
         <h1>user account</h1>
         {
           this.state.apiDataLoaded

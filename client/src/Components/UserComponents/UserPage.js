@@ -30,6 +30,7 @@ class Home extends Component {
     this.follow = this.follow.bind(this);
     this.displayFollowers = this.displayFollowers.bind(this);
     this.displayFollowersCount = this.displayFollowersCount.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -139,6 +140,12 @@ class Home extends Component {
     });
   }
 
+  logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
+    this.setState({logoutUser: true});
+  }
+
   displayFollowersCount() {
     console.log(this.state.numFollowers);
     let insertString = '';
@@ -167,7 +174,7 @@ class Home extends Component {
     } else {
       return (
         <div className="welcome">
-          <Header />
+          <Header logout={this.logout}/>
           <div>
             <h1>Welcome to {this.props.match.params.id}'s page!</h1>
           </div>
