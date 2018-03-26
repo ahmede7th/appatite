@@ -207,27 +207,16 @@ class Home extends Component {
             </Collapse>
           </div>
 
-          {/* {
-            this.state.gotUsers
-              ? this.displayUsers()
-              : ''
-          } */
-          }
-
           <div className="row">
             <div className="col-sm" id="left">
               {
                 this.state.apiDataLoaded && !this.state.next20
                   ? this.mainListing()
                   : ''}
-                {/* {this.state.next20
-                  ? this.mainListing(`${this.state.count}`)
-                  : ''} */}
               </div>
 
                 <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
-                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
               </div>
