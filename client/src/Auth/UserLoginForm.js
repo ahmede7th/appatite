@@ -50,7 +50,7 @@ export default class UserLoginForm extends Component {
             Password -
             <input
               class="form__input"
-              pattern=".{6,}" required
+              pattern=".{4,}" required
               type="password"
               name="password"
               onChange={this.handleChange}

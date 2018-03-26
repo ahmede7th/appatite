@@ -24,7 +24,7 @@ class Review extends Component {
     this.buttonClickAll = this.buttonClickAll.bind(this);
   }
 
-  componentDidMount() {
+  componentWillReceiveProps() {
     console.log('CURRENT USER--->', window.localStorage.getItem('username'));
     console.log(this.props.name);
     axios
@@ -72,6 +72,7 @@ class Review extends Component {
   }
 
   formSubmit(e) {
+    e.preventDefault();
     axios({
       method: 'POST',
       url: `/api/review/${this.props.name}`,
@@ -108,6 +109,7 @@ class Review extends Component {
       );
     });
   }
+
   showReviews() {
     let linkRoute;
     if (this.state.initialReviews) {
@@ -119,12 +121,11 @@ class Review extends Component {
         }
 
         // shows initial 3
-        console.log(el);
         if (i < 3) {
           return (
             <p>
               <Link key={el.id} to={linkRoute}>
-                <i>{el.username}</i>
+                <i>{el.username}: </i>
               </Link>
               {el.content}
             </p>
@@ -147,7 +148,7 @@ class Review extends Component {
         return (
           <p>
             <Link key={el.id} to={linkRoute}>
-              <i>{el.username}</i>
+              <i>{el.username}: </i>
             </Link>
             {el.content}
           </p>

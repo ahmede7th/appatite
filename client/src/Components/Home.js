@@ -72,6 +72,10 @@ constructor() {
       });
   }
 
+  componentWillReceiveProps() {
+    console.log('I AM IN PROPS--->', this.props);
+  }
+
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
