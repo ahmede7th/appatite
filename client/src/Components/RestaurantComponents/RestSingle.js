@@ -18,6 +18,7 @@ class RestSingle extends Component {
       favoriteUsers: null,
       id: null,
       owner: false,
+      displayMessage: '',
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
@@ -62,7 +63,7 @@ class RestSingle extends Component {
                   'USERS WHO LIKE THE RESTAURANT--->',
                   users.data.data,
                 );
-                const user = users.data.data.filter(function(user) {
+                const user = users.data.data.filter(function (user) {
                   return (
                     user.username === window.localStorage.getItem('username')
                   );
@@ -71,6 +72,15 @@ class RestSingle extends Component {
                 if (user.length > 0) {
                   this.setState({
                     favorite: true,
+                    displayMessage: 'Users who favorited this restaurant: ',
+                  });
+                } else if (users.data.data.length > 0) {
+                  this.setState({
+                    displayMessage: 'Users who favorited this restaurant: ',
+                  });
+                } else {
+                  this.setState({
+                    displayMessage: '',
                   });
                 }
 
@@ -131,8 +141,11 @@ class RestSingle extends Component {
 
   renderFavoriteUsers() {
     let linkRoute;
+    if (this.state.favoriteUsers.length === 0) {
+      return '';
+    }
+
     return this.state.favoriteUsers.map((el, id) => {
-      console.log('HELP', el);
       if (el.username === window.localStorage.getItem('username')) {
         linkRoute = `/user/account`;
       } else {
@@ -184,7 +197,7 @@ class RestSingle extends Component {
           {this.state.favoriteNumber > 0 ? `Number of favorites: ${this.state.favoriteNumber}` : ''}
         </p>
         <p>
-          {this.state.favoriteUsers ? `Users who Favorite:` : ''}
+          {this.state.favoriteUsers ? this.state.displayMessage : ''}
           {this.state.favoriteUsers ? this.renderFavoriteUsers() : ''}
         </p>
         {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
