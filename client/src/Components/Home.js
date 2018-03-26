@@ -9,7 +9,7 @@ import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
 import RestMap from '../Components/RestaurantComponents/RestMap';
 import RestSingle from '../Components/RestaurantComponents/RestSingle';
-import {Button} from 'reactstrap';
+import { Collapse, Button, Card } from 'reactstrap';
 
 class Home extends Component {
 constructor() {
@@ -192,9 +192,35 @@ constructor() {
           <div className="jumbotron">
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
-            <Button color='primary' onClick={this.buttonClick}>ADD</Button>
+            {/* <Button color='primary' onClick={this.buttonClick}>ADD</Button> */}
 
-            {this.state.show ? <RestCreate /> : ''}
+            {/* {this.state.show ? <RestCreate /> : ''} */}
+
+
+
+
+
+            <div>
+                  <Button color="primary" onClick={this.buttonClick} style={{ marginBottom: '1rem' }}>ADD</Button>
+                  <Collapse isOpen={this.state.show}>
+                    <Card>
+                        <RestCreate />
+                    </Card>
+                  </Collapse>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
             {this.state.gotUsers ? this.displayUsers() : ''}
 
             <div className="row">

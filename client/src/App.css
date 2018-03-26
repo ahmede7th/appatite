@@ -9,7 +9,7 @@
   z-index: 15;
 }
 
-.home{
+.home {
   font-size: 20px;
   font-style: normal;
   font-variant: normal;
@@ -20,12 +20,12 @@
   z-index: 15;
 }
 
-.pass{
+.pass {
   color: red;
   text-shadow: 2px 2px 4px red;
 }
 
-.header{
+.header {
   z-index: 20;
   /* position: fixed;  */
   width: 100%;
@@ -89,7 +89,7 @@ input {
   border-color: green;
 }
 
-.form__input:valid + .icon::after {
+.form__input:valid+.icon::after {
   content: '😃';
 }
 
@@ -97,7 +97,7 @@ input {
   border-color: red;
 }
 
-.form__input:invalid + .icon::after {
+.form__input:invalid+.icon::after {
   content: '😳';
 }
 

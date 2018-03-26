@@ -45,35 +45,34 @@ class Welcome extends Component {
   }
 
   renderWelcome() {
-    return (
-      <div className="welcome">
+    return (<div className="welcome">
 
-
-        <div>
-        <Button color="primary" size="lg" onClick={this.toggle} block style={{position:'center', marginBottom: '1rem'}}>Welcome</Button>
-        </div>
-
-
-        <Collapse isOpen={this.state.collapse}>
-              <div>
-              <h1>App-A-TITE</h1>
-              <p>
-                Are you hungry? Are you always looking for places to eat only to find a 5 star rated restaurant written by people who have no idea what good food is? You have come to the right place
-              </p>
-              <div>
-                <Button outline="outline" color="primary">
-                  <a href="/register">Sign up</a>
-                </Button>
-                <Button outline="outline" color="primary">
-                  <a href="/login">Log In</a>
-                </Button>
-              </div>
-            </div>
-
-        </Collapse>
+      <div>
+        <Button color="primary" size="lg" onClick={this.toggle} block="block" style={{
+            position: 'center',
+            marginBottom: '1rem'
+          }}>Welcome</Button>
       </div>
 
-  )}
+      <Collapse isOpen={this.state.collapse}>
+        <div>
+          <h1>App-A-TITE</h1>
+          <p>
+            Are you hungry? Are you always looking for places to eat only to find a 5 star rated restaurant written by people who have no idea what good food is? You have come to the right place
+          </p>
+          <div>
+            <Button outline="outline" color="primary">
+              <a href="/register">Sign up</a>
+            </Button>
+            <Button outline="outline" color="primary">
+              <a href="/login">Log In</a>
+            </Button>
+          </div>
+        </div>
+
+      </Collapse>
+    </div>)
+  }
 
   render() {
     return this.state.finishRender
