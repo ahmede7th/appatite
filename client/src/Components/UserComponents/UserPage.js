@@ -144,14 +144,14 @@ class Home extends Component {
       insertString = 's';
     }
 
-    return (
-      <div>
-        <p>
-          User {' ' + this.props.match.params.id + ' '}
-          has {this.state.numFollowers[0].count} follower{insertString}!
-        </p>
-      </div>
-    );
+    return (<div>
+      <p>
+        User {this.props.match.params.id+ ' '}
+        has
+        {' '+this.state.numFollowers[0].count+' '}
+        follower{insertString}!
+      </p>
+    </div>);
   }
 
   render() {

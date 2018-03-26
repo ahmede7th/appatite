@@ -39,7 +39,8 @@ class Home extends Component {
       return `${window.localStorage.getItem('username')} has no favorites!`;
     } else {
       return (<div>
-        <p>{window.localStorage.getItem('username')} favorited:
+        <p>{window.localStorage.getItem('username')+' '}
+           favorited:
           <br/>{this.userRestaurantFavorites()}</p>
       </div>);
     }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Button} from 'reactstrap'
 
 class RestCreate extends Component {
   constructor() {
@@ -45,11 +46,14 @@ class RestCreate extends Component {
     return (<div className="restaurant-create">
       <h1>Add a restaurant</h1>
       <form onSubmit={this.formSubmit}>
-        <input type="text" name="name" onChange={this.inputChange} placeholder="name of business"/>
-        <input type="text" name="cuisine" onChange={this.inputChange} placeholder="type of cuisine"/>
-        <input type="text" name="img_src" onChange={this.inputChange} placeholder="image url"/>
-        <input type="test" name="loc" onChange={this.inputChange} placeholder="location"/>
-        <input type="submit" value="submit"/>
+        <input class="form__input" pattern=".{1,}" required="required" type="text" name="name" onChange={this.inputChange} placeholder="name of business"/>
+        <input class="form__input" pattern=".{1,}" required="required" type="text" name="cuisine" onChange={this.inputChange} placeholder="type of cuisine"/>
+        <input class="form__input" pattern=".{1,}" required="required" type="text" name="img_src" onChange={this.inputChange} placeholder="image url"/>
+        <input class="form__input" pattern=".{1,}" required="required" type="test" name="loc" onChange={this.inputChange} placeholder="location"/>
+        <br />
+        <Button color='primary' type="submit" value="Submit">
+          Submit
+        </Button>
       </form>
       {/* {this.state.fireRedirect ? <Redirect to="/main" /> : ''} */}
     </div>);

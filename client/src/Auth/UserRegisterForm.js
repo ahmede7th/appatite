@@ -28,27 +28,28 @@ export default class UserRegisterForm extends Component {
   }
 
   render() {
-    return (<div>
+
+    return (<div className="form__field">
       <form onSubmit={this.handleSubmit}>
         <label>
           First Name -
-          <input type="text" name="fname" onChange={this.handleChange} value={this.state.fname}/>
+          <input class="form__input" pattern=".{1,}" required="required" type="text" name="fname" onChange={this.handleChange} value={this.state.fname}/>
         </label>
         <label>
           Last Name -
-          <input type="text" name="lname" onChange={this.handleChange} value={this.state.lname}/>
+          <input class="form__input" pattern=".{1,}" required="required" type="text" name="lname" onChange={this.handleChange} value={this.state.lname}/>
         </label>
         <label>
           User Name -
-          <input type="text" name="username" onChange={this.handleChange} value={this.state.username}/>
+          <input class="form__input" pattern=".{1,}" required="required" type="text" name="username" onChange={this.handleChange} value={this.state.username}/>
         </label>
         <label>
           Password -
-          <input type="password" name="password" onChange={this.handleChange} value={this.state.password}/>
+          <input class="form__input" pattern=".{4,}" required="required" type="password" name="password" onChange={this.handleChange} value={this.state.password}/>
         </label>
         <label>
           About Me-
-          <input type="text" name="about_me" onChange={this.handleChange} value={this.state.about_me}/>
+          <input class="form__input" pattern=".{1,}" required="required" type="text" name="about_me" onChange={this.handleChange} value={this.state.about_me}/>
         </label>
         <br/>
         <Button color='primary' type="submit" value="Submit">

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
@@ -9,10 +9,10 @@ import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
 import RestMap from '../Components/RestaurantComponents/RestMap';
 import RestSingle from '../Components/RestaurantComponents/RestSingle';
-import {Button} from 'reactstrap';
+import {Collapse, Button, Card} from 'reactstrap';
 
 class Home extends Component {
-constructor() {
+  constructor() {
     super();
     this.state = {
       apiDataLoaded: false,
@@ -31,6 +31,7 @@ constructor() {
       reviews: false,
       restaurant: null,
       update: false,
+      showUsers: false
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -43,6 +44,7 @@ constructor() {
     this.renderMap = this.renderMap.bind(this);
     this.renderRestaurant = this.renderRestaurant.bind(this);
     this.showOne = this.showOne.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {
@@ -69,31 +71,26 @@ constructor() {
       .catch(err => {
         console.log('nope :', err);
       });
+    }).catch(err => {
+      console.log('nope :', err);
+    });
   }
 
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
-    this.setState({
-      logoutUser: true,
-    });
+    this.setState({logoutUser: true});
   }
 
   getLocation() {
-    axios
-      .request({
-        method: 'get',
-        url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac',
-      })
-      .then(result => {
-        this.setState({
-          location: 'restaurants near ' + result.data.postal,
-          showLocation: true,
-        });
-      })
-      .catch(err => {
-        console.log('error in geolocation');
+    axios.request({method: 'get', url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac'}).then(result => {
+      this.setState({
+        location: 'restaurants near ' + result.data.postal,
+        showLocation: true
       });
+    }).catch(err => {
+      console.log('error in geolocation');
+    });
   }
 
   buttonClick() {
@@ -112,15 +109,13 @@ constructor() {
     this.getRestaurants(index);
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
-        return (
-          <div className="border-top border-primary" key={i}>
-            <br/>
-            <Restaurants restaurants={el} key={el.id} />
-            <Button color='primary' onClick={this.showOne} value={el.id}>
-              Click for more details
-            </Button>
-          </div>
-        );
+        return (<div className="border-top border-primary" key={i}>
+          <br/>
+          <Restaurants restaurants={el} key={el.id}/>
+          <Button color='primary' onClick={this.showOne} value={el.id}>
+            Click for more details
+          </Button>
+        </div>);
       });
     }
   }
@@ -158,46 +153,73 @@ constructor() {
   displayUsers() {
     if (this.state.users) {
       return this.state.users.map(el => {
-        return (
-          <Link key={el.id} to={`/user/page/${el.username}`}>
-            <p>{el.username}</p>
-          </Link>
-        );
+        return (<Link key={el.id} to={`/user/page/${el.username}`}>
+          <p>{el.username}</p>
+        </Link>);
       });
     }
   }
 
   renderMap() {
     if (this.state.showLocation) {
-      return (
-        <div>
-          <p className="text-center">Restaurants near you</p>
-          <RestMap location={this.state.location} />
-        </div>
-      );
+      return (<div>
+        <p className="text-center">Restaurants near you</p>
+        <RestMap location={this.state.location}/>
+      </div>);
     }
   }
 
-  renderReviews() {}
+  toggle() {
+    if (this.state.gotUsers) {
+      this.setState({
+        showUsers: !this.state.showUsers
+      })
+    }
+  }
+  // renderReviews() {}
 
   render() {
     if (this.state.logoutUser) {
-      return <Welcome />;
+      return <Welcome/>;
     } else {
-      return (
-        <div className="home">
-          <Header logout={this.logout} />
-          <div className="jumbotron">
-            <small>Don't see a restaurant you want to review? ADD!</small>
-            <br />
-            <Button color='primary' onClick={this.buttonClick}>ADD</Button>
+      return (<div className="home">
+        <Header logout={this.logout}/>
+        <div className="jumbotron">
+          <small>Don't see a restaurant you want to review? ADD!</small>
+          <br/>
+          <div>
+            <Button color="primary" onClick={this.buttonClick} style={{
+                marginBottom: '1rem'
+              }}>ADD</Button>
+            <Collapse isOpen={this.state.show}>
+              <Card>
+                <RestCreate/>
+              </Card>
+            </Collapse>
+          </div>
 
-            {this.state.show ? <RestCreate /> : ''}
-            {this.state.gotUsers ? this.displayUsers() : ''}
+          <div>
+            <Button color="primary" onClick={this.toggle} style={{
+                marginBottom: '1rem'
+              }}>Users</Button>
+            <Collapse isOpen={this.state.showUsers}>
+              <Card>
+                {this.displayUsers()}
+              </Card>
+            </Collapse>
+          </div>
 
-            <div className="row">
-              <div className="col-sm" id="left">
-                {this.state.apiDataLoaded && !this.state.next20
+          {/* {
+            this.state.gotUsers
+              ? this.displayUsers()
+              : ''
+          } */
+          }
+
+          <div className="row">
+            <div className="col-sm" id="left">
+              {
+                this.state.apiDataLoaded && !this.state.next20
                   ? this.mainListing()
                   : ''}
                 {/* {this.state.next20
@@ -211,11 +233,11 @@ constructor() {
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
-            <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
           </div>
-          <Footer />
+          <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
         </div>
-      );
+        <Footer/>
+      </div>);
     }
   }
 }
