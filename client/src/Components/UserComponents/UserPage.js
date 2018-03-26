@@ -187,7 +187,7 @@ class Home extends Component {
           <Button color="primary" onClick={this.follow}>
             {this.state.follower ? 'Follow?' : 'Unfollow?'}
           </Button>
-          <button onClick={this.logout}>Logout?</button>
+          <Button onClick={this.logout}>Logout?</Button>
           {/* <Footer /> */}
         </div>
       );

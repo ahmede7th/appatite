@@ -27,10 +27,10 @@ class RestSingle extends Component {
 
   componentWillReceiveProps(nextprops) {
     let getId;
-    if (!this.props.id) {
-      getId = this.props.match.params.id;
+    if (!nextprops.id) {
+      getId = nextprops.match.params.id;
     } else {
-      getId = this.props.id;
+      getId = nextprops.id;
     }
 
     return axios

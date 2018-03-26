@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import {Button} from 'reactstrap'
 
 class ReviewEdit extends Component {
   constructor() {
@@ -69,8 +70,8 @@ class ReviewEdit extends Component {
       console.log('Props id', this.props.review.id);
       return (
         <div>
-          <button onClick={this.buttonClick}>Edit</button>
-          <button onClick={this.deleteReview}>Delete</button>
+          <Button color ='primary' onClick={this.buttonClick}>Edit</Button>
+          <Button color='primary' onClick={this.deleteReview}>Delete</Button>
           {this.state.click ? (
             <form onSubmit={this.submitForm}>
               <input type="hidden" name="id" value={this.props.review.id} />

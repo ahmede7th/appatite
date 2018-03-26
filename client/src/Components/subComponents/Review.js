@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import {Button} from 'reactstrap';
 class Review extends Component {
   constructor() {
     super();
@@ -160,10 +160,10 @@ class Review extends Component {
     return (
       <div className="review">
         {this.state.initialReviews ? this.showReviews() : ''}
-        <button onClick={this.buttonClickAll}>All Reviews</button>
+        <Button color='primary' onClick={this.buttonClickAll}>All Reviews</Button>
         {this.state.showAll ? this.showAllReviews() : ''}
         <div class="form-group">
-          <button onClick={this.buttonClickForm}>Review</button>
+          <Button color='primary' onClick={this.buttonClickForm}>Review</Button>
           <div class="col-md-4">
             {this.state.showForm ? (
               <form onSubmit={this.formSubmit}>
