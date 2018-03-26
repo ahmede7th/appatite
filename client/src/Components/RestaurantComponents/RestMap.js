@@ -5,8 +5,8 @@ const RestMap = (props) => {
 		<div className="map">
 		<br/>
 			<iframe className="embed-responsive"
-					width={"600"}
-					height={"400"}
+					width={300}
+					height={300}
 					src={`https://www.google.com/maps/embed/v1/search?q=${props.location}&key=AIzaSyCgPb79qOvgUSyoGsPIhQSDnfNl5_DFasM`} allowfullscreen>
 			</iframe>
 		</div>

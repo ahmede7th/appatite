@@ -26,13 +26,13 @@ class RestSingle extends Component {
     this.renderFavoriteUsers = this.renderFavoriteUsers.bind(this);
     this.renderOwner = this.renderOwner.bind(this);
   }
-
+  
   componentDidMount() {
     let getId;
-    if (!this.props.id) {
+    if (!nextProps.id) {
       getId = this.props.match.params.id;
     } else {
-      getId = this.props.id;
+      getId = nextProps.id;
     }
 
     return axios

@@ -10,9 +10,6 @@ const Restaurants = props => {
   return (
     <div className="restaurant">
       <h1>{props.restaurants.name}</h1>
-      <p>
-        Rating:
-        <small>{props.restaurants.rating}</small>
         <ReactStars
           count={props.restaurants.rating}
           onChange={ratingChanged}
@@ -21,13 +18,13 @@ const Restaurants = props => {
           color1={'#ffd700'}
           position={'right'}
         />
-      </p>
       <p>
         Cuisine:
         <strong>{props.restaurants.cuisine}</strong>
       </p>
       <img
         className="img-fluid img-thumbnail"
+        width={"80%"}
         src={props.restaurants.img_src}
         alt="restaurant"
       />
