@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
-import Header from '../subComponents/Header';
 import RestMap from './RestMap';
 import Review from '../subComponents/Review';
 import { Button } from 'reactstrap';
@@ -55,17 +54,12 @@ class RestSingle extends Component {
         axios
           .get(`/api/favorites/restaurant/num/${this.state.id}`)
           .then(favorites => {
-            console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
             this.setState({
               favoriteNumber: favorites.data.data[0].count,
             });
             axios
               .get(`/api/favorites/restaurant/users/${this.state.id}`)
               .then(users => {
-                console.log(
-                  'USERS WHO LIKE THE RESTAURANT--->',
-                  users.data.data,
-                );
                 const user = users.data.data.filter(function (user) {
                   return (
                     user.username === window.localStorage.getItem('username')
@@ -106,7 +100,6 @@ class RestSingle extends Component {
 
   componentWillReceiveProps(nextProps) {
     let getId;
-    console.log('WHY NOT NOW GET PROPS--->', nextProps.id);
     if (!nextProps.id) {
       getId = this.props.match.params.id;
     } else {
@@ -116,7 +109,6 @@ class RestSingle extends Component {
     return axios
       .get(`/api/restaurant/${getId}`)
       .then(restaurant => {
-        console.log('HELLO', window.localStorage.getItem('username'), restaurant.data.data[0].creator);
         if (window.localStorage.getItem('username') === restaurant.data.data[0].creator) {
           this.setState({
             owner: true,
@@ -132,7 +124,6 @@ class RestSingle extends Component {
         axios
           .get(`/api/favorites/restaurant/num/${this.state.id}`)
           .then(favorites => {
-            console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
             this.setState({
               favoriteNumber: favorites.data.data[0].count,
             });
@@ -260,7 +251,6 @@ class RestSingle extends Component {
   }
 
   render() {
-    console.log('why not--->', this.state.continue);
     if (this.state.continue) {
       return (
         <div className="home">

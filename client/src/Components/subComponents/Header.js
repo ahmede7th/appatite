@@ -1,14 +1,10 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
-import TokenService from '../../Auth/Services/TokenService';
-import SearchBar from '../SearchBar';
 import {Link} from 'react-router-dom';
-import {Collapse, Button, CardBody, Card} from 'reactstrap';
+import {Button} from 'reactstrap';
 
-const refresh = () => {
-  window.location.reload()
-}
+// const refresh = () => {
+//   window.location.reload()
+// }
 
 const Header = (props) => {
   return (<div className="header">

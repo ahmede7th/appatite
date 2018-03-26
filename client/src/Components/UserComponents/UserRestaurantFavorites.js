@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import Header from '../subComponents/Header';
 
 class Home extends Component {
   constructor() {
@@ -17,9 +16,7 @@ class Home extends Component {
 
   componentDidMount() {
     const user = window.localStorage.getItem('id');
-    console.log('INSIDE COMPONENT DID MOUNT USERFAVORITES--->', user);
     axios.get(`/api/favorites/user/restaurants/${user}`).then(favorites => {
-      console.log('USER FAVORITES ->', favorites.data.data);
       this.setState({apiDataLoaded: true, apiData: favorites.data.data});
     }).catch(err => {
       console.log('nope :', err);
@@ -38,7 +35,6 @@ class Home extends Component {
   }
 
   renderUserFavorites() {
-    let displayMessage;
     if (this.state.apiData.length === 0) {
       return `${window.localStorage.getItem('username')} has no favorites!`;
     } else {
