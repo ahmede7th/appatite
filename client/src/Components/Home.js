@@ -118,7 +118,8 @@ constructor() {
     if (this.state.restaurants) {
       return this.state.restaurants.map((el, i) => {
         return (
-          <div key={i}>
+          <div className="border-top border-primary" key={i}>
+            <br/>
             <Restaurants restaurants={el} key={el.id} />
             <button onClick={this.showOne} value={el.id}>
               Click for more details
@@ -188,16 +189,14 @@ constructor() {
         <div className="home">
           <Header logout={this.logout} />
           <div className="jumbotron">
-
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
             <button onClick={this.buttonClick}>ADD</button>
-
             {this.state.show ? <RestCreate /> : ''}
             {this.state.gotUsers ? this.displayUsers() : ''}
 
             <div className="row">
-              <div className="col-sm">
+              <div className="col-sm" id="left">
                 {this.state.apiDataLoaded && !this.state.next20
                   ? this.mainListing()
                   : ''}
@@ -206,16 +205,14 @@ constructor() {
                   : ''}
               </div>
 
-                <div className="col-sm">
+                <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
                   {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
-
-            <button onClick={this.updateMain}>See More</button>
+            <button onClick={this.updateMain} id="seemore">See More</button>
           </div>
-          <button onClick={this.logout}>Logout?</button>
           <Footer />
         </div>
       );
