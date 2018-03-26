@@ -179,7 +179,7 @@ class Home extends Component {
     } else {
       return (<div className="home">
         <Header logout={this.logout}/>
-        <div className="jumbotron">
+        <div className="jumbotron" style={{background: 'white'}}>
           <small>Don't see a restaurant you want to review? ADD!</small>
           <br/>
           <div>
@@ -221,15 +221,15 @@ class Home extends Component {
                   ? this.mainListing(`${this.state.count}`)
                   : ''} */}
               </div>
-
                 <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
                   {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
+              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
           </div>
-          <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
+      
         <Footer/>
         </div>);
     }
