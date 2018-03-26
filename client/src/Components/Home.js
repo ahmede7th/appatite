@@ -236,13 +236,8 @@ class Home extends Component {
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
-              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
           </div>
-<<<<<<< HEAD
-      
-=======
           <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
->>>>>>> c958caede116bd3d9db50299d180f5174e0d4022
         <Footer/>
         </div>);
     }
