@@ -22,7 +22,7 @@ class Home extends Component {
       logoutUser: false,
       location: null,
       restaurants: [],
-      next20: false,
+      next20: true,
       gotLocation: false,
       users: null,
       gotUsers: false,
@@ -38,13 +38,14 @@ class Home extends Component {
     this.logout = this.logout.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.mainListing = this.mainListing.bind(this);
-    this.updateMain = this.updateMain.bind(this);
+    // this.updateMain = this.updateMain.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.displayUsers = this.displayUsers.bind(this);
     this.renderMap = this.renderMap.bind(this);
     this.renderRestaurant = this.renderRestaurant.bind(this);
     this.showOne = this.showOne.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.updateNext20 = this.updateNext20.bind(this);
   }
 
   componentDidMount() {
@@ -63,12 +64,10 @@ class Home extends Component {
               users: foundUsers.data.data,
               gotUsers: true,
             });
-          })
-          .catch(err => {
+          }).catch(err => {
             console.log('FAILED IN GETTING USERS--->', err);
           });
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log('nope :', err);
       });
   }
@@ -97,9 +96,11 @@ class Home extends Component {
   }
 
   getRestaurants(startIndex) {
-    this.state.apiData.splice(startIndex, 5).map((el, i) => {
-      this.state.restaurants.push(el);
-    });
+    if (this.state.next20) {
+      this.state.apiData.splice(startIndex, 5).map((el, i) => {
+        this.state.restaurants.push(el);
+      });
+    }
   }
 
   mainListing(index) {
@@ -132,19 +133,25 @@ class Home extends Component {
     );
   }
 
-  updateMain() {
+  // updateMain() {
+  //   this.setState({
+  //     next20: !this.state.next20,
+  //   });
+  // }
+
+  updateNext20() {
     let iter;
+    const newCount = this.state.count;
+    console.log('NEXT 20 IN UPDATE MAIN--->', this.state.next20);
     if (this.state.next20) {
       iter = 1;
     } else {
       iter = 0;
     }
 
-    const newCount = this.state.count;
     this.setState({
-      next20: !this.state.next20,
-      count: newCount + iter,
-    });
+      count: newCount + 1,
+    })
   }
 
   displayUsers() {
@@ -210,8 +217,8 @@ class Home extends Component {
           <div className="row">
             <div className="col-sm" id="left">
               {
-                this.state.apiDataLoaded && !this.state.next20
-                  ? this.mainListing()
+                this.state.apiDataLoaded
+                  ? this.mainListing(this.state.count)
                   : ''}
               </div>
 
@@ -222,11 +229,10 @@ class Home extends Component {
               </div>
               <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
             </div>
-        <Footer />
-      </div>
-            </div>
-
-      );
+          </div>
+          <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
+        <Footer/>
+        </div>);
     }
   }
 }
