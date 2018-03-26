@@ -80,6 +80,7 @@ class Home extends Component {
 
   getLocation() {
     axios.request({method: 'get', url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac'}).then(result => {
+      console.log(result);
       this.setState({
         location: 'restaurants near ' + result.data.postal,
         showLocation: true
@@ -136,11 +137,6 @@ class Home extends Component {
     let iter;
     const newCount = this.state.count;
     console.log('NEXT 20 IN UPDATE MAIN--->', this.state.next20);
-    if (this.state.next20) {
-      iter = 1;
-    } else {
-      iter = 0;
-    }
 
     this.setState({
       count: newCount + 1,
@@ -180,6 +176,22 @@ class Home extends Component {
       return <Welcome/>;
     } else {
       return (<div className="home">
+        <div>
+        <div style={{background: 'white'}}>
+        <Header logout={this.logout}/>
+        <div className="jumbotron" style={{background: 'white'}}>
+          <small>Don't see a restaurant you want to review? ADD!</small>
+          <br/>
+          <div>
+            <Button color="primary" onClick={this.buttonClick} style={{
+                marginBottom: '1rem'
+              }}>ADD</Button>
+            <Collapse isOpen={this.state.show}>
+              <Card>
+                <RestCreate />
+              </Card>
+            </Collapse>
+          </div>
 
         <div style={{
             background: 'white'
@@ -209,33 +221,34 @@ class Home extends Component {
               </Collapse>
             </div>
 
+          {/* {
+            this.state.gotUsers
+              ? this.displayUsers()
+              : ''
+          } */
+          }
+
           <div className="row">
             <div className="col-sm" id="left">
               {
                 this.state.apiDataLoaded
                   ? this.mainListing(this.state.count)
                   : ''}
+                {/* {this.state.next20
+                  ? this.mainListing(`${this.state.count}`)
+                  : ''} */}
               </div>
-
-              <div className="col-sm" id="right">
-                {
-                  this.state.map
-                    ? this.renderMap()
-                    : ''
-                }
-                {
-                  this.state.restaurant
-                    ? this.renderRestaurant()
-                    : ''
-                }
-              </div>
-              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
+                <div className="col-sm" id="right">
+                  {this.state.map ? this.renderMap() : ''}
+                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
+                  {this.state.restaurant ? this.renderRestaurant() : ''}
+                </div>
             </div>
+            <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
           </div>
-          <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
-        <Footer/>
-      </div>
-        </div>);
+          <Footer/>
+
+      </div>);
     }
   }
 }
