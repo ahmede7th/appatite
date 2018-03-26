@@ -28,7 +28,6 @@ class RestSingle extends Component {
   }
 
   componentDidMount() {
-    console.log('I AM A BEAUTIFUL BEING--->', this.props.id);
     let getId;
     if (!this.props.id) {
       getId = this.props.match.params.id;
