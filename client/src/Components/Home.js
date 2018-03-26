@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
 import Restaurants from './RestaurantComponents/Restaurants';
 import Welcome from './Welcome';
@@ -48,29 +48,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`/api/restaurant`)
-      .then(restaurants => {
-        this.getLocation();
-        this.setState({
-          apiDataLoaded: true,
-          apiData: restaurants.data.data,
-        });
-        axios
-          .get(`/api/user/all/${window.localStorage.getItem('username')}`)
-          .then(foundUsers => {
-            this.setState({
-              users: foundUsers.data.data,
-              gotUsers: true,
-            });
-          })
-          .catch(err => {
-            console.log('FAILED IN GETTING USERS--->', err);
-          });
-      })
-      .catch(err => {
-        console.log('nope :', err);
+    axios.get(`/api/restaurant`).then(restaurants => {
+      this.getLocation();
+      this.setState({apiDataLoaded: true, apiData: restaurants.data.data});
+      axios.get(`/api/user/all/${window.localStorage.getItem('username')}`).then(foundUsers => {
+        this.setState({users: foundUsers.data.data, gotUsers: true});
+      }).catch(err => {
+        console.log('FAILED IN GETTING USERS--->', err);
       });
+    }).catch(err => {
+      console.log('nope :', err);
+    });
   }
 
   logout(ev) {
@@ -118,18 +106,11 @@ class Home extends Component {
   }
 
   showOne(e) {
-    this.setState({
-      restaurant: e.target.value,
-      map: false,
-    });
+    this.setState({restaurant: e.target.value, map: false});
   }
 
   renderRestaurant() {
-    return (
-      <RestSingle
-        id={this.state.restaurant}
-      />
-    );
+    return (<RestSingle id={this.state.restaurant}/>);
   }
 
   updateMain() {
@@ -143,7 +124,7 @@ class Home extends Component {
     const newCount = this.state.count;
     this.setState({
       next20: !this.state.next20,
-      count: newCount + iter,
+      count: newCount + iter
     });
   }
 
@@ -180,53 +161,61 @@ class Home extends Component {
       return <Welcome/>;
     } else {
       return (<div className="home">
-        <div style={{background:'white'}}>
-        <Header logout={this.logout}/>
-        <div className="jumbotron">
-          <small>Don't see a restaurant you want to review? ADD!</small>
-          <br/>
-          <div>
-            <Button color="primary" onClick={this.buttonClick} style={{
-                marginBottom: '1rem'
-              }}>ADD</Button>
-            <Collapse isOpen={this.state.show}>
-              <Card>
-                <RestCreate/>
-              </Card>
-            </Collapse>
-          </div>
-
-          <div>
-            <Button color="primary" onClick={this.toggle} style={{
-                marginBottom: '1rem'
-              }}>Users</Button>
-            <Collapse isOpen={this.state.showUsers}>
-              <Card>
-                {this.displayUsers()}
-              </Card>
-            </Collapse>
-          </div>
-
-          <div className="row">
-            <div className="col-sm" id="left">
-              {
-                this.state.apiDataLoaded && !this.state.next20
-                  ? this.mainListing()
-                  : ''}
-              </div>
-
-                <div className="col-sm" id="right">
-                  {this.state.map ? this.renderMap() : ''}
-                  {this.state.restaurant ? this.renderRestaurant() : ''}
-                </div>
-              </div>
-              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
+        <div style={{
+            background: 'white'
+          }}>
+          <Header logout={this.logout}/>
+          <div className="jumbotron">
+            <small>Don't see a restaurant you want to review? ADD!</small>
+            <br/>
+            <div>
+              <Button color="primary" onClick={this.buttonClick} style={{
+                  marginBottom: '1rem'
+                }}>ADD</Button>
+              <Collapse isOpen={this.state.show}>
+                <Card>
+                  <RestCreate/>
+                </Card>
+              </Collapse>
             </div>
-        <Footer />
-      </div>
+            <div>
+              <Button color="primary" onClick={this.toggle} style={{
+                  marginBottom: '1rem'
+                }}>Users</Button>
+              <Collapse isOpen={this.state.showUsers}>
+                <Card>
+                  {this.displayUsers()}
+                </Card>
+              </Collapse>
             </div>
 
-      );
+            <div className="row">
+              <div className="col-sm" id="left">
+                {
+                  this.state.apiDataLoaded && !this.state.next20
+                    ? this.mainListing()
+                    : ''
+                }
+              </div>
+
+              <div className="col-sm" id="right">
+                {
+                  this.state.map
+                    ? this.renderMap()
+                    : ''
+                }
+                {
+                  this.state.restaurant
+                    ? this.renderRestaurant()
+                    : ''
+                }
+              </div>
+            </div>
+            <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
+          </div>
+          <Footer/>
+        </div>
+      </div>);
     }
   }
 }

@@ -36,7 +36,7 @@ class Home extends Component {
 
   renderUserFavorites() {
     if (this.state.apiData.length === 0) {
-      return `${window.localStorage.getItem('username')} has no favorites!`;
+      return `${window.localStorage.getItem('username')+' '} has no favorites!`;
     } else {
       return (<div>
         <p>{window.localStorage.getItem('username')+' '}
