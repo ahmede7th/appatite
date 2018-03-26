@@ -1,6 +1,6 @@
 ## APPatite
 
-# A restaraunt review site
+# A restaurant review site
 
 Welcome to APP-A-TITE.  This app was developed in collaboration with classmates during my career at General Assembly.  We created this in order for the public to be able to read and review their favorite/least favorite restaraunts.  Reviews posted on a particular restaraunt will feature 3rd party reviews from sites such as yelp and google reviews.  It allows the users to form a better opinion of a restaraunt. 
 
