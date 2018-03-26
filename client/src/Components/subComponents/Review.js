@@ -61,7 +61,7 @@ class Review extends Component {
   }
 
   formSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     axios({
       method: 'POST',
       url: `/api/review/${this.props.name}`,
@@ -139,32 +139,43 @@ class Review extends Component {
   }
 
   render() {
-    return (<div className="review">
-      {
-        this.state.initialReviews
-          ? this.showReviews()
-          : ''
-      }
-      <Button color='primary' onClick={this.buttonClickAll}>All Reviews</Button>
-      {
-        this.state.showAll
-          ? this.showAllReviews()
-          : ''
-      }
-      <div class="form-group">
-        <Button color='primary' onClick={this.buttonClickForm}>Review</Button>
-        <div class="col-md-4">
-          {
-            this.state.showForm
-              ? (<form onSubmit={this.formSubmit}>
-                <input type="hidden" name={window.localStorage.getItem('username')}/>
-                <input type="hidden" name="restaurant_name" value={this.props.name}/>
-                <textarea class="form-control" type="text" rows="3" onChange={this.inputChange} name="content" placeholder={`leave a review for ${
-                  this.state.restaurantName}`}/>
-                <input type="submit" value="submit"/>
-              </form>)
-              : ('')
-          }
+    return (
+      <div className="review">
+        {this.state.initialReviews ? this.showReviews() : ''}
+        {this.state.showAll ? this.showAllReviews() : ''}
+        <button onClick={this.buttonClickAll}>All Reviews</button>
+        <br/>
+        <br/>
+        <div class="form-group">
+          <button onClick={this.buttonClickForm}>Leave a Review</button>
+          <div class="col align-self-center">
+            {this.state.showForm ? (
+              <form onSubmit={this.formSubmit}>
+                <input
+                  type="hidden"
+                  name={window.localStorage.getItem('username')}
+                />
+                <input
+                  type="hidden"
+                  name="restaurant_name"
+                  value={this.props.name}
+                />
+                <textarea
+                  className="form-control"
+                  type="text"
+                  rows="3"
+                  onChange={this.inputChange}
+                  name="content"
+                  placeholder={`leave a review for ${
+                    this.state.restaurantName
+                  }`}
+                />
+                <input type="submit" value="submit" />
+              </form>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
     </div>);
