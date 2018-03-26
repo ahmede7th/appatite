@@ -175,25 +175,8 @@ class Home extends Component {
     if (this.state.logoutUser) {
       return <Welcome/>;
     } else {
-      return (<div className="home">
-        <div>
-        <div style={{background: 'white'}}>
-        <Header logout={this.logout}/>
-        <div className="jumbotron" style={{background: 'white'}}>
-          <small>Don't see a restaurant you want to review? ADD!</small>
-          <br/>
-          <div>
-            <Button color="primary" onClick={this.buttonClick} style={{
-                marginBottom: '1rem'
-              }}>ADD</Button>
-            <Collapse isOpen={this.state.show}>
-              <Card>
-                <RestCreate />
-              </Card>
-            </Collapse>
-          </div>
-
-        <div style={{
+      return (
+        <div className='home' style={{
             background: 'white'
           }}>
           <Header logout={this.logout}/>
@@ -221,22 +204,12 @@ class Home extends Component {
               </Collapse>
             </div>
 
-          {/* {
-            this.state.gotUsers
-              ? this.displayUsers()
-              : ''
-          } */
-          }
-
           <div className="row">
             <div className="col-sm" id="left">
               {
                 this.state.apiDataLoaded
                   ? this.mainListing(this.state.count)
                   : ''}
-                {/* {this.state.next20
-                  ? this.mainListing(`${this.state.count}`)
-                  : ''} */}
               </div>
                 <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
@@ -247,8 +220,9 @@ class Home extends Component {
             <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
           </div>
           <Footer/>
+        </div>
 
-      </div>);
+);
     }
   }
 }
