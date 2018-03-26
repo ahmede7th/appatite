@@ -176,7 +176,7 @@ class Review extends Component {
                     this.state.restaurantName
                   }`}
                 />
-                <input type="submit" value="submit" />
+                <input class="btn btn-primary" type="submit" value="submit"/>
               </form>
             ) : (
               ''
