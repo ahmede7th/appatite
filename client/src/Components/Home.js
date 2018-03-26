@@ -63,17 +63,12 @@ class Home extends Component {
               users: foundUsers.data.data,
               gotUsers: true,
             });
-          })
-          .catch(err => {
+          }).catch(err => {
             console.log('FAILED IN GETTING USERS--->', err);
           });
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log('nope :', err);
       });
-    }).catch(err => {
-      console.log('nope :', err);
-    });
   }
 
   logout(ev) {
@@ -235,9 +230,8 @@ class Home extends Component {
             </div>
           </div>
           <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
-        </div>
         <Footer/>
-      </div>);
+        </div>);
     }
   }
 }
