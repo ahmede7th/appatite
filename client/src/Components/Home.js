@@ -143,11 +143,6 @@ class Home extends Component {
     let iter;
     const newCount = this.state.count;
     console.log('NEXT 20 IN UPDATE MAIN--->', this.state.next20);
-    if (this.state.next20) {
-      iter = 1;
-    } else {
-      iter = 0;
-    }
 
     this.setState({
       count: newCount + 1,
@@ -187,7 +182,7 @@ class Home extends Component {
       return <Welcome/>;
     } else {
       return (<div className="home">
-        <div style={{background:'white'}}>
+        <div style={{background: 'white'}}>
         <Header logout={this.logout}/>
         <div className="jumbotron">
           <small>Don't see a restaurant you want to review? ADD!</small>
@@ -214,25 +209,37 @@ class Home extends Component {
             </Collapse>
           </div>
 
+          {/* {
+            this.state.gotUsers
+              ? this.displayUsers()
+              : ''
+          } */
+          }
+
           <div className="row">
             <div className="col-sm" id="left">
               {
                 this.state.apiDataLoaded
                   ? this.mainListing(this.state.count)
                   : ''}
+                {/* {this.state.next20
+                  ? this.mainListing(`${this.state.count}`)
+                  : ''} */}
               </div>
 
                 <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
+                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
-              </div>
-              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
             </div>
+            <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
+
           </div>
-          <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
-        <Footer/>
-        </div>);
+          <Footer/>
+
+        </div>
+      </div>);
     }
   }
 }
