@@ -9,6 +9,7 @@ import RestCreate from '../Components/RestaurantComponents/RestCreate';
 import Footer from './subComponents/Footer';
 import RestMap from '../Components/RestaurantComponents/RestMap';
 import RestSingle from '../Components/RestaurantComponents/RestSingle';
+import {Button} from 'reactstrap';
 
 class Home extends Component {
 constructor() {
@@ -121,9 +122,9 @@ constructor() {
           <div className="border-top border-primary" key={i}>
             <br/>
             <Restaurants restaurants={el} key={el.id} />
-            <button onClick={this.showOne} value={el.id}>
+            <Button color='primary' onClick={this.showOne} value={el.id}>
               Click for more details
-            </button>
+            </Button>
           </div>
         );
       });
@@ -191,7 +192,8 @@ constructor() {
           <div className="jumbotron">
             <small>Don't see a restaurant you want to review? ADD!</small>
             <br />
-            <button onClick={this.buttonClick}>ADD</button>
+            <Button color='primary' onClick={this.buttonClick}>ADD</Button>
+
             {this.state.show ? <RestCreate /> : ''}
             {this.state.gotUsers ? this.displayUsers() : ''}
 
@@ -211,7 +213,7 @@ constructor() {
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
             </div>
-            <button onClick={this.updateMain} id="seemore">See More</button>
+            <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
           </div>
           <Footer />
         </div>

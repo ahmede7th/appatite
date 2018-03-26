@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import UserRegisterForm from './UserRegisterForm';
 import {Button} from 'reactstrap';
 export default class Register extends Component {
@@ -13,12 +13,15 @@ export default class Register extends Component {
   }
 
   render() {
-    return (
-      <div className="welcome">
-        <h1>Registration</h1>
-        <UserRegisterForm submit={this.onSubmit} />
-        <p><Link to="/"><Button color="primary">Back Home</Button></Link></p>
-      </div>
-    );
+    return (<div className="welcome">
+      <h1>Registration</h1>
+      <UserRegisterForm submit={this.onSubmit}/>
+      <p>
+        <Link to="/">
+          <Button color="primary">Back Home</Button>
+        </Link>
+      </p>
+      <p>Password must be minimum of 6 chars</p>
+    </div>);
   }
 }

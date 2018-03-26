@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Home extends Component {
   constructor() {
@@ -8,7 +8,7 @@ class Home extends Component {
     this.state = {
       apiDataLoaded: false,
       apiData: null,
-      user: null,
+      user: null
     };
     this.userRestaurantFavorites = this.userRestaurantFavorites.bind(this);
     this.renderUser = this.renderUser.bind(this);
@@ -16,30 +16,21 @@ class Home extends Component {
 
   componentDidMount() {
     console.log('inside component did mount restaurant user favorites', this.props.user);
-    return axios
-      .get(`/api/favorites/user/restaurants/${this.props.user}`)
-      .then(favorites => {
-        console.log('USER FAVORITES ->', favorites.data.data);
-        this.setState({
-          apiDataLoaded: true,
-          apiData: favorites.data.data,
-          user: this.props.userPage,
-        });
-      })
-      .catch(err => {
-        console.log('nope :', err);
-      });
+    return axios.get(`/api/favorites/user/restaurants/${this.props.user}`).then(favorites => {
+      console.log('USER FAVORITES ->', favorites.data.data);
+      this.setState({apiDataLoaded: true, apiData: favorites.data.data, user: this.props.userPage});
+    }).catch(err => {
+      console.log('nope :', err);
+    });
   }
 
   userRestaurantFavorites() {
     console.log(this.state.apiData);
     return this.state.apiData.map((el, i) => {
-      return (
-        <Link to={`/main/${el.restaurant_id}`}>
-          <strong>{el.restaurant_name}</strong>
-          <br/>
-        </Link>
-       );
+      return (<Link to={`/main/${el.restaurant_id}`}>
+        <strong>{el.restaurant_name}</strong>
+        <br/>
+      </Link>);
     });
   }
 
@@ -48,17 +39,24 @@ class Home extends Component {
     if (this.state.apiData.length > 0) {
       return <h1>RESTAURANT USER FAVORITES for {this.state.user}!</h1>;
     } else {
-      return <h1>{this.state.user} hasn't favorited any restaurants yet!</h1>;
+      return <h1>{this.state.user}
+        hasn't favorited any restaurants yet!</h1>;
     }
   }
 
   render() {
-    return (
-      <div className="welcome">
-        {this.state.apiDataLoaded ? this.renderUser() : '' }
-        {this.state.apiDataLoaded ? this.userRestaurantFavorites() : ''}
-      </div>
-    );
+    return (<div className="welcome">
+      {
+        this.state.apiDataLoaded
+          ? this.renderUser()
+          : ''
+      }
+      {
+        this.state.apiDataLoaded
+          ? this.userRestaurantFavorites()
+          : ''
+      }
+    </div>);
   }
 }
 

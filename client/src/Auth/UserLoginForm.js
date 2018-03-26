@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Button} from 'reactstrap';
-
 
 export default class UserLoginForm extends Component {
   constructor(props) {
@@ -9,7 +8,7 @@ export default class UserLoginForm extends Component {
     // set initial state
     this.state = {
       username: '',
-      password: '',
+      password: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,47 +23,30 @@ export default class UserLoginForm extends Component {
 
   // update form state
   handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
+    const {name, value} = e.target;
+    this.setState({[name]: value});
   }
 
   render() {
-    return (
-      <div className="form__field">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            User Name -
-            <input
-              class="form__input"
-              pattern= ".{1,}" required
-              type="text"
-              name="username"
-              onChange={this.handleChange}
-              value={this.state.username}
-            />
-          </label>
+    return (<div className="form__field">
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          User Name -
+          <input class="form__input" pattern=".{1,}" required="required" type="text" name="username" onChange={this.handleChange} value={this.state.username}/>
+        </label>
 
-          <label>
-            Password -
-            <input
-              class="form__input"
-              pattern=".{4,}" required
-              type="password"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-            /><span class="icon"></span>
-          </label>
+        <label>
+          Password -
+          <input class="form__input" pattern=".{4,}" required="required" type="password" name="password" onChange={this.handleChange} value={this.state.password}/>
+          <span class="icon"></span>
+        </label>
 
-          <br />
-          <Button color='primary' type="submit" value="Submit">
-            Submit
-          </Button>
-          <br/>
-        </form>
-      </div>
-    );
+        <br/>
+        <Button color='primary' type="submit" value="Submit">
+          Submit
+        </Button>
+        <br/>
+      </form>
+    </div>);
   }
 }
