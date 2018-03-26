@@ -7,6 +7,7 @@ import {Button} from 'reactstrap';
 // }
 
 const Header = (props) => {
+  console.log('HEADERASDASD', props);
   return (
     <div className="header">
       <nav className="navbar navbar-expand-sm navbar-light bg-light">

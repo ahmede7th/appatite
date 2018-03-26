@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import TokenService from '../../Auth/Services/TokenService';
 import Header from '../subComponents/Header';
 import Welcome from '../Welcome';
@@ -21,6 +22,7 @@ class Home extends Component {
       numFollowers: null,
       showFollowCount: false,
       follower: false,
+      changeFollow: false,
     };
     this.getLocation = this.getLocation.bind(this);
     this.showPosition = this.showPosition.bind(this);
@@ -28,6 +30,7 @@ class Home extends Component {
     this.follow = this.follow.bind(this);
     this.displayFollowers = this.displayFollowers.bind(this);
     this.displayFollowersCount = this.displayFollowersCount.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -39,17 +42,20 @@ class Home extends Component {
         });
 
         console.log('HELP', newFollower);
-        let changeFollow;
-        if (newFollower) {
-          changeFollow = true;
+
+        if (newFollower.length > 0) {
+          this.setState({
+            changeFollow: true,
+          });
         } else {
-          changeFollow = false;
+          this.setState({
+            changeFollow: false,
+          });
         }
 
         this.setState({
           apiDataLoaded: true,
           followers: followers.data.data,
-          follower: changeFollow,
         });
 
         axios
@@ -134,6 +140,12 @@ class Home extends Component {
     });
   }
 
+  logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
+    this.setState({logoutUser: true});
+  }
+
   displayFollowersCount() {
     console.log(this.state.numFollowers);
     let insertString = '';
@@ -144,14 +156,16 @@ class Home extends Component {
       insertString = 's';
     }
 
-    return (<div>
-      <p>
-        User {this.props.match.params.id+ ' '}
-        has
-        {' '+this.state.numFollowers[0].count+' '}
-        follower{insertString}!
-      </p>
-    </div>);
+    return (
+      <div>
+        <p>
+          User {this.props.match.params.id + ' '}
+          has
+          {' ' + this.state.numFollowers[0].count + ' '}
+          follower{insertString}!
+        </p>
+      </div>
+    );
   }
 
   render() {
@@ -160,7 +174,7 @@ class Home extends Component {
     } else {
       return (
         <div className="welcome">
-          <Header />
+          <Header logout={this.logout}/>
           <div>
             <h1>Welcome to {this.props.match.params.id}'s page!</h1>
           </div>
@@ -171,7 +185,7 @@ class Home extends Component {
             user={window.localStorage.getItem('id')}
           />
           <Button color="primary" onClick={this.follow}>
-            {this.state.follower ? 'Follow?' : 'Unfollow?'}
+            {this.state.changeFollow ? 'Unfollow?' : 'Follow?'}
           </Button>
           <Button color="primary" onClick={this.logout}>
             Logout?
