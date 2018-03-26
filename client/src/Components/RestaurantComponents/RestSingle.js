@@ -240,7 +240,7 @@ class RestSingle extends Component {
               Edit
             </Link>
           </Button>
-          <Button color="primary" onClick={this.deleteRestaurant}>
+          <Button color="warning" onClick={this.deleteRestaurant}>
             Delete posting
           </Button>
         </div>
