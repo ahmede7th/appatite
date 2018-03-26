@@ -13,7 +13,7 @@ const refresh = () => {
 const Header = (props) => {
   return (
     <div className="header">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <Link className="navbar-brand" to="/main">
           Home
         </Link>

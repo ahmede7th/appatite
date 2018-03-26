@@ -28,17 +28,10 @@ class RestSingle extends Component {
     this.renderOwner = this.renderOwner.bind(this);
   }
 
-<<<<<<< HEAD
   componentWillReceiveProps(nextProps) {
     console.log('inside RestSingle', nextProps)
     let getId
     if (!nextProps.id) {
-=======
-  componentDidMount() {
-    let getId;
-    console.log('WHY NOT NOW--->', this.props.id);
-    if (!this.props.id) {
->>>>>>> ae10d9074b2d98285fdad5316687550fc8d23e9a
       getId = this.props.match.params.id;
     } else {
       getId = nextProps.id;
@@ -59,83 +52,6 @@ class RestSingle extends Component {
           apiData: restaurant.data.data[0],
           id: restaurant.data.data[0].id,
           continue: true,
-        });
-        axios
-          .get(`/api/favorites/restaurant/num/${this.state.id}`)
-          .then(favorites => {
-            console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
-            this.setState({
-              favoriteNumber: favorites.data.data[0].count,
-            });
-            axios
-              .get(`/api/favorites/restaurant/users/${this.state.id}`)
-              .then(users => {
-                console.log(
-                  'USERS WHO LIKE THE RESTAURANT--->',
-                  users.data.data,
-                );
-                const user = users.data.data.filter(function (user) {
-                  return (
-                    user.username === window.localStorage.getItem('username')
-                  );
-                });
-
-                if (user.length > 0) {
-                  this.setState({
-                    favorite: true,
-                    displayMessage: 'Users who favorited this restaurant: ',
-                  });
-                } else if (users.data.data.length > 0) {
-                  this.setState({
-                    displayMessage: 'Users who favorited this restaurant: ',
-                  });
-                } else {
-                  this.setState({
-                    displayMessage: '',
-                  });
-                }
-
-                this.setState({
-                  favoriteUsers: users.data.data,
-                });
-              })
-              .catch(err => {
-                console.log('ERROR IN GET USERS WHO LIKE RESTAURANT--->', err);
-              });
-          })
-          .catch(err => {
-            console.log('nope :', err);
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let getId;
-    console.log('WHY NOT NOW GET PROPS--->', nextProps.id);
-    if (!nextProps.id) {
-      getId = this.props.match.params.id;
-    } else {
-      getId = nextProps.id;
-    }
-
-    return axios
-      .get(`/api/restaurant/${getId}`)
-      .then(restaurant => {
-        console.log('HELLO', window.localStorage.getItem('username'), restaurant.data.data[0].creator);
-        if (window.localStorage.getItem('username') === restaurant.data.data[0].creator) {
-          this.setState({
-            owner: true,
-          });
-        }
-
-        this.setState({
-          apiDataLoaded: true,
-          apiData: restaurant.data.data[0],
-          id: restaurant.data.data[0].id,
-          continueMore: true,
         });
         axios
           .get(`/api/favorites/restaurant/num/${this.state.id}`)
@@ -257,7 +173,7 @@ class RestSingle extends Component {
               Edit
             </Link>
           </Button>
-          <Button color="primary" onClick={this.deleteRestaurant}>
+          <Button color="warning" onClick={this.deleteRestaurant}>
             Delete posting
           </Button>
         </div>

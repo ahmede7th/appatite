@@ -72,7 +72,7 @@ class Review extends Component {
   }
 
   formSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     axios({
       method: 'POST',
       url: `/api/review/${this.props.name}`,
@@ -148,7 +148,7 @@ class Review extends Component {
         return (
           <p>
             <Link key={el.id} to={linkRoute}>
-              <i>{el.username}: </i>
+              <i>{el.username}:</i>
             </Link>
             {el.content}
           </p>
@@ -161,11 +161,13 @@ class Review extends Component {
     return (
       <div className="review">
         {this.state.initialReviews ? this.showReviews() : ''}
-        <button onClick={this.buttonClickAll}>All Reviews</button>
         {this.state.showAll ? this.showAllReviews() : ''}
+        <button onClick={this.buttonClickAll}>All Reviews</button>
+        <br/>
+        <br/>
         <div class="form-group">
-          <button onClick={this.buttonClickForm}>Review</button>
-          <div class="col-md-4">
+          <button onClick={this.buttonClickForm}>Leave a Review</button>
+          <div class="col align-self-center">
             {this.state.showForm ? (
               <form onSubmit={this.formSubmit}>
                 <input
@@ -178,7 +180,7 @@ class Review extends Component {
                   value={this.props.name}
                 />
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   rows="3"
                   onChange={this.inputChange}
