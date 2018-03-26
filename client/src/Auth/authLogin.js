@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import UserLoginForm from './UserLoginForm';
 import {Button} from 'reactstrap';
 
@@ -15,12 +15,14 @@ export default class authLogin extends Component {
   }
 
   render() {
-    return (
-      <div className="welcome">
-        <h1>Login</h1>
-        <UserLoginForm submit={this.onSubmit} /><br/>
-        <p><Link to="/"><Button color='primary'>Back Home</Button></Link></p>
-      </div>
-    );
+    return (<div className="welcome">
+      <h1>Login</h1>
+      <UserLoginForm submit={this.onSubmit}/><br/>
+      <p>
+        <Link to="/">
+          <Button color='primary'>Back Home</Button>
+        </Link>
+      </p>
+    </div>);
   }
 }
