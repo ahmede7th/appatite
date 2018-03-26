@@ -71,9 +71,6 @@ class Home extends Component {
       .catch(err => {
         console.log('nope :', err);
       });
-    }).catch(err => {
-      console.log('nope :', err);
-    });
   }
 
   logout(ev) {
@@ -183,6 +180,7 @@ class Home extends Component {
       return <Welcome/>;
     } else {
       return (<div className="home">
+        <div style={{background:'white'}}>
         <Header logout={this.logout}/>
         <div className="jumbotron">
           <small>Don't see a restaurant you want to review? ADD!</small>
@@ -232,12 +230,14 @@ class Home extends Component {
                   {/*{this.state.reviews ? this.renderReviews() : ''}*/}
                   {this.state.restaurant ? this.renderRestaurant() : ''}
                 </div>
+              </div>
+              <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
             </div>
-          </div>
-          <Button color='primary' onClick={this.updateMain} id="seemore">See More</Button>
-        </div>
-        <Footer/>
-      </div>);
+        <Footer />
+      </div>
+            </div>
+
+      );
     }
   }
 }
