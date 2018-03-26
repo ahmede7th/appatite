@@ -185,7 +185,7 @@ class Home extends Component {
       return (<div className="home">
         <div style={{background: 'white'}}>
         <Header logout={this.logout}/>
-        <div className="jumbotron">
+        <div className="jumbotron" style={{background: 'white'}}>
           <small>Don't see a restaurant you want to review? ADD!</small>
           <br/>
           <div>
@@ -227,7 +227,6 @@ class Home extends Component {
                   ? this.mainListing(`${this.state.count}`)
                   : ''} */}
               </div>
-
                 <div className="col-sm" id="right">
                   {this.state.map ? this.renderMap() : ''}
                   {/*{this.state.reviews ? this.renderReviews() : ''}*/}
