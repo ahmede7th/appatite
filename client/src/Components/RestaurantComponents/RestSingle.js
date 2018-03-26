@@ -17,6 +17,7 @@ class RestSingle extends Component {
       favoriteNumber: null,
       favoriteUsers: null,
       id: null,
+      getId: null,
       owner: false,
       displayMessage: '',
       continue: false,
