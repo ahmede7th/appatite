@@ -30,7 +30,6 @@ const Header = (props) => {
           </ul>
       </nav>
 </div>
-
   );
 };
 
