@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TokenService from '../Auth/Services/TokenService';
 import Restaurants from './RestaurantComponents/Restaurants';
 import Welcome from './Welcome';
@@ -50,7 +50,6 @@ constructor() {
       .get(`/api/restaurant`)
       .then(restaurants => {
         this.getLocation();
-        console.log('Restaurants ->', restaurants);
         this.setState({
           apiDataLoaded: true,
           apiData: restaurants.data.data,
@@ -58,7 +57,6 @@ constructor() {
         axios
           .get(`/api/user/all/${window.localStorage.getItem('username')}`)
           .then(foundUsers => {
-            console.log('FOUND USERS--->', foundUsers.data.data);
             this.setState({
               users: foundUsers.data.data,
               gotUsers: true,
@@ -71,10 +69,6 @@ constructor() {
       .catch(err => {
         console.log('nope :', err);
       });
-  }
-
-  componentWillReceiveProps() {
-    console.log('I AM IN PROPS--->', this.props);
   }
 
   logout(ev) {
@@ -132,7 +126,6 @@ constructor() {
   }
 
   showOne(e) {
-    console.log('working...', e.target.value);
     this.setState({
       restaurant: e.target.value,
       map: false,
@@ -140,7 +133,6 @@ constructor() {
   }
 
   renderRestaurant() {
-    console.log('really working...', this.state.restaurant);
     return (
       <RestSingle
         id={this.state.restaurant}
@@ -149,10 +141,17 @@ constructor() {
   }
 
   updateMain() {
+    let iter;
+    if (this.state.next20) {
+      iter = 1;
+    } else {
+      iter = 0;
+    }
+
     const newCount = this.state.count;
     this.setState({
       next20: !this.state.next20,
-      count: newCount + 1,
+      count: newCount + iter,
     });
   }
 
@@ -182,7 +181,6 @@ constructor() {
   renderReviews() {}
 
   render() {
-    console.log('state restaurant', this.state.restaurant)
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
@@ -202,9 +200,9 @@ constructor() {
                 {this.state.apiDataLoaded && !this.state.next20
                   ? this.mainListing()
                   : ''}
-                {this.state.next20
+                {/* {this.state.next20
                   ? this.mainListing(`${this.state.count}`)
-                  : ''}
+                  : ''} */}
               </div>
 
                 <div className="col-sm" id="right">
