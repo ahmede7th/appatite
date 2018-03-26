@@ -28,12 +28,12 @@ class RestSingle extends Component {
     this.renderOwner = this.renderOwner.bind(this);
   }
 
-  componentDidMount(nextprops) {
+  componentDidMount() {
     let getId;
-    if (!nextprops.id) {
-      getId = nextprops.match.params.id;
+    if (!this.props.id) {
+      getId = this.props.match.params.id;
     } else {
-      getId = nextprops.id;
+      getId = this.props.id;
     }
 
     return axios
@@ -263,7 +263,8 @@ class RestSingle extends Component {
     console.log('why not--->', this.state.continue);
     if (this.state.continue) {
       return (
-        <div className="welcome">
+        <div className="home">
+          <h1></h1>
           <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
           {this.state.apiDataLoaded ? this.renderOwner() : ''}
           {this.state.apiDataLoaded ? (

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
 class Review extends Component {
   constructor() {
@@ -16,7 +16,7 @@ class Review extends Component {
       restaurant_name: '',
       content: '',
       fireRedirect: false,
-      restaurantName: '',
+      restaurantName: ''
     };
     this.inputChange = this.inputChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
@@ -27,38 +27,29 @@ class Review extends Component {
   componentWillReceiveProps() {
     console.log('CURRENT USER--->', window.localStorage.getItem('username'));
     console.log(this.props.name);
-    axios
-      .get(`/api/review/${this.props.name}`)
-      .then(review => {
-        this.setState({
-          initialReviews: true,
-          apiData: review.data.data,
-        });
-      })
-      .catch(err => {
-        console.log('no reviews exists');
-      });
+    axios.get(`/api/review/${this.props.name}`).then(review => {
+      this.setState({initialReviews: true, apiData: review.data.data});
+    }).catch(err => {
+      console.log('no reviews exists');
+    });
   }
 
   buttonClickForm() {
     console.log(this.props.name);
-    axios
-      .get(`/api/restaurant/${this.props.name}`)
-      .then(restaurant => {
-        this.setState({
-          showForm: !this.state.showForm,
-          restaurantName: restaurant.data.data[0].name,
-        });
-      })
-      .catch(err => {
-        console.log('getting the restaurant failed--->', err);
+    axios.get(`/api/restaurant/${this.props.name}`).then(restaurant => {
+      this.setState({
+        showForm: !this.state.showForm,
+        restaurantName: restaurant.data.data[0].name
       });
+    }).catch(err => {
+      console.log('getting the restaurant failed--->', err);
+    });
   }
 
   buttonClickAll() {
     this.setState({
       showAll: !this.state.showAll,
-      initialReviews: !this.state.initialReviews,
+      initialReviews: !this.state.initialReviews
     });
   }
 
@@ -66,9 +57,7 @@ class Review extends Component {
     let name = e.target.name;
     let value = e.target.value;
     console.log(e.target.name);
-    this.setState({
-      [name]: value,
-    });
+    this.setState({[name]: value});
   }
 
   formSubmit(e) {
@@ -81,18 +70,14 @@ class Review extends Component {
         username: window.localStorage.getItem('username'),
         restaurant_id: this.props.name,
         restaurant_name: this.state.restaurantName,
-        content: this.state.content,
-      },
-    })
-      .then(review => {
-        console.log('submitting review', review);
-        this.setState({
-          fireRedirect: true,
-        });
-      })
-      .catch(err => {
-        console.log('error in review', err);
-      });
+        content: this.state.content
+      }
+    }).then(review => {
+      console.log('submitting review', review);
+      this.setState({fireRedirect: true});
+    }).catch(err => {
+      console.log('error in review', err);
+    });
   }
   renderFavoriteUsers() {
     let linkRoute;
@@ -100,13 +85,11 @@ class Review extends Component {
       if (el.username === window.localStorage.getItem('username')) {
         linkRoute = `/user/account`;
       } else {
-        linkRoute  = `/user/page/${el.username}`
+        linkRoute = `/user/page/${el.username}`
       }
-      return (
-        <Link key={el.id} to={linkRoute}>
-          <p>{el.username}</p>
-        </Link>
-      );
+      return (<Link key={el.id} to={linkRoute}>
+        <p>{el.username}</p>
+      </Link>);
     });
   }
 
@@ -117,19 +100,18 @@ class Review extends Component {
         if (el.username === window.localStorage.getItem('username')) {
           linkRoute = `/user/account`;
         } else {
-          linkRoute  = `/user/page/${el.username}`
+          linkRoute = `/user/page/${el.username}`
         }
 
         // shows initial 3
         if (i < 3) {
-          return (
-            <p>
-              <Link key={el.id} to={linkRoute}>
-                <i>{el.username}: </i>
-              </Link>
-              {el.content}
-            </p>
-          );
+          return (<p>
+            <Link key={el.id} to={linkRoute}>
+              <i>{el.username}:
+              </i>
+            </Link>
+            {el.content}
+          </p>);
         }
       });
     }
@@ -142,60 +124,50 @@ class Review extends Component {
         if (el.username === window.localStorage.getItem('username')) {
           linkRoute = `/user/account`;
         } else {
-          linkRoute  = `/user/page/${el.username}`;
+          linkRoute = `/user/page/${el.username}`;
         }
 
-        return (
-          <p>
-            <Link key={el.id} to={linkRoute}>
-              <i>{el.username}: </i>
-            </Link>
-            {el.content}
-          </p>
-        );
+        return (<p>
+          <Link key={el.id} to={linkRoute}>
+            <i>{el.username}:
+            </i>
+          </Link>
+          {el.content}
+        </p>);
       });
     }
   }
 
   render() {
-    return (
-      <div className="review">
-        {this.state.initialReviews ? this.showReviews() : ''}
-        <Button color='primary' onClick={this.buttonClickAll}>All Reviews</Button>
-        {this.state.showAll ? this.showAllReviews() : ''}
-        <div class="form-group">
-          <Button color='primary' onClick={this.buttonClickForm}>Review</Button>
-          <div class="col-md-4">
-            {this.state.showForm ? (
-              <form onSubmit={this.formSubmit}>
-                <input
-                  type="hidden"
-                  name={window.localStorage.getItem('username')}
-                />
-                <input
-                  type="hidden"
-                  name="restaurant_name"
-                  value={this.props.name}
-                />
-                <textarea
-                  class="form-control"
-                  type="text"
-                  rows="3"
-                  onChange={this.inputChange}
-                  name="content"
-                  placeholder={`leave a review for ${
-                    this.state.restaurantName
-                  }`}
-                />
-                <input type="submit" value="submit" />
-              </form>
-            ) : (
-              ''
-            )}
-          </div>
+    return (<div className="review">
+      {
+        this.state.initialReviews
+          ? this.showReviews()
+          : ''
+      }
+      <Button color='primary' onClick={this.buttonClickAll}>All Reviews</Button>
+      {
+        this.state.showAll
+          ? this.showAllReviews()
+          : ''
+      }
+      <div class="form-group">
+        <Button color='primary' onClick={this.buttonClickForm}>Review</Button>
+        <div class="col-md-4">
+          {
+            this.state.showForm
+              ? (<form onSubmit={this.formSubmit}>
+                <input type="hidden" name={window.localStorage.getItem('username')}/>
+                <input type="hidden" name="restaurant_name" value={this.props.name}/>
+                <textarea class="form-control" type="text" rows="3" onChange={this.inputChange} name="content" placeholder={`leave a review for ${
+                  this.state.restaurantName}`}/>
+                <input type="submit" value="submit"/>
+              </form>)
+              : ('')
+          }
         </div>
       </div>
-    );
+    </div>);
   }
 }
 

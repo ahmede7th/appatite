@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ReactStars from 'react-stars';
 
 const Restaurants = props => {
@@ -7,29 +7,20 @@ const Restaurants = props => {
     console.log(newRating);
   };
 
-  return (
-    <div className="restaurant">
-      <h1>{props.restaurants.name}</h1>
-        <ReactStars
-          count={props.restaurants.rating}
-          onChange={ratingChanged}
-          size={20}
-          edit={false}
-          color1={'#ffd700'}
-          position={'right'}
-        />
-      <p>
-        Cuisine:
-        <strong>{props.restaurants.cuisine}</strong>
-      </p>
-      <img
-        className="img-fluid img-thumbnail"
-        width={"80%"}
-        src={props.restaurants.img_src}
-        alt="restaurant"
-      />
-    </div>
-  );
+  return (<div className="restaurant">
+    <h1>{props.restaurants.name}</h1>
+    <ReactStars
+      count={props.restaurants.rating}
+      onChange={ratingChanged} size={20}
+      edit={false}
+      color1={'#ffd700'}
+      position={'right'}/>
+    <p>
+      Cuisine:
+      <strong>{props.restaurants.cuisine}</strong>
+    </p>
+    <img className="img-fluid img-thumbnail" width={"80%"} src={props.restaurants.img_src} alt="restaurant"/>
+  </div>);
 };
 
 export default Restaurants;
