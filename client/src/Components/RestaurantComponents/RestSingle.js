@@ -19,6 +19,7 @@ class RestSingle extends Component {
       id: null,
       owner: false,
       displayMessage: '',
+      continue: false,
     };
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.goToFavorite = this.goToFavorite.bind(this);
@@ -26,7 +27,8 @@ class RestSingle extends Component {
     this.renderOwner = this.renderOwner.bind(this);
   }
 
-  componentWillReceiveProps(nextprops) {
+  componentDidMount() {
+    console.log('I AM A BEAUTIFUL BEING--->', this.props.id);
     let getId;
     if (!this.props.id) {
       getId = this.props.match.params.id;
@@ -48,6 +50,7 @@ class RestSingle extends Component {
           apiDataLoaded: true,
           apiData: restaurant.data.data[0],
           id: restaurant.data.data[0].id,
+          continue: true,
         });
         axios
           .get(`/api/favorites/restaurant/num/${this.state.id}`)
@@ -180,35 +183,42 @@ class RestSingle extends Component {
   }
 
   render() {
-    return (
-      <div className="welcome">
-        <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
-        {this.state.apiDataLoaded ? this.renderOwner() : ''}
-        {this.state.apiDataLoaded ? (
-          <RestMap location={this.state.apiData.loc} />
-        ) : (
-          'failed to load map'
-        )}
-        <p>
-          Yelp Rating:{' '}
-          {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars
-        </p>
-        <p>
-          {this.state.favoriteNumber > 0 ? `Number of favorites: ${this.state.favoriteNumber}` : ''}
-        </p>
-        <p>
-          {this.state.favoriteUsers ? this.state.displayMessage : ''}
-          {this.state.favoriteUsers ? this.renderFavoriteUsers() : ''}
-        </p>
-        {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
-        <Button color="primary" onClick={this.goToFavorite}>
-          {this.state.favorite
-            ? 'Unfavorite this baby!'
-            : 'Favorite this baby!'}
-        </Button>
-        {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
-      </div>
-    );
+    console.log('why not--->', this.state.continue);
+    if (this.state.continue) {
+      return (
+        <div className="welcome">
+          <h2>{this.state.apiDataLoaded ? this.state.apiData.name : ''}</h2>
+          {this.state.apiDataLoaded ? this.renderOwner() : ''}
+          {this.state.apiDataLoaded ? (
+            <RestMap location={this.state.apiData.loc} />
+          ) : (
+            'failed to load map'
+          )}
+          <p>
+            Yelp Rating:{' '}
+            {this.state.apiDataLoaded ? this.state.apiData.rating : ''} Stars
+          </p>
+          <p>
+            {this.state.favoriteNumber > 0 ? `Number of favorites: ${this.state.favoriteNumber}` : ''}
+          </p>
+          <p>
+            {this.state.favoriteUsers ? this.state.displayMessage : ''}
+            {this.state.favoriteUsers ? this.renderFavoriteUsers() : ''}
+          </p>
+          {this.state.apiDataLoaded ? <Review name={this.state.id} /> : ''}
+          <Button color="primary" onClick={this.goToFavorite}>
+            {this.state.favorite
+              ? 'Unfavorite this baby!'
+              : 'Favorite this baby!'}
+          </Button>
+          {this.state.fireRedirect ? <Redirect to="/main" /> : ''}
+        </div>
+      );
+    } else {
+      return (
+          'loading'
+        );
+    }
   }
 }
 
