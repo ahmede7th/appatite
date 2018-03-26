@@ -26,7 +26,7 @@ class ReviewEdit extends Component {
     e.preventDefault();
     axios({
       method: 'PUT',
-      url: `/api/review/edit/${this.props.review.id}`,
+      url: `/review/edit/${this.props.review.id}`,
       data: {
         id: this.props.review.id,
         content: this.state.content
@@ -40,7 +40,7 @@ class ReviewEdit extends Component {
   }
 
   deleteReview() {
-    return axios.delete(`/api/review/delete/${this.props.review.id}`).then(review => {
+    return axios.delete(`/review/delete/${this.props.review.id}`).then(review => {
       console.log('deleted review', review);
       this.setState({fireRedirect: true});
     }).catch(err => {

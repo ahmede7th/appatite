@@ -27,20 +27,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(tokenService.receiveToken);
 
-app.get('/api/restricted', authService.restrict(), (req, res) => {
+app.get('/restricted', authService.restrict(), (req, res) => {
   res.json({ msg: 'yay' });
 });
 
-app.get('/api/isLoggedIn', authService.isLoggedIn, (req, res) => {
+app.get('/isLoggedIn', authService.isLoggedIn, (req, res) => {
   res.json({ isLoggedIn: res.locals.isLoggedIn });
 });
 
-app.use('/api/favorites', favoritesRouter);
-app.use('/api/review', reviewRouter);
-app.use('/api/restaurant', restaurantRouter);
-app.use('/api/user', userRouter);
-app.use('/api/user/auth', authRouter);
-app.use('/api/follower', followerRouter);
+app.use('/favorites', favoritesRouter);
+app.use('/review', reviewRouter);
+app.use('/restaurant', restaurantRouter);
+app.use('/user', userRouter);
+app.use('/user/auth', authRouter);
+app.use('/follower', followerRouter);
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);

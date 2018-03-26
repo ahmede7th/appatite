@@ -15,7 +15,7 @@ class AllFavorites extends Component {
   componentDidMount() {
     const user = window.localStorage.getItem('id');
     console.log('INSIDE COMPONENT DID MOUNT USER NUM FAVORITES--->', user);
-    return axios.get(`/api/favorites/user/num/${user}`).then(favorites => {
+    return axios.get(`/favorites/user/num/${user}`).then(favorites => {
       console.log('USER FAVORITES ->', favorites.data.data);
       this.setState({apiDataLoaded: true, apiData: favorites.data.data});
     }).catch(err => {

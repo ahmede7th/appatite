@@ -24,12 +24,12 @@ class RestSingleMain extends Component {
   }
 
   componentDidMount() {
-    return axios.get(`/api/restaurant/${this.props.match.params.id}`).then(restaurant => {
+    return axios.get(`/restaurant/${this.props.match.params.id}`).then(restaurant => {
       this.setState({apiDataLoaded: true, apiData: restaurant.data.data[0], id: restaurant.data.data[0].id});
-      axios.get(`/api/favorites/restaurant/num/${this.state.id}`).then(favorites => {
+      axios.get(`/favorites/restaurant/num/${this.state.id}`).then(favorites => {
         console.log('RESTAURANT FAVORITES ->', favorites.data.data[0]);
         this.setState({favoriteNumber: favorites.data.data[0].count});
-        axios.get(`/api/favorites/restaurant/users/${this.state.id}`,).then(users => {
+        axios.get(`/favorites/restaurant/users/${this.state.id}`,).then(users => {
           console.log('USERS WHO LIKE THE RESTAURANT--->', users.data.data,);
           const user = users.data.data.filter(function(user) {
             return (user.username === window.localStorage.getItem('username'));
@@ -52,7 +52,7 @@ class RestSingleMain extends Component {
   }
 
   deleteRestaurant() {
-    return axios.delete(`/api/restaurant/delete/${this.state.id}`).then(restaurant => {
+    return axios.delete(`/restaurant/delete/${this.state.id}`).then(restaurant => {
       this.setState({fireRedirect: true});
     }).catch(err => {
       console.log('error deleting', err);
@@ -60,7 +60,7 @@ class RestSingleMain extends Component {
   }
 
   goToFavorite() {
-    return axios.post(`/api/favorites/${this.state.id}`, {
+    return axios.post(`/favorites/${this.state.id}`, {
       withCredentials: true
     }, {
       headers: {

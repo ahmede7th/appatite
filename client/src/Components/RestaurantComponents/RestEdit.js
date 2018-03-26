@@ -19,7 +19,7 @@ class RestEdit extends Component {
   }
 
   componentDidMount() {
-    return axios.get(`/api/restaurant/edit/${this.props.match.params.id}`).then(restaurant => {
+    return axios.get(`/restaurant/edit/${this.props.match.params.id}`).then(restaurant => {
       console.log('about to edit', restaurant.data.data[0].name);
       this.setState({apiDataLoaded: true, newName: restaurant.data.data[0].name, name: restaurant.data.data[0].name, rating: restaurant.data.data[0].rating, cuisine: restaurant.data.data[0].cuisine});
     }).catch(err => {
@@ -37,7 +37,7 @@ class RestEdit extends Component {
     e.preventDefault();
     return axios({
       method: 'PUT',
-      url: `/api/restaurant/edit/${this.props.match.params.id}`,
+      url: `/restaurant/edit/${this.props.match.params.id}`,
       data: {
         newName: this.state.newName,
         name: this.state.name,

@@ -18,7 +18,7 @@ class UserReviews extends Component {
 
   componentDidMount() {
     axios
-      .get(`/api/review/user/${this.state.user}`)
+      .get(`/review/user/${this.state.user}`)
       .then(reviews => {
         console.log('got back users reviews', reviews);
         this.setState({
@@ -26,7 +26,7 @@ class UserReviews extends Component {
           apiData: reviews.data.data,
         }); 
         // axios
-        //   .get(`/api/restaurant/${this.props.name}`)
+        //   .get(`/restaurant/${this.props.name}`)
         //   .then(restaurant => {
         //     console.log('got the restaurant', restaurant.data.data[0].name);
         //     this.setState({

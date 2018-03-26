@@ -16,7 +16,7 @@ class Home extends Component {
 
   componentDidMount() {
     const user = window.localStorage.getItem('id');
-    axios.get(`/api/favorites/user/restaurants/${user}`).then(favorites => {
+    axios.get(`/favorites/user/restaurants/${user}`).then(favorites => {
       this.setState({apiDataLoaded: true, apiData: favorites.data.data});
     }).catch(err => {
       console.log('nope :', err);

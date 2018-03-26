@@ -14,7 +14,7 @@ class AllFavorites extends Component {
 
   componentDidMount() {
     console.log('inside component did mount restaurant user favorites', this.props.match.params.id);
-    return axios.get(`/api/favorites/restaurant/num/${this.props.match.params.id}`).then(favorites => {
+    return axios.get(`/favorites/restaurant/num/${this.props.match.params.id}`).then(favorites => {
       console.log('USER FAVORITES ->', favorites.data.data);
       this.setState({apiDataLoaded: true, apiData: favorites.data.data});
     }).catch(err => {

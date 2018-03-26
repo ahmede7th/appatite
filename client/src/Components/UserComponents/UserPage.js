@@ -35,7 +35,7 @@ class Home extends Component {
 
   componentDidMount() {
     axios
-      .get(`/api/follower/friend/${this.props.match.params.id}`)
+      .get(`/follower/friend/${this.props.match.params.id}`)
       .then(followers => {
         const newFollower = followers.data.data.filter(function(follower) {
           return follower.username === window.localStorage.getItem('username');
@@ -59,7 +59,7 @@ class Home extends Component {
         });
 
         axios
-          .get(`/api/follower/friend/num/${this.props.match.params.id}`)
+          .get(`/follower/friend/num/${this.props.match.params.id}`)
           .then(totalFollowers => {
             this.setState({
               showFollowCount: true,
@@ -99,7 +99,7 @@ class Home extends Component {
   follow() {
     return axios
       .post(
-        `/api/follower/add/${this.props.match.params.id}`,
+        `/follower/add/${this.props.match.params.id}`,
         {
           withCredentials: true,
         },
