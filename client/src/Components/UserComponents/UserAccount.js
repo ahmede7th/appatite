@@ -115,8 +115,8 @@ class UserAccount extends Component {
             : "loading user"
         }
         <br/>
-        <Button color="primary" onClick={this.buttonClick}>Edit</Button>
-        <Button color="primary" onClick={this.deleteUser}>Delete</Button>
+        <Button color="warning" onClick={this.buttonClick}>Edit</Button>{' '}{' '}
+        <Button color="danger" onClick={this.deleteUser}>Delete</Button>
         {
           this.state.click
             ? <form onSubmit={this.submitForm}>

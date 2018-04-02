@@ -67,7 +67,7 @@ class Review extends Component {
   }
 
   formSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
     axios({
       method: 'POST',
       url: `/api/review/${this.props.name}`,

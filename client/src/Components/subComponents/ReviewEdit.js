@@ -57,8 +57,8 @@ class ReviewEdit extends Component {
   render() {
     console.log('Props id', this.props.review.id);
     return (<div>
-      <Button color='primary' onClick={this.buttonClick}>Edit</Button>
-      <Button color='primary' onClick={this.deleteReview}>Delete</Button>
+      <Button color='warning' onClick={this.buttonClick}>Edit</Button>{' '}
+      <Button color='danger' onClick={this.deleteReview}>Delete</Button>
       {
         this.state.click
           ? (<form onSubmit={this.submitForm}>

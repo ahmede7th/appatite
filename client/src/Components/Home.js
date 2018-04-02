@@ -74,6 +74,7 @@ class Home extends Component {
 
   logout(ev) {
     ev.preventDefault();
+    console.log('logging out')
     TokenService.destroy();
     this.setState({logoutUser: true});
   }
@@ -184,7 +185,7 @@ class Home extends Component {
     } else {
       return (<div className="home">
         <div style={{background: 'white'}}>
-        <Header logout={this.logout}/>
+        <Header logout={this.logout} user={this.state.logoutUser} />
         <div className="jumbotron" style={{background: 'white'}}>
           <small>Don't see a restaurant you want to review? ADD!</small>
           <br/>
