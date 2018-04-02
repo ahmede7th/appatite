@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(logger('dev'));
+app.use(express.static('build'));
 app.use(cors());
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
@@ -41,6 +42,8 @@ app.use('/restaurant', restaurantRouter);
 app.use('/user', userRouter);
 app.use('/user/auth', authRouter);
 app.use('/follower', followerRouter);
+
+app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
