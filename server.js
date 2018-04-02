@@ -43,7 +43,7 @@ app.use('/user', userRouter);
 app.use('/user/auth', authRouter);
 app.use('/follower', followerRouter);
 
-app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
+app.get('*', (req, res) => res.sendFile(path.resolve('client/public', 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
