@@ -50,7 +50,7 @@ class Home extends Component {
 
   componentDidMount() {
     axios
-      .get(`/api/restaurant`)
+      .get(`/restaurant`)
       .then(restaurants => {
         this.getLocation();
         this.setState({
@@ -58,7 +58,7 @@ class Home extends Component {
           apiData: restaurants.data.data,
         });
         axios
-          .get(`/api/user/all/${window.localStorage.getItem('username')}`)
+          .get(`/user/all/${window.localStorage.getItem('username')}`)
           .then(foundUsers => {
             this.setState({
               users: foundUsers.data.data,
