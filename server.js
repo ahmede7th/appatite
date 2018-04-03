@@ -23,7 +23,8 @@ app.use(cors());
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(tokenService.receiveToken);
@@ -43,7 +44,7 @@ app.use('/user', userRouter);
 app.use('/user/auth', authRouter);
 app.use('/follower', followerRouter);
 
-app.get('*', (req, res) => res.sendFile(path.resolve('client/public', 'index.html')));
+app.get('*', (req, res) => res.sendFile(path.resolve('client/build', 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
