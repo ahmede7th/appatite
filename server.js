@@ -18,13 +18,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(logger('dev'));
-// app.use(express.static('build'));
 app.use(cors());
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static('client/build'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(tokenService.receiveToken);
