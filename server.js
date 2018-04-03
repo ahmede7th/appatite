@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(logger('dev'));
-app.use(express.static('build'));
+// app.use(express.static('build'));
 app.use(cors());
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
