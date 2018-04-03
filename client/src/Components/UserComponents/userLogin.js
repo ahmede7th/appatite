@@ -18,7 +18,7 @@ class userLogin extends Component {
 
   register(data) {
     console.log(data);
-    axios('api/user/auth', {
+    axios('https://app-a-tite.herokuapp.com/api/user/auth', {
       method: 'POST',
       data
     }).then(resp => {
@@ -34,7 +34,7 @@ class userLogin extends Component {
   }
 
   login(data) {
-    axios('api/user/auth/login', {
+    axios('https://app-a-tite.herokuapp.com/api/user/auth/login', {
       method: 'POST',
       data
     }).then(resp => {
@@ -50,7 +50,7 @@ class userLogin extends Component {
   }
 
   componentDidMount() {
-    axios('api/isLoggedIn', {
+    axios('https://app-a-tite.herokuapp.com/api/isLoggedIn', {
       headers: {
         Authorization: `Bearer ${TokenService.read()}`
       }
