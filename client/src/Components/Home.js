@@ -80,7 +80,7 @@ class Home extends Component {
   }
 
   getLocation() {
-    axios.request({method: 'get', url: 'http://ipinfo.io/json/?token=ca0bf2e0b0eeac'}).then(result => {
+    axios.request({method: 'get', url: 'https://ipinfo.io/json/?token=ca0bf2e0b0eeac'}).then(result => {
       console.log(result);
       this.setState({
         location: 'restaurants near ' + result.data.postal,
