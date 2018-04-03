@@ -24,7 +24,7 @@ class Welcome extends Component {
   }
 
   componentDidMount() {
-    axios('api/isLoggedIn', {
+    axios('https://app-a-tite.herokuapp.com/api/isLoggedIn', {
       headers: {
         Authorization: `Bearer ${TokenService.read()}`
       }
