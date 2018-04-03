@@ -31,12 +31,12 @@ app.get('/restricted', authService.restrict(), (req, res) => {
   res.json({ msg: 'yay' });
 });
 
-app.get('/isLoggedIn', authService.isLoggedIn, (req, res) => {
+app.get('/api/isLoggedIn', authService.isLoggedIn, (req, res) => {
   res.json({ isLoggedIn: res.locals.isLoggedIn });
 });
 
 app.use('/favorites', favoritesRouter);
-app.use('/review', reviewRouter);
+app.use('/api/review', reviewRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/user', userRouter);
 app.use('/user/auth', authRouter);
