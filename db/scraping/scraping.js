@@ -30,7 +30,7 @@ function concat(response) {
     //getAllReviews(id)
     // axios({
     //   method: 'get',
-    //   url: `https://api.yelp.com/v3/businesses/${id}/reviews`,
+    //   url: `https:/.yelp.com/v3/businesses/${id}/reviews`,
     //   headers: {
     //     Authorization: 'Bearer _xTx5LGGUCl2acQlp0pANIpbQ1L-bxdG3C15i4AKKBt_lWRX-MczS2YmW8BGD5vEFqCeCIu8BN3rWPAm2GIx94xphS1pkceYx6vjYKO4OV52oidIwpsjWMjIPEu0WnYx'
     //   }
@@ -58,7 +58,7 @@ function concat(response) {
 function getAllYelp(req, res) {
   axios({
     method: 'get',
-    url: `https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}`,
+    url: `https:/.yelp.com/v3/businesses/search?term=${term}&location=${location}`,
     headers: {
       Authorization: 'Bearer _xTx5LGGUCl2acQlp0pANIpbQ1L-bxdG3C15i4AKKBt_lWRX-MczS2YmW8BGD5vEFqCeCIu8BN3rWPAm2GIx94xphS1pkceYx6vjYKO4OV52oidIwpsjWMjIPEu0WnYx'
     }
@@ -74,7 +74,7 @@ function getAllReviews(test) {
 
   axios({
     method: 'get',
-    url: `https://api.yelp.com/v3/businesses/${test}/reviews`,
+    url: `https:/.yelp.com/v3/businesses/${test}/reviews`,
     headers: {
       Authorization: 'Bearer _xTx5LGGUCl2acQlp0pANIpbQ1L-bxdG3C15i4AKKBt_lWRX-MczS2YmW8BGD5vEFqCeCIu8BN3rWPAm2GIx94xphS1pkceYx6vjYKO4OV52oidIwpsjWMjIPEu0WnYx'
     }

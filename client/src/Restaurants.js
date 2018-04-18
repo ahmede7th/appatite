@@ -21,7 +21,7 @@ class Restaurants extends Component {
   componentDidMount(){
     axios({
     method: 'post',
-    url: '/api/restaurant',
+    url: '/restaurant',
     data: {
       term: this.state.searchRequest.term,
       location: this.state.searchRequest.location

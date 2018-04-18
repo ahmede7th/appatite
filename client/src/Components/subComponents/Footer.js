@@ -7,7 +7,7 @@ const Footer = () => {
         Made in GA with 🍺
       </small>
     </footer>
-  );
+  )
 }
 
 export default Footer;

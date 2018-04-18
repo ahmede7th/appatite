@@ -36,7 +36,7 @@ class RestSingle extends Component {
     }
 
     return axios
-      .get(`/api/restaurant/${getId}`)
+      .get(`/restaurant/${getId}`)
       .then(restaurant => {
         console.log(window.localStorage.getItem('username'), restaurant.data.data[0].creator);
         if (window.localStorage.getItem('username') === restaurant.data.data[0].creator) {
@@ -52,13 +52,13 @@ class RestSingle extends Component {
           continue: true,
         });
         axios
-          .get(`/api/favorites/restaurant/num/${this.state.id}`)
+          .get(`/favorites/restaurant/num/${this.state.id}`)
           .then(favorites => {
             this.setState({
               favoriteNumber: favorites.data.data[0].count,
             });
             axios
-              .get(`/api/favorites/restaurant/users/${this.state.id}`)
+              .get(`/favorites/restaurant/users/${this.state.id}`)
               .then(users => {
                 const user = users.data.data.filter(function (user) {
                   return (
@@ -107,7 +107,7 @@ class RestSingle extends Component {
     }
 
     return axios
-      .get(`/api/restaurant/${getId}`)
+      .get(`/restaurant/${getId}`)
       .then(restaurant => {
         if (window.localStorage.getItem('username') === restaurant.data.data[0].creator) {
           this.setState({
@@ -122,13 +122,13 @@ class RestSingle extends Component {
           continueMore: true,
         });
         axios
-          .get(`/api/favorites/restaurant/num/${this.state.id}`)
+          .get(`/favorites/restaurant/num/${this.state.id}`)
           .then(favorites => {
             this.setState({
               favoriteNumber: favorites.data.data[0].count,
             });
             axios
-              .get(`/api/favorites/restaurant/users/${this.state.id}`)
+              .get(`/favorites/restaurant/users/${this.state.id}`)
               .then(users => {
                 console.log(
                   'USERS WHO LIKE THE RESTAURANT--->',
@@ -174,7 +174,7 @@ class RestSingle extends Component {
 
   deleteRestaurant() {
     return axios
-      .delete(`/api/restaurant/delete/${this.state.id}`)
+      .delete(`/restaurant/delete/${this.state.id}`)
       .then(restaurant => {
         this.setState({
           fireRedirect: true,
@@ -188,7 +188,7 @@ class RestSingle extends Component {
   goToFavorite() {
     return axios
       .post(
-        `/api/favorites/${this.state.id}`,
+        `/favorites/${this.state.id}`,
         { withCredentials: true },
         {
           headers: {

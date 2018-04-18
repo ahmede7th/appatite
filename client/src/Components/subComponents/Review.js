@@ -26,7 +26,7 @@ class Review extends Component {
   }
 
   componentWillReceiveProps() {
-    axios.get(`/api/review/${this.props.name}`).then(review => {
+    axios.get(`https://app-a-tite.herokuapp.com/api/review/${this.props.name}`).then(review => {
       console.log(review.data.data);
       let showMoreReviews;
       if (review.data.data.length > 3) {
@@ -42,7 +42,7 @@ class Review extends Component {
 
   buttonClickForm() {
     console.log(this.props.name);
-    axios.get(`/api/restaurant/${this.props.name}`).then(restaurant => {
+    axios.get(`https://app-a-tite.herokuapp.com/api/restaurant/${this.props.name}`).then(restaurant => {
       this.setState({
         showForm: !this.state.showForm,
         restaurantName: restaurant.data.data[0].name
@@ -67,10 +67,10 @@ class Review extends Component {
   }
 
   formSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
     axios({
       method: 'POST',
-      url: `/api/review/${this.props.name}`,
+      url: `https://app-a-tite.herokuapp.com/api/review/${this.props.name}`,
       data: {
         user_id: window.localStorage.getItem('id'),
         username: window.localStorage.getItem('username'),

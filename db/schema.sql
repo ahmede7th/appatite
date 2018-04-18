@@ -1,4 +1,3 @@
-\c appatite_db;
 
 DROP TABLE IF EXISTS users cascade;
 DROP TABLE IF EXISTS restaurants cascade;

@@ -27,7 +27,7 @@ class RestCreate extends Component {
     //e.preventDefault();
     axios({
       method: 'POST',
-      url: '/api/restaurant',
+      url: '/restaurant',
       data: {
         name: this.state.name,
         cuisine: this.state.cuisine,

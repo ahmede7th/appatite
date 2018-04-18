@@ -18,13 +18,28 @@ class UserReviews extends Component {
 
   componentDidMount() {
     axios
-      .get(`/api/review/user/${this.state.user}`)
+      .get(`/review/user/${this.state.user}`)
       .then(reviews => {
         console.log('got back users reviews', reviews);
         this.setState({
           apiDataLoaded: true,
           apiData: reviews.data.data,
         }); 
+<<<<<<< HEAD
+=======
+        // axios
+        //   .get(`/restaurant/${this.props.name}`)
+        //   .then(restaurant => {
+        //     console.log('got the restaurant', restaurant.data.data[0].name);
+        //     this.setState({
+        //       showForm: !this.state.showForm,
+        //       restaurantName: restaurant.data.data[0].name,
+        //     });
+        //   })
+        //   .catch(err => {
+        //     console.log('getting the restaurant failed--->', err);
+        //   });
+>>>>>>> df2e2c6ea2d5ed6007b32ab8c7b0580bbaf32efa
       })
       .catch(err => {
         console.log('no user reviews', err);

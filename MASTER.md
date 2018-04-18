@@ -9,7 +9,7 @@ THE RESTAURANT TO MAKE IT EASIER TO FIND THE AVERAGE
 5.) General CSS / Bootstrapping
 6.) Right now the map shows your current position rather than the position of the restaurant when you are on RestSingle page
 
-#GET /api/user/:id
+#GET /user/:id
 Returns information about one specific user based on username in the database.
 {
   "message": "Got user",
@@ -27,7 +27,7 @@ Returns information about one specific user based on username in the database.
   }
 }
 
-#POST /api/user
+#POST /user
 Adds a user to the database.
 {
   "message": "ok",
@@ -45,7 +45,7 @@ Adds a user to the database.
   }
 }
 
-#GET /api/user/edit/:id
+#GET /user/edit/:id
 Gets a specific users information based on their username to use for updating user information.
 {
   "message": "Got user",
@@ -63,7 +63,7 @@ Gets a specific users information based on their username to use for updating us
   }
 }
 
-#PUT /api/user/edit/:id
+#PUT /user/edit/:id
 Edits a users information, based on that users' username in the database.
 {
   "message": "ok",
@@ -79,7 +79,7 @@ Edits a users information, based on that users' username in the database.
   }
 }
 
-#DELETE /api/user/delete/:id
+#DELETE /user/delete/:id
 Deletes a user from the database, based on that users username.
 {
  "message": "ok"
@@ -87,7 +87,7 @@ Deletes a user from the database, based on that users username.
 
 -----------------------------------------
 
-#GET /api/restaurant
+#GET /restaurant
 Gets the information about every restaurant currently in the database.
 {
   "message": "ok",
@@ -115,7 +115,7 @@ Gets the information about every restaurant currently in the database.
   }
 }
 
-#GET /api/restaurant/:id
+#GET /restaurant/:id
 Gets a specific restaurant from the database based on that restaurants name in the database.
 {
   "message": "Got restaurant",
@@ -132,7 +132,7 @@ Gets a specific restaurant from the database based on that restaurants name in t
   }
 }
 
-#POST /api/restaurant/
+#POST /restaurant/
 Creates a new restaurant in the database, returning the information about that restaurant.
 {
   "message": "ok",
@@ -151,7 +151,7 @@ Creates a new restaurant in the database, returning the information about that r
   }
 }
 
-#GET /api/restaurant/edit/:id
+#GET /restaurant/edit/:id
 Gets one restaurant in the database based on that restaurants name to be used to edit that restaurant.
 {
   "message": "Got restaurant",
@@ -168,7 +168,7 @@ Gets one restaurant in the database based on that restaurants name to be used to
   }
 }
 
-#PUT /api/restaurant/edit/:id
+#PUT /restaurant/edit/:id
 Edits a restaurant in the database based on that restaurants name.
 {
   "message": "ok",
@@ -185,7 +185,7 @@ Edits a restaurant in the database based on that restaurants name.
   }
 }
 
-#DELETE /api/restaurant/delete/:id
+#DELETE /restaurant/delete/:id
 Deletes a restaurant from the database, based on that restaurants name in the database.
 {
   "message": "restaurant deleted"
@@ -195,7 +195,7 @@ Deletes a restaurant from the database, based on that restaurants name in the da
 ---------------------------------------
 
 
-#GET /api/review/:id
+#GET /review/:id
 Gets all reviews for the specific restaurant based on the restaurants' name in the database.
 {
   "message": "ok",
@@ -217,7 +217,7 @@ Gets all reviews for the specific restaurant based on the restaurants' name in t
   }
 }
 
-#POST /api/review
+#POST /review
 Adds a review to the database.
 {
   "message": "ok",
@@ -232,7 +232,7 @@ Adds a review to the database.
   }
 }
 
-#GET /api/review/user/:id
+#GET /review/user/:id
 Gets all reviews made by a specific user based on that users username in the database.
 {
   "message": "ok",
@@ -256,7 +256,7 @@ Gets all reviews made by a specific user based on that users username in the dat
   }
 }
 
-#GET /api/review/edit/:id
+#GET /review/edit/:id
 Gets a review from the database based on that reviews id to be used to edit.
 {
   "message": "ok"
@@ -271,7 +271,7 @@ Gets a review from the database based on that reviews id to be used to edit.
   }
 }
 
-#PUT /api/review/edit/:id
+#PUT /review/edit/:id
 Edits a review based on that reviews id in the database.
 {
   "message": "ok",
@@ -286,7 +286,7 @@ Edits a review based on that reviews id in the database.
   }
 }
 
-#DELETE /api/review/delete/:id
+#DELETE /review/delete/:id
 Deletes a review from the database.
 {
   "message": "deleted review"
@@ -296,9 +296,9 @@ Deletes a review from the database.
 
 -------------------
 
-/api/favorites
+/favorites
 
-#POST /api/favorites/user
+#POST /favorites/user
 Gets the names of all restaurants that a user has favorited, based on the currently logged in user
 {
   "message": "ok",
@@ -308,7 +308,7 @@ Gets the names of all restaurants that a user has favorited, based on the curren
   }
 }
 
-#GET /api/favorites/:id
+#GET /favorites/:id
 Gets the total number of favorites for the restaurant based on the restaurant name in req.params.id
 {
   "message": "ok",
@@ -318,10 +318,10 @@ Gets the total number of favorites for the restaurant based on the restaurant na
   ]
 }
 
-#POST /api/favorites/:id
+#POST /favorites/:id
 Either adds a user / restaurant key value pair to the favorites table or deletes it
 
-#GET /api/favorites/number/:id
+#GET /favorites/number/:id
 Gets the total number of favorites that the current user has made
 {
   "message": "ok",

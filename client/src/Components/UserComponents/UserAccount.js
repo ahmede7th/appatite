@@ -28,7 +28,7 @@ class UserAccount extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/user/${this.state.user}`).then(user => {
+    axios.get(`/user/${this.state.user}`).then(user => {
       console.log('Returned user info: ', user);
       this.setState({apiDataLoaded: true, apiData: user.data.data});
     }).catch(err => {
@@ -39,7 +39,7 @@ class UserAccount extends Component {
   submitForm(e) {
     axios({
       method: 'PUT',
-      url: `/api/user/edit/${this.state.user}`,
+      url: `/user/edit/${this.state.user}`,
       data: {
         username: this.state.user,
         fname: this.state.fname,
@@ -64,7 +64,7 @@ class UserAccount extends Component {
   deleteUser() {
     if (window.confirm('Are you sure?')) {
       alert('account deleted');
-      axios.delete(`/api/user/delete/${this.state.user}`).then(user => {
+      axios.delete(`/user/delete/${this.state.user}`).then(user => {
         console.log('DELETED USER', user);
         TokenService.destroy();
         this.setState({logoutUser: true});
@@ -115,8 +115,8 @@ class UserAccount extends Component {
             : "loading user"
         }
         <br/>
-        <Button color="primary" onClick={this.buttonClick}>Edit</Button>
-        <Button color="primary" onClick={this.deleteUser}>Delete</Button>
+        <Button color="warning" onClick={this.buttonClick}>Edit</Button>{' '}{' '}
+        <Button color="danger" onClick={this.deleteUser}>Delete</Button>
         {
           this.state.click
             ? <form onSubmit={this.submitForm}>

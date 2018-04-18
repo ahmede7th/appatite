@@ -1,4 +1,3 @@
-\c appatite_db;
 
 INSERT INTO restaurants(name, rating, cuisine, img_src, loc) VALUES
 

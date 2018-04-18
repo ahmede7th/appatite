@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    return axios.get(`/api/favorites/user/restaurants/${this.props.user}`).then(favorites => {
+    return axios.get(`/favorites/user/restaurants/${this.props.user}`).then(favorites => {
       this.setState({apiDataLoaded: true, apiData: favorites.data.data, user: this.props.userPage});
     }).catch(err => {
       console.log('nope :', err);

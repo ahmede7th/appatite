@@ -22,13 +22,12 @@ app.use(cors());
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(express.static('client/build'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.static('client/build'));
 app.use(tokenService.receiveToken);
 
-app.get('/api/restricted', authService.restrict(), (req, res) => {
+app.get('/restricted', authService.restrict(), (req, res) => {
   res.json({ msg: 'yay' });
 });
 
@@ -36,12 +35,14 @@ app.get('/api/isLoggedIn', authService.isLoggedIn, (req, res) => {
   res.json({ isLoggedIn: res.locals.isLoggedIn });
 });
 
-app.use('/api/favorites', favoritesRouter);
+app.use('/favorites', favoritesRouter);
 app.use('/api/review', reviewRouter);
+app.use('/review', reviewRouter);
 app.use('/api/restaurant', restaurantRouter);
-app.use('/api/user', userRouter);
+app.use('/restaurant', restaurantRouter);
+app.use('/user', userRouter);
 app.use('/api/user/auth', authRouter);
-app.use('/api/follower', followerRouter);
+app.use('/follower', followerRouter);
 
 app.listen(PORT, () => {
   console.log(`Up and listening in express on port ${PORT}`);
