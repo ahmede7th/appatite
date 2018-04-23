@@ -135,18 +135,10 @@ class Home extends Component {
   }
 
   renderRestaurant() {
-<<<<<<< HEAD
-    return (<RestSingle id={this.state.restaurant}/>);
-=======
-    return <RestSingle id={this.state.restaurant} />;
->>>>>>> df2e2c6ea2d5ed6007b32ab8c7b0580bbaf32efa
+
+    return <RestSingle id={this.state.restaurant} />
   }
 
-  // updateMain() {
-  //   this.setState({
-  //     next20: !this.state.next20,
-  //   });
-  // }
 
   updateNext20() {
     let iter;
@@ -188,50 +180,12 @@ class Home extends Component {
       });
     }
   }
-  // renderReviews() {}
 
   render() {
     if (this.state.logoutUser) {
       return <Welcome />;
     } else {
       return (
-<<<<<<< HEAD
-        <div className='home' style={{
-            background: 'white'
-          }}>
-          <Header logout={this.logout}/>
-          <div className="jumbotron">
-            <small>Don't see a restaurant you want to review? ADD!</small>
-            <br/>
-            <div>
-              <Button color="primary" onClick={this.buttonClick} style={{
-                  marginBottom: '1rem'
-                }}>ADD</Button>
-              <Collapse isOpen={this.state.show}>
-                <Card>
-                  <RestCreate/>
-                </Card>
-              </Collapse>
-            </div>
-            <div>
-              <Button color="primary" onClick={this.toggle} style={{
-                  marginBottom: '1rem'
-                }}>Users</Button>
-              <Collapse isOpen={this.state.showUsers}>
-                <Card>
-                  {this.displayUsers()}
-                </Card>
-              </Collapse>
-            </div>
-
-          <div className="row">
-            <div className="col-sm" id="left">
-              {
-                this.state.apiDataLoaded
-                  ? this.mainListing(this.state.count)
-                  : ''}
-              </div>
-=======
         <div className="home">
           <div style={{ background: 'white' }}>
             <Header logout={this.logout} user={this.state.logoutUser} />
@@ -270,45 +224,21 @@ class Home extends Component {
                 </Collapse>
               </div>
 
-              {/* {
-            this.state.gotUsers
-              ? this.displayUsers()
-              : ''
-          } */}
 
               <div className="row">
                 <div className="col-sm" id="left">
                   {this.state.apiDataLoaded
                     ? this.mainListing(this.state.count)
                     : ''}
-                  {/* {this.state.next20
-                  ? this.mainListing(`${this.state.count}`)
-                  : ''} */}
                 </div>
->>>>>>> df2e2c6ea2d5ed6007b32ab8c7b0580bbaf32efa
-                <div className="col-sm" id="right">
-                  {this.state.map ? this.renderMap() : ''}
-                  {/*{this.state.reviews ? this.renderReviews() : ''}*/}
-                  {this.state.restaurant ? this.renderRestaurant() : ''}
-                </div>
-              </div>
-              <Button color="primary" onClick={this.updateNext20} id="seemore">
-                See More
-              </Button>
-            </div>
-<<<<<<< HEAD
+
             <Button color='primary' onClick={this.updateNext20} id="seemore">See More</Button>
           </div>
           <Footer/>
         </div>
-
+      </div>
+      </div>
 );
-=======
-            <Footer />
-          </div>
-        </div>
-      );
->>>>>>> df2e2c6ea2d5ed6007b32ab8c7b0580bbaf32efa
     }
   }
 }
