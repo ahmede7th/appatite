@@ -1,6 +1,6 @@
 ## APPatite
 
-![Alt text](wireFrames/Appatite.png?raw=true "Title")
+![Alt text](wireframes/Appatite.png?raw=true "Title")
 
 # A restaurant review site
 
